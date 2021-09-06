@@ -13,7 +13,8 @@ override ARGS ?= --log=$(BUILD_DIR)/nemu-log.txt
 override ARGS += $(ARGS_DIFF)
 
 # Command to execute NEMU
-NEMU_EXEC := $(BINARY) $(ARGS)
+IMG ?=
+NEMU_EXEC := $(BINARY) $(ARGS) $(IMG)
 
 run-env: $(BINARY) $(DIFF_REF_SO)
 
