@@ -80,11 +80,17 @@ static int cmd_info(char *args) {
 	if (strcmp(arg, "r") == 0) {
 		for (int i = 0; i < 32; ++ i) {
 			printf("%s%d %x %d\n", "x", i, cpu.gpr[i]._32, cpu.gpr[i]._32);
-		}
+	 	}
+		return 0;
 	}
-	printf("%s\n", "good");
+	if (strcmp(arg, "w") == 0) {
+		//print watchpoint
+		return 0;
+	}
+	printf("%s\n", "Error: Invalid info choice");
 	return 0;
 }
+
 /*
 static int cmd_
 */
