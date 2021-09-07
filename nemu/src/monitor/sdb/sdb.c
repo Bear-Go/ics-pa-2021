@@ -77,7 +77,7 @@ static int cmd_si(char *args) {
 
 static int cmd_info(char *args) {
 	char *arg = strtok(NULL, " ");
-	if (strcmp(arg, "r")) {
+	if (strcmp(arg, "r") == 0) {
 		for (int i = 0; i < 32; ++ i) {
 			printf("%s%d %x %d\n", "x", i, cpu.gpr[i]._32, cpu.gpr[i]._32);
 		}
