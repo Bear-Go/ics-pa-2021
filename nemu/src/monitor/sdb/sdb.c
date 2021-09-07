@@ -39,15 +39,45 @@ static int cmd_q(char *args) {
 static int cmd_help(char *args);
 
 
-//static int cmd_si(char *args) {
-//		char
-//}
+static int cmd_si(char *args) {
+	/* extract the times */
+	char *arg = strtok(NULL, " ");
+	int i;
+
+	if (arg == NULL) {
+		/* default 1 time */
+		cpu_exec(1);
+		return 0;
+	}
+	
+	/* get the times */
+	sscanf(arg, "%d", &i);
+
+	if (i >= 0) {
+	/* normal i times*/
+		for(; i > 0; -- i) {
+			cpu_exec(1);
+		}
+		return 0;
+	}
+	if (i == -1) {
+	/* infinite */
+		cpu_exec(-1);
+		return 0;
+	}
+	if (i < -1) {
+	/* invalid times */
+		printf("Error: Invalid times\n");
+		return 0;
+	}
+	printf("Error: Amazing\n");
+	return 0;
+}
 
 /*
 static int cmd_info(char *args);
 static int cmd_
 */
-
 
 static struct {
   const char *name;
@@ -57,7 +87,7 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-
+	{ "si", "Step N times", cmd_si},
   /* TODO: Add more commands */
 
 };
