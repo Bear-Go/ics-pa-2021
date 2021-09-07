@@ -74,7 +74,6 @@ static int cmd_si(char *args) {
 	return 0;
 }
 
-
 static int cmd_info(char *args) {
 	char *arg = strtok(NULL, " ");
 	if (strcmp(arg, "r") == 0) {
@@ -97,7 +96,8 @@ static int cmd_x(char *args) {
 	vaddr_t addr;
 	sscanf(arg, "%d", &i);
 	*arg = strtok(NULL, " ");
-	*/
+ 	*/
+	return 0;
 }
 
 static struct {
