@@ -78,19 +78,27 @@ static int cmd_si(char *args) {
 static int cmd_info(char *args) {
 	char *arg = strtok(NULL, " ");
 	if (strcmp(arg, "r") == 0) {
+	/* print register info*/
 		isa_reg_display();
+		return 0;
 	}
 	if (strcmp(arg, "w") == 0) {
 		//print watchpoint
 		return 0;
 	}
-	printf("%s\n", "Error: Invalid info choice");
+	printf("Error: Invalid info choice\n");
 	return 0;
 }
 
-/*
-static int cmd_
-*/
+static int cmd_x(char *args) {
+	/*
+	char *arg = strtok(NULL, " ");
+	int i;
+	vaddr_t addr;
+	sscanf(arg, "%d", &i);
+	*arg = strtok(NULL, " ");
+	*/
+}
 
 static struct {
   const char *name;
