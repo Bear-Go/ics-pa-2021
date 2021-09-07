@@ -110,6 +110,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
 	{ "si", "Step N times", cmd_si},
 	{ "info", "print info which you want", cmd_info},
+	{ "x", "print info N times from register EXPR ", cmd_x},
 
 	/* TODO: Add more commands */
 
