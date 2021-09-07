@@ -74,8 +74,17 @@ static int cmd_si(char *args) {
 	return 0;
 }
 
+
+static int cmd_info(char *args) {
+	char *arg = strtok(NULL, " ");
+	if ( arg == "r" ) {
+		for (int i = 0; i < 8; ++ i) {
+			printf("%s %x %d\n", regsl[i], cpu.gpr[i]._32, cpu.gpr[i]._32);
+		}
+	}
+	return 0;
+}
 /*
-static int cmd_info(char *args);
 static int cmd_
 */
 
@@ -88,7 +97,9 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
 	{ "si", "Step N times", cmd_si},
-  /* TODO: Add more commands */
+	{ "info", "print info which you want", cmd_info},
+
+	/* TODO: Add more commands */
 
 };
 
