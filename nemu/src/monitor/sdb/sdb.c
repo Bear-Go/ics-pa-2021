@@ -77,9 +77,9 @@ static int cmd_si(char *args) {
 
 static int cmd_info(char *args) {
 	char *arg = strtok(NULL, " ");
-	if ( arg == "r" ) {
+	if (strcmp(arg, "r")) {
 		for (int i = 0; i < 8; ++ i) {
-			printf("%s %x %d\n", regsl[i], cpu.gpr[i]._32, cpu.gpr[i]._32);
+			printf("%s %x %d\n", reg_name[i], cpu.gpr[i]._32, cpu.gpr[i]._32);
 		}
 	}
 	return 0;
