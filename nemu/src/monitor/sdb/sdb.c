@@ -98,7 +98,7 @@ static int cmd_x(char *args) {
 	sscanf(arg1, "%d", &len);
 	sscanf(arg2, "%x", &addr);
 	for (; len > 0; -- len) {
-		printf("0x%x ", vaddr_read(addr, 4));
+		printf("0x%x: %x ", addr, vaddr_read(addr, 4));
 		addr+=4;
 	}
 	printf("\n");
