@@ -105,6 +105,21 @@ static int cmd_x(char *args) {
 	return 0;
 }
 
+static int cmd_p(char *args) {
+	printf("Coming soon\n");
+	return 0;
+}
+
+static int cmd_w(char *args) {
+	printf("Coming soon\n");
+	return 0;
+}
+
+static int cmd_d(char *args) {
+	printf("Coming soon\n");
+	return 0;
+}
+
 static struct {
   const char *name;
   const char *description;
@@ -114,8 +129,11 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
 	{ "si", "Step N times", cmd_si},
-	{ "info", "print info which you want", cmd_info},
-	{ "x", "print info N times from register EXPR ", cmd_x},
+	{ "info", "Print info which you want", cmd_info},
+	{ "x", "Print N info start from register EXPR", cmd_x},
+	{ "p", "Determine the value of expression EXPR", cmd_p},
+	{ "w", "Set the watchpoint", cmd_w},
+	{ "d", "Delete the watchpoint", cmd_d},
 
 	/* TODO: Add more commands */
 
