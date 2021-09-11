@@ -45,4 +45,4 @@ include $(NEMU_HOME)/scripts/native.mk
 endif
 
 # Speed up
-MAKEFLAGS += -j 4
+MAKEFLAGS += -j 6
