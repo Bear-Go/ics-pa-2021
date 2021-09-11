@@ -57,9 +57,9 @@ static int cmd_si(char *args) {
 	/* normal i times*/
 		for(; i > 0; -- i) {
 			cpu_exec(1);
-		}
+		 }
 		return 0;
-	}
+	} 
 	if (i == -1) {
 	/* infinite */
 		cpu_exec(-1);
@@ -76,12 +76,12 @@ static int cmd_si(char *args) {
 
 static int cmd_info(char *args) {
 	char *arg = strtok(NULL, " ");
-	if (strcmp(arg, "r") == 0) {
+	if (strcmp(arg,  "r") == 0) {
 	/* print register info*/
 		isa_reg_display();
 		return 0;
 	}
-	if (strcmp(arg, "w") == 0) {
+	if (strcmp(arg,  "w") == 0) {
 		//print watchpoint
 		return 0;
 	}
@@ -90,13 +90,17 @@ static int cmd_info(char *args) {
 }
 
 static int cmd_x(char *args) {
-	/*
-	char *arg = strtok(NULL, " ");
-	int i;
+	char *arg1 = strtok(NULL, " ");
+	char *arg2 = strtok(NULL, " ");
+	int len;
 	vaddr_t addr;
-	sscanf(arg, "%d", &i);
-	*arg = strtok(NULL, " ");
- 	*/
+	sscanf(arg1, "%d", &len);
+	sscanf(arg2, "%x", &addr);
+	for (; len > 0; -- len) {
+		printf("0x%x ", vaddr_read(addr, 4));
+		addr+=4;
+	}
+	printf("\n");
 	return 0;
 }
 
