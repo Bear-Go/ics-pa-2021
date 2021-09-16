@@ -1,16 +1,16 @@
 #include <isa.h>
-
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <regex.h>
-//#define STR_MAX_LEN 32
+
+#define STR_MAX_LEN 32
+#define EXP_MAX_LEN 32
 
 enum {
   TK_NOTYPE = 256, TK_NUM, TK_EQ,
 
   /* TODO: Add more token types */
-
 };
 
 static struct rule {
@@ -22,16 +22,17 @@ static struct rule {
    * Pay attention to the precedence level of different rules.
    */
 
-	{"[0-9]+", TK_NUM},		// number
-  {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},					// plus
-	{"-", '-'},						// minus
-	{"\\*", '*'},					// mul
-	{"/", '/'},						// div
-	{"\\(", '('},					// left bracket
-	{"\\)", ')'},					// right bracket
-  {"==", TK_EQ},				// equal
+	{"[0-9]{STR_MAX_LEN-1}", TK_NUM},			// number
+  {" +", TK_NOTYPE},									// spaces
+  {"\\+", '+'},												// plus
+	{"-", '-'},													// minus
+	{"\\*", '*'},												// mul
+	{"/", '/'},													// div
+	{"\\(", '('},												// left bracket
+	{"\\)", ')'},												// right bracket
+  {"==", TK_EQ},											// equal
 	{""}
+
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -57,10 +58,10 @@ void init_regex() {
 
 typedef struct token {
   int type;
-  char str[32];
+  char str[STR_MAX_LEN];
 } Token;
 
-static Token tokens[32] __attribute__((used)) = {};
+static Token tokens[EXP_MAX_LEN] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
