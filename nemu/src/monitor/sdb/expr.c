@@ -4,9 +4,10 @@
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <regex.h>
+//#define STR_MAX_LEN 32
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,
+  TK_NOTYPE = 256, TK_NUM, TK_EQ,
 
   /* TODO: Add more token types */
 
@@ -21,9 +22,16 @@ static struct rule {
    * Pay attention to the precedence level of different rules.
    */
 
+	{"[0-9]+", TK_NUM},		// number
   {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},         // plus
-  {"==", TK_EQ},        // equal
+  {"\\+", '+'},					// plus
+	{"-", '-'},						// minus
+	{"\\*", '*'},					// mul
+	{"/", '/'},						// div
+	{"\\(", '('},					// left bracket
+	{"\\)", ')'},					// right bracket
+  {"==", TK_EQ},				// equal
+	{""}
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -80,9 +88,12 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-          default: TODO();
+					case TK_NOTYPE: break;
+					default: tokens[nr_token].type = rules[i].token_type;
+									 strncpy(token[nr_token].str, substr_start, substr_len);
+									 token[nr_token].str[substr_len]='\0';
+									 ++ nr_token;
         }
-
         break;
       }
     }
