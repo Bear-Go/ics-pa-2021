@@ -21,8 +21,8 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-
-	{"[0-9]{STR_MAX_LEN-1}", TK_NUM},			// number
+	//31 := STR_MAX_LEN-1
+	{"[0-9]{31}", TK_NUM},			// number
   {" +", TK_NOTYPE},									// spaces
   {"\\+", '+'},												// plus
 	{"-", '-'},													// minus
