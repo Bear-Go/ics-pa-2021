@@ -5,7 +5,7 @@
 #include <regex.h>
 
 #define STR_MAX_LEN 32
-#define EXP_MAX_LEN 32
+#define EXP_MAX_SIZE 32
 
 enum {
   TK_NOTYPE = 256, TK_NUM, TK_EQ,
@@ -61,7 +61,7 @@ typedef struct token {
   char str[STR_MAX_LEN];
 } Token;
 
-static Token tokens[EXP_MAX_LEN] __attribute__((used)) = {};
+static Token tokens[EXP_MAX_SIZE] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
@@ -103,12 +103,39 @@ static bool make_token(char *e) {
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
     }
-  }
+  } 
 
   return true;
 }
 
+/*
+static word_t eval(p, q) {
+	if (p > q) {
+		//bad expression
 
+	}
+	else if (p == q) {
+		//single token should be a number just return the value
+
+	}
+	else if (check_parentheses(p, q) == true) {
+		//remove the brackets
+		return eval(p + 1, q - 1);
+	}
+	else {
+		op = place_of_main_op();
+		word_t val1 = eval(p, op - 1);
+		word_t val2 = eval(op + 1, q);
+		switch (op_type) {
+			case '+': return val1+val2;
+			case '-': return //
+			case '*': return //
+			case '/': return //
+			default: assert(0);
+		}
+	}
+}
+*/
 word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
@@ -116,7 +143,7 @@ word_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
-
-  return 0;
+  
+	return 0;
+  //return eval(0, nr_token - 1);
 }
