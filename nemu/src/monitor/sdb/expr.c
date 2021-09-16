@@ -70,7 +70,7 @@ static bool make_token(char *e) {
 
   nr_token = 0;
 
-  w hile (e[position] != '\0') {
+  while (e[position] != '\0') {
     /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
