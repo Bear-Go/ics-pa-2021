@@ -153,10 +153,12 @@ static int main_op(int p, int q) {
 }
 
 static word_t eval(int p, int q) {
-	if ( !*is_exp_right ) {printf("check1 right\n"); return 0;}
+	if ( !*is_exp_right ) return 0;
+	//printf("p=%d\tq=%d\n",p,q);
 	if (p > q) {
 		//bad expression
 		*is_exp_right = false;
+		printf("when p>q we got false\n");
 		return 0;
 	}
 	else if (p == q) {
@@ -166,8 +168,9 @@ static word_t eval(int p, int q) {
 			case TK_NUM		: sscanf(tokens[p].str, "%d", &num); return num;
 			case TK_HEXNUM	: sscanf(tokens[p].str, "%x", &num); return num;
  			case TK_REG 	: num = isa_reg_str2val(tokens[p].str+1, is_exp_right);
+			 					if( !*is_exp_right ) printf("when got reg value we got false\n");
 			 					return ( *is_exp_right ? num : 0);
-			default: *is_exp_right = false; return 0;
+			default: *is_exp_right = false; printf("when p==q and undefined token we got false\n"); return 0;
 		}
 	}
 	else if (check_parentheses(p, q) == true) {
@@ -182,11 +185,11 @@ static word_t eval(int p, int q) {
 			case '+'	: return val1 + val2;
 			case '-'	: return val1 - val2;
 			case '*'	: return val1 * val2;
-			case '/'	: if (val2) {return val1 / val2;} else {*is_exp_right = false; return 0;}
+			case '/'	: if (val2) {return val1 / val2;} else {*is_exp_right = false; printf("when div 0 we got false\n"); return 0;}
 			case TK_EQ	: return val1 == val2;
 			case TK_NEQ : return val1 != val2;
 			case TK_AND : return val1 && val2;
-			default: *is_exp_right = false; return 0;
+			default: *is_exp_right = false; printf("when main op not found we got false\n"); return 0;
 		}
 	}
 	printf("In the eval wrong branch\n");
