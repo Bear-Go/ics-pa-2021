@@ -240,7 +240,7 @@ word_t expr(char *e, bool *success) {
 	is_exp_right = success;
 	if ( !is_brackets_match(0, nr_token - 1) ) {
 		*is_exp_right = false;
-		printf("Error: is_brackets_match() mistake");
+		printf("Error: is_brackets_match() mistake\n");
 		return 0;
 	}
 	printf("Massage: finish is_brackets_match()\n");

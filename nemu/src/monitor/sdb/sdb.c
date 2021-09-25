@@ -113,7 +113,7 @@ static int cmd_x(char *args) {
   bool is_expr_right = true;
   addr = expr(arg2, &is_expr_right);
   if ( !is_expr_right ) {
-      printf("Error: Wrong expression\n");
+      printf("Attention: wrong expression\n");
       return 0;
   }
   printf("0x%d\n", addr);
