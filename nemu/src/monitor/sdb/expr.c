@@ -18,8 +18,8 @@ static struct rule {
 	/* TODO: Add more rules.
 	* Pay attention to the precedence level of different rules.
 	*/
-	{"0x[0-9a-fA-F]{1,10}",	TK_HEXNUM},			// hex-number
-	{"[0-9]{1,32}",			TK_NUM},			// number
+	{"0x[0-9a-fA-F]{8}",	TK_HEXNUM},			// hex-number
+	{"[0-9]{32}",			TK_NUM},			// number
 	{" +", 					TK_NOTYPE},			// spaces
 	{"\\+", 				'+'},				// plus
 	{"-", 					'-'},				// minus
@@ -30,7 +30,7 @@ static struct rule {
 	{"==", 					TK_EQ},				// equal
 	{"!=", 					TK_NEQ},			// not equal
 	{"&&", 					TK_AND},			// and
-	{"\\$[a-zA-Z0-9]+", 	TK_REG}				// reg
+	{"\\$[a-zA-Z0-9]{4}", 	TK_REG}				// reg
 };
 
 #define NR_REGEX ARRLEN(rules)
