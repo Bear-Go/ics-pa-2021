@@ -88,14 +88,13 @@ static bool make_token(char *e) {
 
 				switch (rules[i].token_type) {
 					case TK_NOTYPE: break;
-					//case TK_
 					default: tokens[nr_token].type = rules[i].token_type;
 							strncpy(tokens[nr_token].str, substr_start, substr_len);
 							++ nr_token;
 				}
 				break;
 			}
-      }
+      	}
  
 		if (i == NR_REGEX) {
 			printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
@@ -154,7 +153,7 @@ static int main_op(int p, int q) {
 }
 
 static word_t eval(int p, int q) {
-	if (! *is_exp_right) return 0;
+	if ( !*is_exp_right ) return 0;
 	if (p > q) {
 		//bad expression
 		*is_exp_right = false;
@@ -227,12 +226,11 @@ word_t expr(char *e, bool *success) {
 	}
 
 	/* TODO: Insert codes to evaluate the expression. */
+	is_exp_right = success;
 	if ( !is_brackets_match(0, nr_token - 1) ) {
-		is_exp_right = false;
+		*is_exp_right = false;
 		return 0;
 	}
 	modify_token(0, nr_token - 1);
-
-	is_exp_right = success;
 	return eval(0, nr_token - 1);
 }
