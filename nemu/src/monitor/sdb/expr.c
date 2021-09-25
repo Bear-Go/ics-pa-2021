@@ -123,7 +123,7 @@ static bool check_parentheses(int p, int q) {
 
 static int main_op(int p, int q) {
 	//find the location of main operator
-	const int priority = 0
+	int priority = 0;
 	int cnt = 0, loc = 0;
 	for (; p <= q; -- q) {
 		if (tokens[q].type == ')') -- cnt;
