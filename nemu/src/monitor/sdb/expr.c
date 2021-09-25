@@ -112,8 +112,8 @@ static bool check_parentheses(int p, int q) {
 	if (tokens[p].type == '(' && tokens[q].type == ')') {
 		int cnt = 0;
 		for(++ p; p < q; ++ p) {
-			if (token[p].type == '(') ++ cnt;
-			if (token[p].type == ')') -- cnt;
+			if (tokens[p].type == '(') ++ cnt;
+			if (tokens[p].type == ')') -- cnt;
 			if (cnt < 0) return false;
 		}
 	}
@@ -122,7 +122,7 @@ static bool check_parentheses(int p, int q) {
 
 static int main_op(int p, int q) {
 	//find the location of main operator
-	
+	return 0;
 }
 
 static word_t eval(int p, int q) {
