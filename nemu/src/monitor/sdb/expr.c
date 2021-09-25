@@ -4,7 +4,7 @@
  */
 #include <regex.h>
 
-//static const int STR_MAX_LEN = 32+1 = 33;
+//static const int STR_MAX_LEN = 32;
 //static const int EXP_MAX_SIZE = 32;
 
 enum {
@@ -57,7 +57,7 @@ void init_regex() {
 
 typedef struct token {
 	int type;
-	char str[33];
+	char str[32];
 } Token;
 
 static Token tokens[32] __attribute__((used)) = {};
@@ -91,7 +91,6 @@ static bool make_token(char *e) {
 					case TK_NOTYPE: break;
 					default: tokens[nr_token].type = rules[i].token_type;
 							strncpy(tokens[nr_token].str, substr_start, substr_len);
-							tokens[nr_token].str[substr_len] = '\0';
 							++ nr_token;
 				}
 				break;
@@ -209,6 +208,9 @@ word_t expr(char *e, bool *success) {
 	if ( !is_brackets_match(0, nr_token - 1) ) {
 		is_exp_right = false;
 		return 0;
+	}
+	for (int i = 0; i < nr_token; ++ i) {
+		if (tokens[i].type == '*' && (i == 0 | tokens[i-1]) )
 	}
 
 	is_exp_right = success;
