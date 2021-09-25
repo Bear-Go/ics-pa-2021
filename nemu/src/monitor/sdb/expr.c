@@ -185,7 +185,7 @@ static word_t eval(int p, int q) {
 	else {
 		printf("choice: branch find mainop\n");
 		int op = main_op(p, q);
-		printf("main operator is %s", tokens[op].str);
+		printf("main operator is %s \n",tokens[op].str);
 		word_t val1 = eval(p, op - 1);
 		word_t val2 = eval(op + 1, q);
 		switch (tokens[op].type) {
