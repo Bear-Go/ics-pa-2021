@@ -158,13 +158,14 @@ static word_t eval(int p, int q) {
 	printf("time: runnig between p=%d and q=%d\n",p,q);
 	if (p > q) {
 		//bad expression
+		printf("choice: branch p > q");
 		*is_exp_right = false;
 		printf("when p>q we got false\n");
 		return 0;
 	}
 	else if (p == q) {
 		//single token should be a number just return the value
-		//printf("%d\t%s\n",p,tokens[p].str);
+		printf("choice: branch p == q");
 		word_t num;
 		switch (tokens[p].type) {
 			case TK_NUM		: sscanf(tokens[p].str, "%d", &num); return num;
@@ -177,10 +178,12 @@ static word_t eval(int p, int q) {
 	}
 	else if (check_parentheses(p, q) == true) {
 		//remove the pair of brackets
+		printf("choice: branch remove brackets");
 		printf("p=%d and q=%d brackets have been removed\n",p,q);
 		return eval(p + 1, q - 1);
 	}
 	else {
+		printf("choice: branch find mainop");
 		int op = main_op(p, q);
 		word_t val1 = eval(p, op - 1);
 		word_t val2 = eval(op + 1, q);
