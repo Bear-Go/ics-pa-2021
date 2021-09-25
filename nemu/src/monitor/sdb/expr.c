@@ -140,7 +140,11 @@ static int main_op(int p, int q) {
 				break;
 		} 
 	}
-	return 0;
+	if ( !priority ) {
+		*is_exp_right = false;
+		return 0;
+	}
+	return loc;
 }
 
 static word_t eval(int p, int q) {
