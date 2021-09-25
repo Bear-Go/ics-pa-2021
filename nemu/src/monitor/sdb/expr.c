@@ -153,7 +153,7 @@ static int main_op(int p, int q) {
 }
 
 static word_t eval(int p, int q) {
-	if ( !*is_exp_right ) return 0;
+	if ( !*is_exp_right ) {printf("check1 right\n"); return 0;}
 	if (p > q) {
 		//bad expression
 		*is_exp_right = false;
