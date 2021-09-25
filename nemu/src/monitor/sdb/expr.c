@@ -231,6 +231,8 @@ word_t expr(char *e, bool *success) {
 		*is_exp_right = false;
 		return 0;
 	}
+	printf("Massage: finish brackets_match\n");
 	modify_token(0, nr_token - 1);
+	printf("Massage: finish modify_tokens\n");
 	return eval(0, nr_token - 1);
 }
