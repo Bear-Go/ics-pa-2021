@@ -116,7 +116,7 @@ static int cmd_x(char *args) {
       printf("Error: Wrong expression\n");
       return 0;
   }
-  printf("0x%x\n", addr);
+  printf("0x%d\n", addr);
   return 0;
 	for (; len > 0; -- len) {
 		printf("0x%x:\t0x%08x\n", addr, vaddr_read(addr, 4) & 0xffffffff);
