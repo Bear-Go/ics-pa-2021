@@ -4,8 +4,8 @@
  */
 #include <regex.h>
 
-const int STR_MAX_LEN = 32+1;
-const int EXP_MAX_SIZE = 32;
+//static const int STR_MAX_LEN = 32+1;
+//static const int EXP_MAX_SIZE = 32;
 
 enum {
   TK_NOTYPE = 256, TK_NUM, TK_EQ,
@@ -20,8 +20,8 @@ static struct rule {
 
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
-   */
-	{"[0-9]{STR_MAX_LEN}", TK_NUM},			// number
+    */
+	{"[0-9]{33}", TK_NUM},			// number
   {" +", TK_NOTYPE},									// spaces
   {"\\+", '+'},												// plus
 	{"-", '-'},													// minus
@@ -57,10 +57,10 @@ void init_regex() {
 
 typedef struct token {
   int type;
-  char str[STR_MAX_LEN];
+  char str[33];
 } Token;
 
-static Token tokens[EXP_MAX_SIZE] __attribute__((used)) = {};
+static Token tokens[32] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
