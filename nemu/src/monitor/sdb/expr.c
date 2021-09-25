@@ -109,7 +109,7 @@ bool *is_exp_right;
 
 static bool check_parentheses(int p, int q) {
 	//check whether the brackets on both ends cound be removed
-	if (token[p].type == '(' && token[q].type == ')') {
+	if (tokens[p].type == '(' && tokens[q].type == ')') {
 		int cnt = 0;
 		for(++ p; p < q; ++ p) {
 			if (token[p].type == '(') ++ cnt;
@@ -126,7 +126,7 @@ static int main_op(int p, int q) {
 }
 
 static word_t eval(int p, int q) {
-	if (! *is_exp_right()) return 0;
+	if (! *is_exp_right) return 0;
 	if (p > q) {
 		//bad expression
 		*is_exp_right = false;
@@ -135,7 +135,7 @@ static word_t eval(int p, int q) {
 	else if (p == q) {
 		//single token should be a number just return the value
 		word_t num;
-		switch (token[p].type) {
+		switch (tokens[p].type) {
 			case TK_NUM: sscanf(tokens[p].str, "%d", &num); return num;
 			default: *is_exp_right = false; return 0;
 		}
@@ -145,14 +145,14 @@ static word_t eval(int p, int q) {
 		return eval(p + 1, q - 1);
 	}
 	else {
-		op = main_op();
+		int op = main_op();
 		word_t val1 = eval(p, op - 1);
 		word_t val2 = eval(op + 1, q);
-		switch (op_type) {
+		switch (tokens[op].type) {
 			case '+': return val1+val2;
 			case '-': return val1-val2;
 			case '*': return val1*val2;
-			case '/': if(val2) {return val1/val2;} else {*is_exp_right = false; return 0};
+			case '/': if(val2) {return val1/val2;} else {*is_exp_right = false; return 0;}
 			default: *is_exp_right = false; return 0;
 		}
 	}
