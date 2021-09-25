@@ -80,7 +80,7 @@ static int cmd_si(char *args) {
 static int cmd_info(char *args) {
 	char *arg = strtok(NULL, " ");
   if (arg == NULL) {
-    printf("Please input the number\n");
+    printf("Incomplete command\n");
     return 0;
   }
 	if (strcmp(arg,  "r") == 0) {
@@ -98,10 +98,18 @@ static int cmd_info(char *args) {
 
 static int cmd_x(char *args) {
 	char *arg1 = strtok(NULL, " ");
-	char *arg2 = strtok(NULL, " ");
+  if (arg1 == NULL) {
+    printf("Incomplete command\n");
+    return 0;
+  }
 	int len;
+  sscanf(arg1, "%d", &len);
+	char *arg2 = strtok(NULL, " ");
+  if (arg2 == NULL) {
+    printf("Incomplete command\n");
+    return 0;
+  }
 	vaddr_t addr;
-	sscanf(arg1, "%d", &len);
   bool is_expr_right = true;
   addr = expr(arg2, &is_expr_right);
   if ( !is_expr_right ) {
