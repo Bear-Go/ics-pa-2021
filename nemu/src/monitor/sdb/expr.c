@@ -4,8 +4,8 @@
  */
 #include <regex.h>
 
-#define STR_MAX_LEN 32
-#define EXP_MAX_SIZE 32
+const int STR_MAX_LEN = 32+1;
+const int EXP_MAX_SIZE = 32;
 
 enum {
   TK_NOTYPE = 256, TK_NUM, TK_EQ,
@@ -21,8 +21,7 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-	//31 := STR_MAX_LEN-1
-	{"[0-9]{31}", TK_NUM},			// number
+	{"[0-9]{STR_MAX_LEN}", TK_NUM},			// number
   {" +", TK_NOTYPE},									// spaces
   {"\\+", '+'},												// plus
 	{"-", '-'},													// minus
@@ -52,8 +51,8 @@ void init_regex() {
     if (ret != 0) {
       regerror(ret, &re[i], error_msg, 128);
       panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
-     }
-	 }
+      }
+ 	 }
 }
 
 typedef struct token {
@@ -73,8 +72,8 @@ static bool make_token(char *e) {
 
   while (e[position] != '\0') {
     /* Try all rules one by one. */
-    for (i = 0; i < NR_REGEX; i ++) {
-      if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
+    f or (i = 0; i < NR_REGEX; i ++) {
+       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
@@ -86,9 +85,9 @@ static bool make_token(char *e) {
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
-         */
+          */
 
-        switch (rules[i].token_type) {
+         switch (rules[i].token_type) {
 					case TK_NOTYPE: break;
 					default: tokens[nr_token].type = rules[i].token_type;
 									 strncpy(tokens[nr_token].str, substr_start, substr_len);
@@ -103,11 +102,10 @@ static bool make_token(char *e) {
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
     }
-  } 
+  }  
 
   return true;
 }
-
 /*
 static word_t eval(p, q) {
 	if (p > q) {
