@@ -232,17 +232,19 @@ static int modify_token(int p, int q) {
 word_t expr(char *e, bool *success) {
 	if ( !make_token(e) ) {
 		*success = false;
+		printf("Error: make_token() mistake\n");
 		return 0;
 	}
-	printf("Massage: finish make_token\n");
+	printf("Massage: finish make_token()\n");
 	/* TODO: Insert codes to evaluate the expression. */
 	is_exp_right = success;
 	if ( !is_brackets_match(0, nr_token - 1) ) {
 		*is_exp_right = false;
+		printf("Error: is_brackets_match() mistake");
 		return 0;
 	}
-	printf("Massage: finish brackets_match\n");
+	printf("Massage: finish is_brackets_match()\n");
 	modify_token(0, nr_token - 1);
-	printf("Massage: finish modify_tokens\n");
+	printf("Massage: finish modify_token()\n");
 	return eval(0, nr_token - 1);
 }
