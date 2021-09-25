@@ -97,6 +97,7 @@ static int cmd_info(char *args) {
 }
 
 static int cmd_x(char *args) {
+  printf("%s \n",args);
 	char *arg1 = strtok(NULL, " ");
   if (arg1 == NULL) {
     printf("Incomplete command\n");
@@ -104,7 +105,7 @@ static int cmd_x(char *args) {
   }
 	int len;
   sscanf(arg1, "%d", &len);
-  printf("args = %s", args);
+  printf("args = %s \n", args);
 	char *arg2 = strtok(NULL, " ");
   if (arg2 == NULL) {
     printf("Incomplete command\n");
