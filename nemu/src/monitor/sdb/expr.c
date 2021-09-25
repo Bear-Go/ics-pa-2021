@@ -128,7 +128,7 @@ static int main_op(int p, int q) {
 	for (; p <= q; -- q) {
 		if (tokens[q].type == ')') -- cnt;
 		if (tokens[q].type == '(') ++ cnt;
-		if ( !cnt ) continue;
+		if (cnt) continue;
 		switch (tokens[q].type) {
 			case '+':case '-':
 				if (priority < 4) loc = q, priority = 4;
