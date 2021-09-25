@@ -176,10 +176,13 @@ static word_t eval(int p, int q) {
 		word_t val1 = eval(p, op - 1);
 		word_t val2 = eval(op + 1, q);
 		switch (tokens[op].type) {
-			case '+': return val1+val2;
-			case '-': return val1-val2;
-			case '*': return val1*val2;
-			case '/': if(val2) {return val1/val2;} else {*is_exp_right = false; return 0;}
+			case '+'	: return val1+val2;
+			case '-'	: return val1-val2;
+			case '*'	: return val1*val2;
+			case '/'	: if(val2) {return val1/val2;} else {*is_exp_right = false; return 0;}
+			case TK_EQ	: return val1==val2;
+			case TK_NEQ : return val1!=val2;
+			case TK_AND : return val1&&val2;
 			default: *is_exp_right = false; return 0;
 		}
 	}
@@ -197,6 +200,22 @@ static bool is_brackets_match(int p, int q) {
 	return !cnt;
 }
 
+static int modify_token(int p, int q) {
+	for (int i = p; i <= q; ++ i) {
+		bool is_pre_type_sign = tokens[i-1].type != TK_NUM && 
+								tokens[i-1].type != TK_HEXNUM && 
+								tokens[i-1].type != TK_REG && 
+								tokens[i-1].type != ')';
+		if (tokens[i].type == '*' && (i == p || is_pre_type_sign ) ) {
+			tokens[i].type = TK_REF;
+		}
+		if (tokens[i].type == '-' && (i == p || is_pre_type_sign ) ) {
+			tokens[i].type = TK_NEG;
+		}
+	}
+	return 0;
+}
+
 word_t expr(char *e, bool *success) {
 	if ( !make_token(e) ) {
 		*success = false;
@@ -208,18 +227,7 @@ word_t expr(char *e, bool *success) {
 		is_exp_right = false;
 		return 0;
 	}
-	for (int i = 0; i < nr_token; ++ i) {
-		bool is_pre_type_sign = tokens[i-1].type != TK_NUM && 
-								tokens[i-1].type != TK_HEXNUM && 
-								tokens[i-1].type != TK_REG && 
-								tokens[i-1].type != ')';
-		if (tokens[i].type == '*' && (i == 0 || is_pre_type_sign ) ) {
-			tokens[i].type = TK_REF;
-		}
-		if (tokens[i].type == '-' && (i == 0 || is_pre_type_sign ) ) {
-			tokens[i].type = TK_NEG;
-		}
-	}
+	modify_token(0, nr_token - 1);
 
 	is_exp_right = success;
 	return eval(0, nr_token - 1);
