@@ -170,8 +170,8 @@ static word_t eval(int p, int q) {
 static bool is_brackets_match(int p, int q) {
 	int cnt = 0;
 	for (; p <= q; ++ p) {
-		if (tokens[p] == '(') ++ cnt;
-		if (tokens[q] == ')') -- cnt;
+		if (tokens[p].type == '(') ++ cnt;
+		if (tokens[p].type == ')') -- cnt;
 		if (cnt < 0) return false;
 	}
 	return !cnt;
