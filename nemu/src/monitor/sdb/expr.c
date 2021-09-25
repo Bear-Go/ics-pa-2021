@@ -168,7 +168,7 @@ static word_t eval(int p, int q) {
 	}
 	else {
 		int op = main_op(p, q);
-		word_t val1 = eval(p, op - 1);
+		word_t val1 = eval(p, op - 1);5
 		word_t val2 = eval(op + 1, q);
 		switch (tokens[op].type) {
 			case '+': return val1+val2;
