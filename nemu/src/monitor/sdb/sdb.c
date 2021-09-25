@@ -99,7 +99,6 @@ static int cmd_x(char *args) {
 	vaddr_t addr;
 	sscanf(arg1, "%d", &len);
   bool is_expr_right = true;
-  printf("%c\n", arg2[0]);
   addr = expr(arg2, &is_expr_right);
   if ( !is_expr_right ) {
       printf("Error: Wrong expression\n");
