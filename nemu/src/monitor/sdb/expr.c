@@ -117,6 +117,7 @@ static bool check_parentheses(int p, int q) {
 			if (cnt < 0) return false;
 		}
 	}
+	else return false;
 	return true;
 }
 
