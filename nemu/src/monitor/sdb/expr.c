@@ -81,13 +81,14 @@ static bool make_token(char *e) {
 
 				position += substr_len;
 
-				/* TODO: Now a new token is recognized with rules[i]. Add codes
-				* to record the token in the array `tokens'. For certain types
-				* of tokens, some extra actions should be performed.
+				/* TODO: Now a new token is recognized with rules[i]. 
+				Add codes to record the token in the array `tokens'. 
+				For certain types of tokens, some extra actions should be performed.
 				*/
 
 				switch (rules[i].token_type) {
 					case TK_NOTYPE: break;
+					case TK_
 					default: tokens[nr_token].type = rules[i].token_type;
 							strncpy(tokens[nr_token].str, substr_start, substr_len);
 							++ nr_token;
@@ -163,7 +164,10 @@ static word_t eval(int p, int q) {
 		//single token should be a number just return the value
 		word_t num;
 		switch (tokens[p].type) {
-			case TK_NUM: sscanf(tokens[p].str, "%d", &num); return num;
+			case TK_NUM		: sscanf(tokens[p].str, "%d", &num); return num;
+			case TK_HEXNUM	: sscanf(tokens[p].str, "%x", &num); return num;
+ 			case TK_REG 	: num = isa_reg_str2val(tokens[p].str+1, is_exp_right);
+			 					return ( *is_exp_right ? num : 0);
 			default: *is_exp_right = false; return 0;
 		}
 	}
@@ -176,13 +180,13 @@ static word_t eval(int p, int q) {
 		word_t val1 = eval(p, op - 1);
 		word_t val2 = eval(op + 1, q);
 		switch (tokens[op].type) {
-			case '+'	: return val1+val2;
-			case '-'	: return val1-val2;
-			case '*'	: return val1*val2;
-			case '/'	: if(val2) {return val1/val2;} else {*is_exp_right = false; return 0;}
-			case TK_EQ	: return val1==val2;
-			case TK_NEQ : return val1!=val2;
-			case TK_AND : return val1&&val2;
+			case '+'	: return val1 + val2;
+			case '-'	: return val1 - val2;
+			case '*'	: return val1 * val2;
+			case '/'	: if (val2) {return val1 / val2;} else {*is_exp_right = false; return 0;}
+			case TK_EQ	: return val1 == val2;
+			case TK_NEQ : return val1 != val2;
+			case TK_AND : return val1 && val2;
 			default: *is_exp_right = false; return 0;
 		}
 	}
