@@ -192,7 +192,7 @@ static word_t eval(int p, int q) {
 			case '+'	: return val1 + val2;
 			case '-'	: return val1 - val2;
 			case '*'	: return val1 * val2;
-			case '/'	: if (val2) {return val1 / val2;} else {*is_exp_right = false; printf("when div 0 we got false\n"); return 0;}
+			case '/'	: if (val2) {return val1 / val2;} else {*is_exp_right = false; printf("Error: division by zero\n"); return 0;}
 			case TK_EQ	: return val1 == val2;
 			case TK_NEQ : return val1 != val2;
 			case TK_AND : return val1 && val2;
