@@ -140,7 +140,7 @@ static int main_op(int p, int q) {
 			case TK_EQ:case TK_NEQ:
 				if (priority < 7) loc = q, priority = 7;
 				break;
-			case TK_EQ:
+			case TK_AND:
 				if (priority < 11) loc = q, priority = 11;
 				break;	
 			default:
