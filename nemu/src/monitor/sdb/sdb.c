@@ -103,7 +103,6 @@ static int cmd_x(char *args) {
 		printf("0x%x:\t0x%08x\n", addr, vaddr_read(addr, 4) & 0xffffffff);
 		addr+=4;
 	}
-	printf("\n");
 	return 0;
 }
 
