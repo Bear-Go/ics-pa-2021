@@ -4,12 +4,10 @@
  */
 #include <regex.h>
 
-//static const int STR_MAX_LEN = 32;
-//static const int EXP_MAX_SIZE = 32;
-
 enum {
-	 TK_NOTYPE = 256, TK_NUM, TK_EQ, TK_NEQ, TK_AND
-
+	 TK_NOTYPE = 256, TK_NUM, TK_HEXNUM,
+	 TK_EQ, TK_NEQ, TK_AND, TK_REG,
+	 TK_REF, TK_NEG
 	 /* TODO: Add more token types */
 };
 
@@ -20,18 +18,19 @@ static struct rule {
 	/* TODO: Add more rules.
 	* Pay attention to the precedence level of different rules.
 	*/
-	{"[0-9]{33}",	TK_NUM},			// number
-	{" +", 			TK_NOTYPE},			// spaces
-	{"\\+", 		'+'},				// plus
-	{"-", 			'-'},				// minus
-	{"\\*", 		'*'},				// mul
-	{"/", 			'/'},				// div
-	{"\\(", 		'('},				// left bracket
-	{"\\)", 		')'},				// right bracket
-	{"==", 			TK_EQ},				// equal
-	{"!=", 			TK_NEQ},			// not equal
-	{"&&", 			TK_AND},			// and
-	{""}
+	{"[0-9]{32}",			TK_NUM},			// number
+	{"0x[0-9a-fA-F]{32}",	TK_HEXNUM},			// hex-number
+	{" +", 					TK_NOTYPE},			// spaces
+	{"\\+", 				'+'},				// plus
+	{"-", 					'-'},				// minus
+	{"\\*", 				'*'},				// mul
+	{"/", 					'/'},				// div
+	{"\\(", 				'('},				// left bracket
+	{"\\)", 				')'},				// right bracket
+	{"==", 					TK_EQ},				// equal
+	{"!=", 					TK_NEQ},			// not equal
+	{"&&", 					TK_AND},			// and
+	{"\\$[a-zA-Z]+", 		TK_REG}				// reg
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -210,7 +209,16 @@ word_t expr(char *e, bool *success) {
 		return 0;
 	}
 	for (int i = 0; i < nr_token; ++ i) {
-		if (tokens[i].type == '*' && (i == 0 | tokens[i-1]) )
+		bool is_pre_type_sign = tokens[i-1].type != TK_NUM && 
+								tokens[i-1].type != TK_HEXNUM && 
+								tokens[i-1].type != TK_REG && 
+								tokens[i-1].type != ')';
+		if (tokens[i].type == '*' && (i == 0 || is_pre_type_sign ) {
+			tokens[i].type = TK_REF;
+		}
+		if (tokens[i].type == '-' && (i == 0 || is_pre_type_sign ) {
+			tokens[i].type = TK_NEG;
+		}
 	}
 
 	is_exp_right = success;
