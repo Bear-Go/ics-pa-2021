@@ -18,8 +18,8 @@ static struct rule {
 	/* TODO: Add more rules.
 	* Pay attention to the precedence level of different rules.
 	*/
-	{"[0-9]{32}",			TK_NUM},			// number
-	{"0x[0-9a-fA-F]{32}",	TK_HEXNUM},			// hex-number
+	{"[0-9]{1,32}",			TK_NUM},			// number
+	{"0x[0-9a-fA-F]{1,32}",	TK_HEXNUM},			// hex-number
 	{" +", 					TK_NOTYPE},			// spaces
 	{"\\+", 				'+'},				// plus
 	{"-", 					'-'},				// minus
@@ -95,7 +95,7 @@ static bool make_token(char *e) {
 				break;
 			}
       	}
- 
+		printf()
 		if (i == NR_REGEX) {
 			printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
 			return false;
