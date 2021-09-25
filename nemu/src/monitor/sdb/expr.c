@@ -155,7 +155,7 @@ static int main_op(int p, int q) {
 
 static word_t eval(int p, int q) {
 	if ( !*is_exp_right ) return 0;
-	//printf("p=%d\tq=%d\n",p,q);
+	printf("time: runnig between p=%d and q=%d\n",p,q);
 	if (p > q) {
 		//bad expression
 		*is_exp_right = false;
@@ -164,7 +164,7 @@ static word_t eval(int p, int q) {
 	}
 	else if (p == q) {
 		//single token should be a number just return the value
-		printf("%d\t%s\n",p,tokens[p].str);
+		//printf("%d\t%s\n",p,tokens[p].str);
 		word_t num;
 		switch (tokens[p].type) {
 			case TK_NUM		: sscanf(tokens[p].str, "%d", &num); return num;
