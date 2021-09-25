@@ -19,7 +19,8 @@ word_t isa_reg_str2val(const char *s, bool *success) {
   for (int i = 0; i < 32; ++ i) {
     if ( !strcmp(regs[i], s) ) return  cpu.gpr[i]._32;
   }
-  if (s[0] == '0') return cpu.gpr[0]._32;
+  if ( !strcmp("0", s) ) return cpu.gpr[0]._32;
+  if ( !strcmp("cp", s) ) return cpu.pc;
   *success = false;
   printf("Error: invalid register name\n");
   return 0;
