@@ -224,7 +224,7 @@ word_t expr(char *e, bool *success) {
 		*success = false;
 		return 0;
 	}
-	printf("Massage: finish make_token\n")
+	printf("Massage: finish make_token\n");
 	/* TODO: Insert codes to evaluate the expression. */
 	is_exp_right = success;
 	if ( !is_brackets_match(0, nr_token - 1) ) {
