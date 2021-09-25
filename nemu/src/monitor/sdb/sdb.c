@@ -104,7 +104,7 @@ static int cmd_x(char *args) {
   }
 	int len;
   sscanf(arg1, "%d", &len);
-  printf("args = %s", args)
+  printf("args = %s", args);
 	char *arg2 = strtok(NULL, " ");
   if (arg2 == NULL) {
     printf("Incomplete command\n");
