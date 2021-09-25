@@ -8,7 +8,7 @@
 //static const int EXP_MAX_SIZE = 32;
 
 enum {
-	 TK_NOTYPE = 256, TK_NUM, TK_EQ, TK_NEQ
+	 TK_NOTYPE = 256, TK_NUM, TK_EQ, TK_NEQ, TK_AND
 
 	 /* TODO: Add more token types */
 };
@@ -30,6 +30,7 @@ static struct rule {
 	{"\\)", 		')'},				// right bracket
 	{"==", 			TK_EQ},				// equal
 	{"!=", 			TK_NEQ},			// not equal
+	{"&&", 			TK_AND},			// and
 	{""}
 };
 
@@ -139,6 +140,9 @@ static int main_op(int p, int q) {
 			case TK_EQ:case TK_NEQ:
 				if (priority < 7) loc = q, priority = 7;
 				break;
+			case TK_EQ:
+				if (priority < 11) loc = q, priority = 11;
+				break;	
 			default:
 				break;
 		} 
