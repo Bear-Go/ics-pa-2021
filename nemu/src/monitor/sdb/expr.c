@@ -122,6 +122,13 @@ static bool check_parentheses(int p, int q) {
 
 static int main_op(int p, int q) {
 	//find the location of main operator
+	const int priority = 100;
+	int cnt = 0, loc = 0;
+	for (; p <= q; ++ p) {
+		if (tokens[p].type == '(') ++ cnt;
+		if (tokens[p].type == ')') -- cnt;
+		if (cnt) return 
+	}
 	return 0;
 }
 
@@ -160,13 +167,28 @@ static word_t eval(int p, int q) {
 	return 0;
 }
 
+static bool is_brackets_match(int p, int q) {
+	int cnt = 0;
+	for (; p <= q; ++ p) {
+		if (tokens[p] == '(') ++ cnt;
+		if (tokens[q] == ')') -- cnt;
+		if (cnt < 0) return false;
+	}
+	return !cnt;
+}
+
 word_t expr(char *e, bool *success) {
-	if (!make_token(e)) {
+	if ( !make_token(e) ) {
 		*success = false;
 		return 0;
 	}
 
 	/* TODO: Insert codes to evaluate the expression. */
+	if ( !is_brackets_match(0, nr_token - 1) ) {
+		is_exp_right = false;
+		return 0;
+	}
+
 	is_exp_right = success;
 	return eval(0, nr_token - 1);
 }
