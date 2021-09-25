@@ -163,6 +163,7 @@ static word_t eval(int p, int q) {
 	}
 	else if (p == q) {
 		//single token should be a number just return the value
+		printf("%s\n",tokens[p].str);
 		word_t num;
 		switch (tokens[p].type) {
 			case TK_NUM		: sscanf(tokens[p].str, "%d", &num); return num;
