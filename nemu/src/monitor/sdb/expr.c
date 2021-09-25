@@ -213,10 +213,10 @@ word_t expr(char *e, bool *success) {
 								tokens[i-1].type != TK_HEXNUM && 
 								tokens[i-1].type != TK_REG && 
 								tokens[i-1].type != ')';
-		if (tokens[i].type == '*' && (i == 0 || is_pre_type_sign ) {
+		if (tokens[i].type == '*' && (i == 0 || is_pre_type_sign ) ) {
 			tokens[i].type = TK_REF;
 		}
-		if (tokens[i].type == '-' && (i == 0 || is_pre_type_sign ) {
+		if (tokens[i].type == '-' && (i == 0 || is_pre_type_sign ) ) {
 			tokens[i].type = TK_NEG;
 		}
 	}
