@@ -229,7 +229,7 @@ static int modify_token(int p, int q) {
 }
 
 word_t expr(char *e, bool *success) {
-	printf("Expression is %s \n",*e);
+	printf("Expression is %s \n",e);
 	if ( !make_token(e) ) {
 		*success = false;
 		printf("Error: make_token() mistake\n");
