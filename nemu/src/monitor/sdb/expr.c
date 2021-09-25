@@ -20,7 +20,7 @@ static struct rule {
 	*/
 	{"[0-9]{1,32}",			TK_NUM},			// number
 	{"0x[0-9a-fA-F]{1,32}",	TK_HEXNUM},			// hex-number
-	{"	+", 					TK_NOTYPE},			// spaces
+	{"\\s", 				TK_NOTYPE},			// spaces
 	{"\\+", 				'+'},				// plus
 	{"-", 					'-'},				// minus
 	{"\\*", 				'*'},				// mul
