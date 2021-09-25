@@ -26,6 +26,7 @@ static struct rule {
 	{"-", 			'-'},				// minus
 	{"\\*", 		'*'},				// mul
 	{"/", 			'/'},				// div
+	{"%",			'%'},				// mod
 	{"\\(", 		'('},				// left bracket
 	{"\\)", 		')'},				// right bracket
 	{"==", 			TK_EQ},				// equal
@@ -122,12 +123,22 @@ static bool check_parentheses(int p, int q) {
 
 static int main_op(int p, int q) {
 	//find the location of main operator
-	const int priority = 100;
+	const int priority = 0
 	int cnt = 0, loc = 0;
-	for (; p <= q; ++ p) {
-		if (tokens[p].type == '(') ++ cnt;
-		if (tokens[p].type == ')') -- cnt;
-		if (cnt) return 
+	for (; p <= q; -- q) {
+		if (tokens[q].type == ')') -- cnt;
+		if (tokens[q].type == '(') ++ cnt;
+		if ( !cnt ) continue;
+		switch (tokens[q].type) {
+			case '+':case '-':
+				if (priority < 4) loc = q, priority = 4;
+				break;
+			case '*':case '/':case '%':
+				if (priority < 3) loc = q, priority = 3;
+				break;
+			default:
+				break;
+		} 
 	}
 	return 0;
 }
