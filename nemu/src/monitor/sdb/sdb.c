@@ -98,7 +98,13 @@ static int cmd_x(char *args) {
 	int len;
 	vaddr_t addr;
 	sscanf(arg1, "%d", &len);
-	sscanf(arg2, "%x", &addr);
+  bool *is_expr_right;
+  addr = expr(arg2, &is_expr_right);
+  if ( !is_expr_right ) {
+      printf("Error: Wrong expression\n");
+      return 0;
+  }
+
 	for (; len > 0; -- len) {
 		printf("0x%x:\t0x%08x\n", addr, vaddr_read(addr, 4) & 0xffffffff);
 		addr+=4;
