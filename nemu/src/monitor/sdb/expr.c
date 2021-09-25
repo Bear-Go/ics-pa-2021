@@ -176,6 +176,7 @@ static word_t eval(int p, int q) {
 	}
 	else if (check_parentheses(p, q) == true) {
 		//remove the pair of brackets
+		printf("p=%d and q=%d brackets have been removed\n",p,q);
 		return eval(p + 1, q - 1);
 	}
 	else {
