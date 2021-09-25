@@ -171,9 +171,8 @@ static word_t eval(int p, int q) {
 			case TK_NUM		: sscanf(tokens[p].str, "%d", &num); return num;
 			case TK_HEXNUM	: sscanf(tokens[p].str, "%x", &num); return num;
  			case TK_REG 	: num = isa_reg_str2val(tokens[p].str+1, is_exp_right);
-			 					if( !*is_exp_right ) printf("when got reg value we got false\n");
 			 					return ( *is_exp_right ? num : 0);
-			default: *is_exp_right = false; printf("when p==q and undefined token we got false\n"); return 0;
+			default: *is_exp_right = false; printf("Error: p==q and undefined number\n"); return 0;
 		}
 	}
 	else if (check_parentheses(p, q) == true) {
