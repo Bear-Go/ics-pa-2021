@@ -167,7 +167,7 @@ static word_t eval(int p, int q) {
 		return eval(p + 1, q - 1);
 	}
 	else {
-		int op = main_op();
+		int op = main_op(p, q);
 		word_t val1 = eval(p, op - 1);
 		word_t val2 = eval(op + 1, q);
 		switch (tokens[op].type) {
