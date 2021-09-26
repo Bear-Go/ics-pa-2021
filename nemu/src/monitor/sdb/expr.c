@@ -18,8 +18,8 @@ static struct rule {
 	/* TODO: Add more rules.
 	* Pay attention to the precedence level of different rules.
 	*/
-	{"0x[0-9a-fA-F]+",	TK_HEXNUM},			// hex-number
-	{"[0-9]+",			TK_NUM},			// number
+	{"0x[0-9a-fA-F]+",		TK_HEXNUM},			// hex-number
+	{"[0-9]+",				TK_NUM},			// number
 	{" +", 					TK_NOTYPE},			// spaces
 	{"\\+", 				'+'},				// plus
 	{"-", 					'-'},				// minus
@@ -129,11 +129,11 @@ static int main_op(int p, int q) {
 		printf("\tis %d main op token = %s \n",q,tokens[q].str);
 		if (tokens[q].type == ')') -- cnt;
 		if (tokens[q].type == '(') ++ cnt;
-		if (cnt) continue;
-		printf("potential token is %s \n", tokens[q].str);
+		if (cnt || tokens[q].type == TK_NUM || tokens[q] == TK_HEXNUM) continue;
 		switch (tokens[q].type) {
 			case TK_NEG:
 				if (priority < 2) loc = q, priority = 2;
+				printf("")
 				break;
 			case '*':case '/':
 				if (priority < 3) loc = q, priority = 3;
