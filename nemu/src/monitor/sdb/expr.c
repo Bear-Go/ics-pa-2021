@@ -149,7 +149,7 @@ static int main_op(int p, int q) {
 	}
 	if ( !priority ) {
 		*is_exp_right = false;
-		return 0;
+		return -1;
 	}
 	return loc;
 }
@@ -186,6 +186,11 @@ static word_t eval(int p, int q) {
 		
 		printf("choice: branch find mainop\n");
 		int op = main_op(p, q);
+		if (op <= p || op >= q) {
+			*is_exp_right = false; 
+			printf("when main op not found we got false\n"); 
+			return 0;
+		}
 		printf("main operator is %s\tlocation is %d \n",tokens[op].str,op);
 		word_t val1 = eval(p, op - 1);
 		word_t val2 = eval(op + 1, q);
@@ -197,7 +202,7 @@ static word_t eval(int p, int q) {
 			case TK_EQ	: return val1 == val2;
 			case TK_NEQ : return val1 != val2;
 			case TK_AND : return val1 && val2;
-			default: *is_exp_right = false; printf("when main op not found we got false\n"); return 0;
+			default: assert(0);
 		}
 	}
 	printf("In the eval wrong branch\n");
