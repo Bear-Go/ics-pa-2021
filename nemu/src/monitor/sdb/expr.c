@@ -130,6 +130,7 @@ static int main_op(int p, int q) {
 		if (tokens[q].type == ')') -- cnt;
 		if (tokens[q].type == '(') ++ cnt;
 		if (cnt) continue;
+		printf("potential token is %s \n", tokens[q].str);
 		switch (tokens[q].type) {
 			case TK_NEG:
 				if (priority < 2) loc = q, priority = 2;
