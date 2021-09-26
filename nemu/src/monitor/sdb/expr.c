@@ -126,7 +126,7 @@ static int main_op(int p, int q) {
 	int priority = 0;
 	int cnt = 0, loc = 0;
 	for (; p <= q; -- q) {
-		printf("\tis main op ? token = %s \n", tokens[q].str);
+		printf("\tis %d main op token = %s \n",q,tokens[q].str);
 		if (tokens[q].type == ')') -- cnt;
 		if (tokens[q].type == '(') ++ cnt;
 		if (cnt) continue;
