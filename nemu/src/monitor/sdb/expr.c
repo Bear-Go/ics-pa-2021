@@ -133,7 +133,7 @@ static int main_op(int p, int q) {
 		switch (tokens[q].type) {
 			case TK_NEG:
 				if (priority < 2) loc = q, priority = 2;
-				printf("we got TK_NEG \n");
+				printf("we got TK_NEG at %d \n",loc);
 				break;
 			case '*':case '/':
 				if (priority < 3) loc = q, priority = 3;
