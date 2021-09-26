@@ -188,7 +188,7 @@ static word_t eval(int p, int q) {
 		int op = main_op(p, q);
 		if (op <= p || op >= q) {
 			*is_exp_right = false; 
-			printf("when main op not found we got false\n"); 
+			printf("Error: main operater not found \n"); 
 			return 0;
 		}
 		printf("main operator is %s\tlocation is %d \n",tokens[op].str,op);
