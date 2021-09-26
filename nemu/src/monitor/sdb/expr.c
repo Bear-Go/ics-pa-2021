@@ -131,11 +131,14 @@ static int main_op(int p, int q) {
 		if (tokens[q].type == '(') ++ cnt;
 		if (cnt) continue;
 		switch (tokens[q].type) {
-			case '+':case '-':
-				if (priority < 4) loc = q, priority = 4;
+			case TK_NEG:
+				if (priority < 2) loc = q, priority = 2;
 				break;
 			case '*':case '/':
 				if (priority < 3) loc = q, priority = 3;
+				break;
+			case '+':case '-':
+				if (priority < 4) loc = q, priority = 4;
 				break;
 			case TK_EQ:case TK_NEQ:
 				if (priority < 7) loc = q, priority = 7;
@@ -202,6 +205,7 @@ static word_t eval(int p, int q) {
 			case TK_EQ	: return val1 == val2;
 			case TK_NEQ : return val1 != val2;
 			case TK_AND : return val1 && val2;
+			case TK_NEG : return -val2;
 			default: assert(0);
 		}
 	}
