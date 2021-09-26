@@ -18,8 +18,8 @@ static struct rule {
 	/* TODO: Add more rules.
 	* Pay attention to the precedence level of different rules.
 	*/
-	{"0x[0-9a-fA-F]{8}",	TK_HEXNUM},			// hex-number
-	{"[0-9]{32}",			TK_NUM},			// number
+	{"0x[0-9a-fA-F]+",	TK_HEXNUM},			// hex-number
+	{"[0-9]+",			TK_NUM},			// number
 	{" +", 					TK_NOTYPE},			// spaces
 	{"\\+", 				'+'},				// plus
 	{"-", 					'-'},				// minus
