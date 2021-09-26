@@ -133,7 +133,6 @@ static int main_op(int p, int q) {
 		switch (tokens[q].type) {
 			case TK_NEG:
 				if (priority < 2) loc = q, priority = 2;
-				printf("we got TK_NEG at %d \n",loc);
 				break;
 			case '*':case '/':
 				if (priority < 3) loc = q, priority = 3;
@@ -190,7 +189,7 @@ static word_t eval(int p, int q) {
 		
 		printf("choice: branch find mainop\n");
 		int op = main_op(p, q);
-		if (op <= p || op >= q) {
+		if (op < p || op > q) {
 			*is_exp_right = false; 
 			printf("Error: main operater not found \n"); 
 			return 0;
