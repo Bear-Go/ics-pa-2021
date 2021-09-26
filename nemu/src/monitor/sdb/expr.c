@@ -126,6 +126,7 @@ static int main_op(int p, int q) {
 	int priority = 0;
 	int cnt = 0, loc = 0;
 	for (; p <= q; -- q) {
+		printf("\tis main op ? token = %s", tokens[q].str);
 		if (tokens[q].type == ')') -- cnt;
 		if (tokens[q].type == '(') ++ cnt;
 		if (cnt) continue;
@@ -182,6 +183,7 @@ static word_t eval(int p, int q) {
 		return eval(p + 1, q - 1);
 	}
 	else {
+		
 		printf("choice: branch find mainop\n");
 		int op = main_op(p, q);
 		printf("main operator is %s\tlocation is %d \n",tokens[op].str,op);
