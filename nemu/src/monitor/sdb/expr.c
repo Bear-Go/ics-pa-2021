@@ -131,7 +131,7 @@ static int main_op(int p, int q) {
 		if (tokens[q].type == '(') ++ cnt;
 		if (cnt || tokens[q].type == TK_NUM || tokens[q].type == TK_HEXNUM) continue;
 		switch (tokens[q].type) {
-			case TK_NEG:
+			case TK_NEG:case TK_REF:
 				if (priority < 2) loc = q, priority = 2;
 				break;
 			case '*':case '/':
@@ -203,7 +203,8 @@ static word_t eval(int p, int q) {
 			case TK_EQ	: return val1 == val2;
 			case TK_NEQ : return val1 != val2;
 			case TK_AND : return val1 && val2;
-			case TK_NEG : return -val2;
+			case TK_NEG	: return -val2;
+			case TK_REF	: return vaddr_read(val2, 4);
 			default: assert(0);
 		}
 	}
