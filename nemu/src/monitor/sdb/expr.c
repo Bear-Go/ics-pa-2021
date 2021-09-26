@@ -129,7 +129,7 @@ static int main_op(int p, int q) {
 		printf("\tis %d main op token = %s \n",q,tokens[q].str);
 		if (tokens[q].type == ')') -- cnt;
 		if (tokens[q].type == '(') ++ cnt;
-		if (cnt || tokens[q].type == TK_NUM || tokens[q] == TK_HEXNUM) continue;
+		if (cnt || tokens[q].type == TK_NUM || tokens[q].type == TK_HEXNUM) continue;
 		switch (tokens[q].type) {
 			case TK_NEG:
 				if (priority < 2) loc = q, priority = 2;
