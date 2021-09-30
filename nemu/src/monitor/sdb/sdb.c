@@ -129,7 +129,18 @@ static int cmd_p(char *args) {
 }
 
 static int cmd_w(char *args) {
-	printf("Coming soon\n");
+	if (args == NULL) {
+    printf("Please input the exxpression\n");
+  }
+  else {
+    int No = set_wp(args);
+    if (No == -1) {
+      printf("Wrong expression\n");
+    }
+    else {
+      printf("Watchpoint set successfully\tNo = %d\n",NO);
+    }
+  }
 	return 0;
 }
 

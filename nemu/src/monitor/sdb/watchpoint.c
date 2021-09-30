@@ -75,3 +75,11 @@ bool delete_wp(int NO){
   return true;
 }
 
+void list_wp() {
+  if (head == NULL) {
+    printf("No watchpoints\n");
+    return;
+  }
+  
+}
+
