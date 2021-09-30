@@ -154,16 +154,16 @@ static int main_op(int p, int q) {
 		*is_exp_right = false;
 		return -66;
 	}
-	printf("\tmain op token = %s \n", tokens[loc].str);
+	//printf("\tmain op token = %s \n", tokens[loc].str);
 	return loc;
 }
 
 static word_t eval(int p, int q) {
 	if ( !*is_exp_right ) return 0;
-	printf("time: runnig between p=%d and q=%d\n",p,q);
+	//printf("time: runnig between p=%d and q=%d\n",p,q);
 	if (p > q) {
 		//bad expression
-		printf("choice: branch p > q\n");
+		//printf("choice: branch p > q\n");
 		*is_exp_right = false;
 		return 0;
 	}
@@ -233,11 +233,11 @@ static int modify_token(int p, int q) {
 								tokens[i-1].type != ')';
 		if (tokens[i].type == '*' && (i == p || is_pre_type_sign ) ) {
 			tokens[i].type = TK_REF;
-			printf("i = %d: * have been changed to pointer\n",i);
+			//printf("i = %d: * have been changed to pointer\n",i);
 		}
 		if (tokens[i].type == '-' && (i == p || is_pre_type_sign ) ) {
 			tokens[i].type = TK_NEG;
-			printf("i = %d: - have been changed to neg\n",i);
+			//printf("i = %d: - have been changed to neg\n",i);
 		}
 	}
 	return 0;
@@ -250,7 +250,7 @@ word_t expr(char *e, bool *success) {
 		printf("Error: make_token() mistake\n");
 		return 0;
 	}
-	printf("Massage: finish make_token()\n");
+	//printf("Massage: finish make_token()\n");
 	/* TODO: Insert codes to evaluate the expression. */
 	is_exp_right = success;
 	if ( !is_brackets_match(0, nr_token - 1) ) {
@@ -258,8 +258,8 @@ word_t expr(char *e, bool *success) {
 		printf("Error: is_brackets_match() mistake\n");
 		return 0;
 	}
-	printf("Massage: finish is_brackets_match()\n");
+	//printf("Massage: finish is_brackets_match()\n");
 	modify_token(0, nr_token - 1);
-	printf("Massage: finish modify_token()\n");
+	//printf("Massage: finish modify_token()\n");
 	return eval(0, nr_token - 1);
 }
