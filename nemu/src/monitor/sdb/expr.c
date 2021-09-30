@@ -127,7 +127,6 @@ static int main_op(int p, int q) {
 	int priority = 0;
 	int cnt = 0, loc = 0;
 	for (; p <= q; -- q) {
-		printf("\tis %d main op token = %s \n",q,tokens[q].str);
 		if (tokens[q].type == ')') -- cnt;
 		if (tokens[q].type == '(') ++ cnt;
 		if (cnt || tokens[q].type == TK_NUM || tokens[q].type == TK_HEXNUM || tokens[q].type == TK_REG) continue;
@@ -155,6 +154,7 @@ static int main_op(int p, int q) {
 		*is_exp_right = false;
 		return -66;
 	}
+	printf("\tmain op token = %s \n", tokens[loc].str);
 	return loc;
 }
 
