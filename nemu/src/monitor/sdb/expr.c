@@ -153,7 +153,7 @@ static int main_op(int p, int q) {
 	}
 	if ( !priority ) {
 		*is_exp_right = false;
-		return -1;
+		return -66;
 	}
 	return loc;
 }
@@ -163,7 +163,8 @@ static word_t eval(int p, int q) {
 	printf("time: runnig between p=%d and q=%d\n",p,q);
 	if (p > q) {
 		//bad expression
-		//printf("choice: branch p > q\n");
+		printf("choice: branch p > q\n");
+		*is_exp_right = false;
 		return 0;
 	}
 	else if (p == q) {
@@ -188,14 +189,15 @@ static word_t eval(int p, int q) {
 		
 		//printf("choice: branch find mainop\n");
 		int op = main_op(p, q);
-		if (op < p || op > q) {
+		if (op == -66) {
 			*is_exp_right = false; 
 			printf("Error: main operater not found \n"); 
 			return 0;
 		}
 		//printf("main operator is %s\tlocation is %d \n",tokens[op].str,op);
-		word_t val1 = eval(p, op - 1);
-		word_t val2 = eval(op + 1, q);
+		word_t val1 = 0, val2 = 0;
+		if (op - 1 >= p) val1 = eval(p, op - 1);
+		if (op + 1 <= q) val2 = eval(op + 1, q);
 		switch (tokens[op].type) {
 			case '+'	: return val1 + val2;
 			case '-'	: return val1 - val2;
