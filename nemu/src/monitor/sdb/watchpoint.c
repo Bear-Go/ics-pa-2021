@@ -51,6 +51,7 @@ int set_wp(char *e) {
   WP *p = new_wp();
   p -> expr = strdup(e);
   p -> cur_val = val;
+  printf("%x\n", val);
   p -> next =head;
   head = p;
 
