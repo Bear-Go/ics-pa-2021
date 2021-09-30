@@ -36,7 +36,7 @@ void init_mem() {
 }
 
 word_t paddr_read(paddr_t addr, int len) {
-  if (likely(in_pmem(addr))) {printf("branch:in_pmem\n");return pmem_read(addr, len)};
+  if (likely(in_pmem(addr))) {printf("branch:in_pmem\n");return pmem_read(addr, len);}
   else return mmio_read(addr, len);
 }
 
