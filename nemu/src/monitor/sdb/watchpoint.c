@@ -89,3 +89,18 @@ void list_wp() {
   }
 }
 
+void scan_wp(vaddr_t pc) {
+  WP *p = head;
+  for (; p != NULL; p = p -> next) {
+    bool success;
+    word_t new_val = expr(p -> expr, &success);
+    if (p -> cur_val != new_val) {
+      printf("Watchpoint: No = %d\nExpression = %s\nChange: %x -> %x\n",
+            p -> NO, p -> expr, p -> cur_val, new_val);
+      p -> cur_val = new_val;
+      nemu_state.state = NEMU_STOP;
+      return;
+    }
+  }
+}
+
