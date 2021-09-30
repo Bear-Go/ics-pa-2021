@@ -146,7 +146,7 @@ static int cmd_w(char *args) {
   else {
     int No = set_wp(args);
     if (No == -1) {
-      printf("Wrong expression\n");
+      printf("Wrong expression:cmd_w\n");
     }
     else {
       printf("Watchpoint set successfully\tNo = %d\n",No);
