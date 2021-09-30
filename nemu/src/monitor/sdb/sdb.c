@@ -138,7 +138,7 @@ static int cmd_w(char *args) {
       printf("Wrong expression\n");
     }
     else {
-      printf("Watchpoint set successfully\tNo = %d\n",NO);
+      printf("Watchpoint set successfully\tNo = %d\n",No);
     }
   }
 	return 0;
