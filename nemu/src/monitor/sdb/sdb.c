@@ -124,7 +124,18 @@ static int cmd_x(char *args) {
 }
 
 static int cmd_p(char *args) {
-	printf("Coming soon\n");
+	if (args == NULL) {
+    printf("Please input the expression\n");
+    return 0;
+  }
+  vaddr_t val;
+  bool is_expr_right = true;
+  val = expr(arg2, &is_expr_right);
+  if ( !is_expr_right ) {
+      printf("Attention: wrong expression\n");
+      return 0;
+  }
+  printf("0x%x\n",val);
 	return 0;
 }
 
