@@ -195,10 +195,10 @@ static word_t eval(int p, int q) {
 			printf("Error: main operater not found \n"); 
 			return 0;
 		}
-		printf("main operator is %s\tlocation is %d \n",tokens[op].str,op);
 		word_t val1 = 0, val2 = 0;
 		if (op - 1 >= p) val1 = eval(p, op - 1);
 		if (op + 1 <= q) val2 = eval(op + 1, q);
+		printf("main operator is %s\tlocation is %d \n",tokens[op].str,op);
 		switch (tokens[op].type) {
 			case '+'	: return val1 + val2;
 			case '-'	: return val1 - val2;
