@@ -35,7 +35,7 @@ static int cmd_c(char *args) {
 
 static int cmd_q(char *args) {
 	//wait to be solved
-  cpu_exec(-1);
+  nemu_state.state = NEMU_STOP;
 	return -1;
 }
 
