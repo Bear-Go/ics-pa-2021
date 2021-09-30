@@ -41,7 +41,7 @@ static void free_wp(WP *wp){
 }
 
 int set_wp(char *e) {
-  bool success;
+  bool success = true;
   word_t val = expr(e, &success);
   if ( !success ) {
     printf("Error: watchpoint wrong expression\n");
@@ -92,7 +92,7 @@ void list_wp() {
 void scan_wp(vaddr_t pc) {
   WP *p = head;
   for (; p != NULL; p = p -> next) {
-    bool success;
+    bool success = true;
     word_t new_val = expr(p -> expr, &success);
     if (p -> cur_val != new_val) {
       printf("Watchpoint: No = %d\nExpression = %s\nChange: %x -> %x\n",
