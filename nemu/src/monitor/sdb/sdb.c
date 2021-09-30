@@ -99,21 +99,21 @@ static int cmd_info(char *args) {
 static int cmd_x(char *args) {
 	char *arg1 = strtok(NULL, " ");
   if (arg1 == NULL) {
-    printf("Incomplete command\n");
+    printf("Incomplete command:cmd_x\n");
     return 0;
   }
 	int len;
   sscanf(arg1, "%d", &len);
 	char *arg2 = strtok(NULL, "\n");
   if (arg2 == NULL) {
-    printf("Incomplete command\n");
+    printf("Incomplete command:cmd_x\n");
     return 0;
   }
 	vaddr_t addr;
   bool is_expr_right = true;
   addr = expr(arg2, &is_expr_right);
   if ( !is_expr_right ) {
-      printf("Attention: wrong expression\n");
+      printf("Attention: wrong expression:cmd_x\n");
       return 0;
   }
 	for (; len > 0; -- len) {
@@ -132,10 +132,10 @@ static int cmd_p(char *args) {
   bool is_expr_right = true;
   val = expr(args, &is_expr_right);
   if ( !is_expr_right ) {
-      printf("Attention: wrong expression\n");
+      printf("Attention: wrong expression:cmd_p\n");
       return 0;
   }
-  printf("0x%x\n",val);
+  printf("0x%08x\n",val & 0xffffffff);
 	return 0;
 }
 
