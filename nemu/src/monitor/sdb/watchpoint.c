@@ -51,7 +51,6 @@ int set_wp(char *e) {
   WP *p = new_wp();
   p -> expr = strdup(e);
   p -> cur_val = val;
-  printf("%x\n", val);
   p -> next =head;
   head = p;
 
@@ -81,10 +80,10 @@ void list_wp() {
     return;
   }
   else {
-    printf("%4s\t%s\t%s\n", "No", "Expression", "Current_val");
+    printf("%4s\t%16s\t%16s\n", "No", "Expression", "Current_val");
     WP *p = head;
     for (; p != NULL; p = p -> next) {
-      printf("%4d\t%s\t%x\n", p ->  NO, p -> expr, p -> cur_val);
+      printf("%4d\t%16s\t%16x\n", p ->  NO, p -> expr, p -> cur_val);
     }
   }
 }
