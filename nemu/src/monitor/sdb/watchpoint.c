@@ -80,10 +80,10 @@ void list_wp() {
     return;
   }
   else {
-    printf("%4s\t%16s\t%16s\n", "No", "Expression", "Current_val");
+    printf("%4s\t%16s\t%s\n", "No", "Expression", "Current_val");
     WP *p = head;
     for (; p != NULL; p = p -> next) {
-      printf("%4d\t%16s\t%16x\n", p ->  NO, p -> expr, p -> cur_val);
+      printf("%4d\t%16s\t0x%08x\n", p ->  NO, p -> expr, p -> cur_val & 0xffffffff);
     }
   }
 }
