@@ -61,7 +61,6 @@ bool delete_wp(int NO){
   WP *p = head, *pre = NULL;
   for (; p != NULL && p -> NO != NO; pre = p, p = p -> next);
   if (p == NULL) {
-    printf("Error: no such watchpoint\n");
     return false;
   }
 
