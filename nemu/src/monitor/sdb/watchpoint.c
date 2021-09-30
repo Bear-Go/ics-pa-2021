@@ -83,7 +83,7 @@ void list_wp() {
   else {
     printf("%4s\t%s\t%s\n", "No", "Expression", "Current_val");
     WP *p = head;
-    for (; p != NULL; P = P -> next) {
+    for (; p != NULL; p = p -> next) {
       printf("%4d\t%s\t%x\n", p ->  NO, p -> expr, p -> cur_val);
     }
   }
