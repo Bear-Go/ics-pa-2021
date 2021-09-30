@@ -166,6 +166,9 @@ static int cmd_d(char *args) {
     if ( !delete_wp(No) ) {
       printf("Error: No such watchpoint\n");
     }
+    else {
+      printf("Delete the watchpoint No = %d successfully\n", No);
+    }
   }
 	return 0;
 }
