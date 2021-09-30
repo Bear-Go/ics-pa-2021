@@ -4,5 +4,6 @@
 #include <common.h>
 
 word_t expr(char *e, bool *success);
+int set_wp(char *e);
 
 #endif
