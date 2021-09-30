@@ -80,6 +80,12 @@ void list_wp() {
     printf("No watchpoints\n");
     return;
   }
-  
+  else {
+    printf("%4s\t%s\t%s\n", "No", "Expression", "Current_val");
+    WP *p = head;
+    for (; p != NULL; P = P -> next) {
+      printf("%4d\t%s\t%x\n", p ->  NO, p -> expr, p -> cur_val);
+    }
+  }
 }
 
