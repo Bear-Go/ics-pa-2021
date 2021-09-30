@@ -5,5 +5,6 @@
 
 word_t expr(char *e, bool *success);
 int set_wp(char *e);
+bool delete_wp(int NO);
 
 #endif
