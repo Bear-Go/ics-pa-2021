@@ -89,7 +89,7 @@ static int cmd_info(char *args) {
 		return 0;
 	}
 	if (strcmp(arg,  "w") == 0) {
-		//print watchpoint
+		list_wp();
 		return 0;
 	}
 	printf("Error: Invalid info choice\n");
