@@ -25,6 +25,9 @@ static void debug_hook(vaddr_t pc, const char *asmbuf) {
   log_write("%s\n", asmbuf);
   if (g_print_step) { puts(asmbuf); }
 
+  /*-------------
+  scan_wp() has not been tested
+  -------------*/
   void scan_wp(vaddr_t pc);
   scan_wp(pc);
 }
