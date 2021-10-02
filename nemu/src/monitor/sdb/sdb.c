@@ -130,7 +130,6 @@ static int cmd_p(char *args) {
   }
   vaddr_t val;
   bool is_expr_right = true;
-  assert(0);
   val = expr(args, &is_expr_right);
   if ( !is_expr_right ) {
       printf("Attention: wrong expression:cmd_p\n");
