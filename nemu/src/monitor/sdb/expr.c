@@ -209,7 +209,7 @@ static word_t eval(int p, int q) {
 			case TK_NEQ : return val1 != val2;
 			case TK_AND : return val1 && val2;
 			case TK_NEG	: return -val2;
-			case TK_REF	: temp = vaddr_read(val2, 4); printf("vaddr_read successful\n");return temp;
+			case TK_REF	: temp = vaddr_read(val2, 4); /*printf("vaddr_read successful\n");*/ return temp;
 			default: assert(0);
 		}
 	}
