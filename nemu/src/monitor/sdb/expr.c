@@ -6,8 +6,8 @@
 #include <regex.h>
 
 enum {
-	 TK_NOTYPE = 256, TK_NUM, TK_HEXNUM,
-	 TK_EQ, TK_NEQ, TK_AND, TK_REG,
+	 TK_NOTYPE = 256, TK_NUM, TK_HEXNUM, TK_REG,
+	 TK_EQ, TK_NEQ, TK_AND, 
 	 TK_REF, TK_NEG
 	 /* TODO: Add more token types */
 };
@@ -208,7 +208,7 @@ static word_t eval(int p, int q) {
 			case TK_EQ	: return val1 == val2;
 			case TK_NEQ : return val1 != val2;
 			case TK_AND : return val1 && val2;
-			case TK_NEG	: return -val2;
+			case TK_NEG	: assert(0); return -val2;
 			case TK_REF	: assert(0); return vaddr_read(val2, 4);
 			default: assert(0);
 		}
