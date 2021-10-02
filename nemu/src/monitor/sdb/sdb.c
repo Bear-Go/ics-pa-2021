@@ -135,8 +135,8 @@ static int cmd_p(char *args) {
       printf("Attention: wrong expression:cmd_p\n");
       return 0;
   }
-  printf("0x%08x\n",val & 0xffffffff);
-	//printf("%u\n", val);
+  //printf("0x%08x\n",val & 0xffffffff);
+	printf("%u\n", val);
   return 0;
 }
 
