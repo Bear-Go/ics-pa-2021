@@ -236,11 +236,11 @@ static int modify_token(int p, int q) {
 								tokens[i-1].type != ')';
 		if (tokens[i].type == '*' && (i == p || is_pre_type_sign ) ) {
 			tokens[i].type = TK_REF;
-			//printf("i = %d: * have been changed to pointer\n",i);
+			printf("i = %d: * have been changed to pointer\n",i);
 		}
 		if (tokens[i].type == '-' && (i == p || is_pre_type_sign ) ) {
 			tokens[i].type = TK_NEG;
-			//printf("i = %d: - have been changed to neg\n",i);
+			printf("i = %d: - have been changed to neg\n",i);
 		}
 	}
 	return 0;
