@@ -210,7 +210,6 @@ static word_t eval(int p, int q) {
 			case TK_NEG	: 	//assert(0); 
 							return -val2;
 			case TK_REF	: 	//assert(0);
-							printf("Go ref\n");
 							return vaddr_read(val2, 4);
 			default: assert(0);
 		}
