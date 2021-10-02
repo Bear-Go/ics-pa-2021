@@ -132,7 +132,7 @@ static int main_op(int p, int q) {
 		if (cnt || tokens[q].type == TK_NUM || tokens[q].type == TK_HEXNUM || tokens[q].type == TK_REG) continue;
 		switch (tokens[q].type) {
 			case TK_NEG:case TK_REF:
-				if (priority < 2) loc = q, priority = 2;
+				if (priority <= 2) loc = q, priority = 2;
 				break;
 			case '*':case '/':
 				if (priority < 3) loc = q, priority = 3;
