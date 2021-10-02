@@ -199,7 +199,6 @@ static word_t eval(int p, int q) {
 		if (op - 1 >= p) val1 = eval(p, op - 1);
 		if (op + 1 <= q) val2 = eval(op + 1, q);
 		//printf("main operator is %s\tlocation is %d \n",tokens[op].str,op);
-		word_t temp;
 		switch (tokens[op].type) {
 			case '+'	: return val1 + val2;
 			case '-'	: return val1 - val2;
@@ -209,7 +208,7 @@ static word_t eval(int p, int q) {
 			case TK_NEQ : return val1 != val2;
 			case TK_AND : return val1 && val2;
 			case TK_NEG	: return -val2;
-			case TK_REF	: temp = vaddr_read(val2, 4); assert(0); return temp;
+			case TK_REF	: return vaddr_read(val2, 4);
 			default: assert(0);
 		}
 	}
