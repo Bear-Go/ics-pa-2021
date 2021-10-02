@@ -164,6 +164,7 @@ static word_t eval(int p, int q) {
 	if (p > q) {
 		//bad expression
 		//printf("choice: branch p > q\n");
+		assert(0);
 		*is_exp_right = false;
 		return 0;
 	}
