@@ -154,7 +154,7 @@ static int main_op(int p, int q) {
 		*is_exp_right = false;
 		return -66;
 	}
-	//printf("\tmain op token = %s \n", tokens[loc].str);
+	printf("\tmain op token = %s \n", tokens[loc].str);
 	return loc;
 }
 
