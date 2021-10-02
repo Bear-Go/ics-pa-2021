@@ -175,7 +175,7 @@ static word_t eval(int p, int q) {
 		switch (tokens[p].type) {
 			case TK_NUM		: sscanf(tokens[p].str, "%d", &num); return num;
 			case TK_HEXNUM	: sscanf(tokens[p].str, "%x", &num); return num;
- 			case TK_REG 	: 	assert(0);
+ 			case TK_REG 	: 	//assert(0);
 			 					num = isa_reg_str2val(tokens[p].str+1, is_exp_right);
 			 					return ( *is_exp_right ? num : 0);
 			default: *is_exp_right = false; printf("Error: p==q and undefined number\n"); return 0;
@@ -208,8 +208,10 @@ static word_t eval(int p, int q) {
 			case TK_EQ	: return val1 == val2;
 			case TK_NEQ : return val1 != val2;
 			case TK_AND : return val1 && val2;
-			case TK_NEG	: assert(0); return -val2;
-			case TK_REF	: return vaddr_read(val2, 4);
+			case TK_NEG	: 	//assert(0); 
+							return -val2;
+			case TK_REF	: 	//assert(0);
+							return vaddr_read(val2, 4);
 			default: assert(0);
 		}
 	}
