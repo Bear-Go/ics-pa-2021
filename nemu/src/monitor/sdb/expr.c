@@ -160,16 +160,16 @@ static int main_op(int p, int q) {
 
 static word_t eval(int p, int q) {
 	if ( !*is_exp_right ) return 0;
-	printf("time: runnig between p=%d and q=%d\n",p,q);
+	//printf("time: runnig between p=%d and q=%d\n",p,q);
 	if (p > q) {
 		//bad expression
-		printf("choice: branch p > q\n");
+		//printf("choice: branch p > q\n");
 		*is_exp_right = false;
 		return 0;
 	}
 	else if (p == q) {
 		//single token should be a number just return the value
-		printf("choice: branch p == q\n");
+		//printf("choice: branch p == q\n");
 		word_t num;
 		switch (tokens[p].type) {
 			case TK_NUM		: sscanf(tokens[p].str, "%d", &num); return num;
@@ -182,13 +182,13 @@ static word_t eval(int p, int q) {
 	}
 	else if (check_parentheses(p, q) == true) {
 		//remove the pair of brackets
-		printf("choice: branch remove brackets\n");
-		printf("p=%d and q=%d brackets have been removed\n",p,q);
+		//printf("choice: branch remove brackets\n");
+		//printf("p=%d and q=%d brackets have been removed\n",p,q);
 		return eval(p + 1, q - 1);
 	}
 	else {
 		
-		printf("choice: branch find mainop\n");
+		//printf("choice: branch find mainop\n");
 		int op = main_op(p, q);
 		if (op == -66) {
 			*is_exp_right = false; 
@@ -198,7 +198,7 @@ static word_t eval(int p, int q) {
 		word_t val1 = 0, val2 = 0;
 		if (op - 1 >= p) val1 = eval(p, op - 1);
 		if (op + 1 <= q) val2 = eval(op + 1, q);
-		printf("main operator is %s\tlocation is %d \n",tokens[op].str,op);
+		//printf("main operator is %s\tlocation is %d \n",tokens[op].str,op);
 		switch (tokens[op].type) {
 			case '+'	: return val1 + val2;
 			case '-'	: return val1 - val2;
@@ -208,7 +208,7 @@ static word_t eval(int p, int q) {
 			case TK_NEQ : return val1 != val2;
 			case TK_AND : return val1 && val2;
 			case TK_NEG	: return -val2;
-			case TK_REF	: printf("Do the vaddr_read\n");return vaddr_read(val2, 4);
+			case TK_REF	: return vaddr_read(val2, 4);
 			default: assert(0);
 		}
 	}
@@ -234,24 +234,24 @@ static int modify_token(int p, int q) {
 								tokens[i-1].type != ')';
 		if (tokens[i].type == '*' && (i == p || is_pre_type_sign ) ) {
 			tokens[i].type = TK_REF;
-			printf("i = %d: * have been changed to pointer\n",i);
+			//printf("i = %d: * have been changed to pointer\n",i);
 		}
 		if (tokens[i].type == '-' && (i == p || is_pre_type_sign ) ) {
 			tokens[i].type = TK_NEG;
-			printf("i = %d: - have been changed to neg\n",i);
+			//printf("i = %d: - have been changed to neg\n",i);
 		}
 	}
 	return 0;
 }
 
 word_t expr(char *e, bool *success) {
-	printf("Expression is:%s \n",e);
+	//printf("Expression is:%s \n",e);
 	if ( !make_token(e) ) {
 		*success = false;
 		printf("Error: make_token() mistake\n");
 		return 0;
 	}
-	printf("Massage: finish make_token()\n");
+	//printf("Massage: finish make_token()\n");
 	/* TODO: Insert codes to evaluate the expression. */
 	is_exp_right = success;
 	if ( !is_brackets_match(0, nr_token - 1) ) {
@@ -259,8 +259,8 @@ word_t expr(char *e, bool *success) {
 		printf("Error: is_brackets_match() mistake\n");
 		return 0;
 	}
-	printf("Massage: finish is_brackets_match()\n");
+	//printf("Massage: finish is_brackets_match()\n");
 	modify_token(0, nr_token - 1);
-	printf("Massage: finish modify_token()\n");
+	//printf("Massage: finish modify_token()\n");
 	return eval(0, nr_token - 1);
 }
