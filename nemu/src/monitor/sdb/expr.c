@@ -177,7 +177,7 @@ static word_t eval(int p, int q) {
 			case TK_HEXNUM	: sscanf(tokens[p].str, "%x", &num); return num;
  			case TK_REG 	: 	num = isa_reg_str2val(tokens[p].str+1, is_exp_right);
 			 					return ( *is_exp_right ? num : 0);
-			default: *is_exp_right = false; printf("Error: p==q and undefined number\n"); return 0;
+			default: *is_exp_right = false; assert(0); return 0;
 		}
 	}
 	else if (check_parentheses(p, q) == true) {
