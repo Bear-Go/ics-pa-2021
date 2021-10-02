@@ -154,7 +154,7 @@ static int main_op(int p, int q) {
 		*is_exp_right = false;
 		return -66;
 	}
-	printf("\tmain op token = %s location = %d\n", tokens[loc].str, loc);
+	//printf("\tmain op token = %s location = %d\n", tokens[loc].str, loc);
 	return loc;
 }
 
@@ -210,6 +210,7 @@ static word_t eval(int p, int q) {
 			case TK_NEG	: 	//assert(0); 
 							return -val2;
 			case TK_REF	: 	//assert(0);
+							printf("Go ref\n");
 							return vaddr_read(val2, 4);
 			default: assert(0);
 		}
