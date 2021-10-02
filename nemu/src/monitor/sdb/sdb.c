@@ -136,7 +136,7 @@ static int cmd_p(char *args) {
       return 0;
   }
   //printf("0x%08x\n",val & 0xffffffff);
-	printf("%d\n", val);
+	printf("%u\n", val);
   return 0;
 }
 
