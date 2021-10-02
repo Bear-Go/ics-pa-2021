@@ -208,7 +208,7 @@ static word_t eval(int p, int q) {
 			case TK_NEQ : return val1 != val2;
 			case TK_AND : return val1 && val2;
 			case TK_NEG	: return -val2;
-			case TK_REF	: return vaddr_read(val2, 4);
+			case TK_REF	: assert(0); return vaddr_read(val2, 4);
 			default: assert(0);
 		}
 	}
