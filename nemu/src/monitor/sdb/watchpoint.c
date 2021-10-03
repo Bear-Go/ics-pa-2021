@@ -89,6 +89,7 @@ void list_wp() {
 }
 
 void scan_wp(vaddr_t pc) {
+  //wait to be tested
   WP *p = head;
   for (; p != NULL; p = p -> next) {
     bool success = true;
