@@ -241,7 +241,7 @@ static int modify_token(int p, int q) {
 }
 
 word_t expr(char *e, bool *success) {
-	Log("Echo:the expression is %c", *e);
+	Log("Echo:the expression is %s", e);
 	if ( !make_token(e) ) {
 		*success = false;
 		printf("Error: make_token() mistake\n");
