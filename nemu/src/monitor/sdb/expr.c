@@ -154,7 +154,7 @@ static int main_op(int p, int q) {
 		*is_exp_right = false;
 		return -66;
 	}
-	//printf("\tmain op token = %s location = %d\n", tokens[loc].str, loc);
+	Log("\tmain op token = %s location = %d", tokens[loc].str, loc);
 	return loc;
 }
 
@@ -180,7 +180,7 @@ static word_t eval(int p, int q) {
 	}
 	else if (check_parentheses(p, q) == true) {
 		//remove the pair of brackets
-		Log("remove the brackets at position %d and %d", p, q);
+		Log("remove the brackets at position %d :( and %d :)", p, q);
 		return eval(p + 1, q - 1);
 	}
 	else {
