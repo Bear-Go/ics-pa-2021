@@ -206,7 +206,7 @@ static word_t eval(int p, int q) {
 			case TK_REF	: 	//assert(0);
 							printf("vaddr is %d\n", val2);
 							//if submit, keep this setence; if test local, delete it
-							word_t temp = vaddr_read(val, 4);
+							word_t temp = vaddr_read(val2, 4);
 							return temp;
 							//return vaddr_read(val2, 4);
 			default: assert(0);
