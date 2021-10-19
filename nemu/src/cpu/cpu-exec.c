@@ -93,9 +93,9 @@ void cpu_exec(uint64_t n) {
       return;
     default: nemu_state.state = NEMU_RUNNING;
   }
-
+  // if (n == 0) {nemu_state.state}
   uint64_t timer_start = get_time();
-
+  
   Decode s;
   for (;n > 0; n --) {
     fetch_decode_exec_updatepc(&s);
