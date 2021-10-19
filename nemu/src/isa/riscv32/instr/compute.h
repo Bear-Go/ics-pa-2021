@@ -5,18 +5,18 @@ def_EHelper(lui) {
 //My own code below
 
 def_EHelper(li) {
-  //wait
+  // wait
   rtl_li(s, ddest, id_src1->imm);
 }
 
 def_EHelper(auipc) {
-  //wait
+  // wait
   rtl_li(s, ddest, s->pc + id_src1->imm);
 }
 
 def_EHelper(addi) {
-  //wait
-  rtl_addi(s, ddest, ddest, id_src1->imm);
+  // wait
+  // rtl_addi(s, ddest, ddest, id_src1->imm);
 }
 
 // def_EHelper(jal) {
