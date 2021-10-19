@@ -207,6 +207,7 @@ static word_t eval(int p, int q) {
 							printf("vaddr is %d\n", val2);
 							//if submit, keep this setence; if test local, delete it
 							word_t temp = vaddr_read(val2, 4);
+							printf("temp is %d\n", temp);
 							return temp;
 							//return vaddr_read(val2, 4);
 			default: assert(0);
