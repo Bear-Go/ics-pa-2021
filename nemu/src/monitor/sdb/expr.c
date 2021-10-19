@@ -202,7 +202,9 @@ static word_t eval(int p, int q) {
 			case TK_AND : return val1 && val2;
 			case TK_NEG	: 	//assert(0); 
 							return -val2;
-			case TK_REF	: 	//assert(0);//if submit, keep this setence; if test local, delete it
+			case TK_REF	: 	//assert(0);
+							printf("vaddr is %d\n", val2);
+							//if submit, keep this setence; if test local, delete it
 							return vaddr_read(val2, 4);
 			default: assert(0);
 		}
