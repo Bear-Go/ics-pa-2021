@@ -42,8 +42,4 @@ static inline def_rtl(msb, rtlreg_t* dest, const rtlreg_t* src1, int width) {
   TODO();
 }
 
-// static inline def_rtl(auipc, rtl) {
-
-// }
-
 #endif
