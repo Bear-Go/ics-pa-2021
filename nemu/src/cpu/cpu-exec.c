@@ -61,6 +61,7 @@ void fetch_decode(Decode *s, vaddr_t pc) {
   s->snpc = pc;
   int idx = isa_fetch_decode(s);
   s->dnpc = s->snpc;
+  printf("%08x\n",s->dnpc);
   s->EHelper = g_exec_table[idx];
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
@@ -78,9 +79,9 @@ void fetch_decode(Decode *s, vaddr_t pc) {
   memset(p, ' ', space_len);
   p += space_len;
 
-  // void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
-  // disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
-  //     MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.instr.val, ilen);
+  void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
+  disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
+      MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.instr.val, ilen);
 #endif
 }
 
