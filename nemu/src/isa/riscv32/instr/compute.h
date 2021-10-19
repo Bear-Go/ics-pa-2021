@@ -14,10 +14,10 @@ def_EHelper(auipc) {
   rtl_li(s, ddest, s->pc + id_src1->imm);
 }
 
-// def_EHelper(addi) {
-//   //wait
-//   rtl_li(s, ddest, id_src1->imm);
-// }
+def_EHelper(addi) {
+  //wait
+  rtl_addi(s, ddest, dsrc1, id_src1->imm);
+}
 
 // def_EHelper(jal) {
 //   //wait
