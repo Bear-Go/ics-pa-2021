@@ -26,5 +26,5 @@ def_EHelper(jal) {
 
 def_EHelper(j) {
   //wait
-  rtl_j(s, ddest, id_src1->imm);
+  rtl_j(s, id_src1->imm);
 }
