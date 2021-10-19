@@ -94,7 +94,7 @@ void cpu_exec(uint64_t n) {
     case NEMU_CMDQ: break;
     default: nemu_state.state = NEMU_RUNNING;
   }
-  printf("go\n");
+  
   uint64_t timer_start = get_time();
   
   Decode s;
