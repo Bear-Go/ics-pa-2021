@@ -135,7 +135,7 @@ static int cmd_p(char *args) {
       printf("Attention: wrong expression:cmd_p\n");
       return 0;
   }
-	printf("%u\n", val);
+	printf("%x\n", val);
 	return 0;
 }
 
