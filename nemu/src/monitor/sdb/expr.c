@@ -251,7 +251,7 @@ word_t expr(char *e, bool *success) {
 		*is_exp_right = false;
 		printf("Error: is_brackets_match() mistake\n");
 		return 0;
-	}
+	} else {Log("Brackets match!");}
 	modify_token(0, nr_token - 1);
 	return eval(0, nr_token - 1);
 }
