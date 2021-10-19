@@ -154,7 +154,7 @@ static int main_op(int p, int q) {
 		*is_exp_right = false;
 		return -66;
 	}
-	Log("\tmain op token = %s location = %d", tokens[loc].str, loc);
+	Log("Main op token = %s location = %d", tokens[loc].str, loc);
 	return loc;
 }
 
@@ -206,7 +206,9 @@ static word_t eval(int p, int q) {
 			case TK_REF	: 	//assert(0);
 							printf("vaddr is %d\n", val2);
 							//if submit, keep this setence; if test local, delete it
-							return vaddr_read(val2, 4);
+							word_t temp = vaddr_read(val, 4);
+							return temp;
+							//return vaddr_read(val2, 4);
 			default: assert(0);
 		}
 	}
