@@ -21,7 +21,7 @@ static char* rl_gets() {
 
   line_read = readline("(nemu) ");
 
-  if (line_read && *line_read) {
+  if ( line_read && *line_read) {
     add_history(line_read);
   }
 
@@ -47,7 +47,7 @@ static int cmd_si(char *args) {
 	char *arg = strtok(NULL, " ");
 	int i;
 
-	if (arg == NULL) {
+	i f (arg == NULL) {
 		/* default 1 time */
 		cpu_exec(1);
 		return 0;
@@ -60,19 +60,19 @@ static int cmd_si(char *args) {
 	/* normal i times*/
 		for(; i > 0; -- i) {
 			cpu_exec(1);
-		 }
+	 	 }
 		return 0;
-	} 
+	}  
 	if (i == -1) {
 	/* infinite */
 		cpu_exec(-1);
 		return 0;
-	}
+	} 
 	if (i < -1) {
 	/* invalid times */
 		printf("Error: Invalid times\n");
 		return 0;
-	}
+	 }
 	printf("Error: Amazing\n");
 	return 0;
 }
@@ -82,16 +82,16 @@ static int cmd_info(char *args) {
   if (arg == NULL) {
     printf("Incomplete command\n");
     return 0;
-  }
+  } 
 	if (strcmp(arg,  "r") == 0) {
 	/* print register info*/
 		isa_reg_display();
 		return 0;
-	}
+	} 
 	if (strcmp(arg,  "w") == 0) {
 		list_wp();
 		return 0;
-	}
+	} 
 	printf("Error: Invalid info choice\n");
 	return 0;
 }
@@ -101,7 +101,7 @@ static int cmd_x(char *args) {
   if (arg1 == NULL) {
     printf("Incomplete command:cmd_x\n");
     return 0;
-  }
+  } 
 	int len;
   sscanf(arg1, "%d", &len);
 	char *arg2 = strtok(NULL, "\n");
@@ -119,7 +119,7 @@ static int cmd_x(char *args) {
 	for (; len > 0; -- len) {
 		printf("0x%x:\t0x%08x\n", addr, vaddr_read(addr, 4) & 0xffffffff);
 		addr+=4;
-	}
+	 }
 	return 0;
 }
 
@@ -135,7 +135,7 @@ static int cmd_p(char *args) {
       printf("Attention: wrong expression:cmd_p\n");
       return 0;
   }
-	printf("%d\n", val);
+	printf("0x%08x\n", val & 0xffffffff);
 	return 0;
 }
 
