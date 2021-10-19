@@ -35,7 +35,7 @@ static int cmd_c(char *args) {
 
 static int cmd_q(char *args) {
 	//wait to be solved
-  cpu_exec(-1);
+	cpu_exec(-1);
 	return -1;
 }
 
@@ -135,9 +135,8 @@ static int cmd_p(char *args) {
       printf("Attention: wrong expression:cmd_p\n");
       return 0;
   }
-  //printf("0x%08x\n",val & 0xffffffff);
 	printf("%u\n", val);
-  return 0;
+	return 0;
 }
 
 static int cmd_w(char *args) {
