@@ -47,7 +47,7 @@ static int cmd_si(char *args) {
 	char *arg = strtok(NULL, " ");
 	int i;
 
-	i f (arg == NULL) {
+	if (arg == NULL) {
 		/* default 1 time */
 		cpu_exec(1);
 		return 0;
