@@ -49,3 +49,11 @@ def_EHelper(sltu) {
   bool is_small = interpret_relop(RELOP_LTU, id_src1->imm, id_src2->imm);
   rtl_li(s, ddest, (is_small ? 1 : 0));
 }
+
+def_EHelper(xor) {
+  rtl_xor(s, ddest, dsrc1, dsrc2);
+}
+
+def_EHelper(or) {
+  rtl_or(s, ddest, dsrc1, dsrc2);
+}
