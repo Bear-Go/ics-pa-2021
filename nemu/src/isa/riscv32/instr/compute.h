@@ -20,9 +20,14 @@ def_EHelper(addi) {
 }
 
 def_EHelper(jal) {
-  //wait buggy
+  // wait
   rtl_li(s, ddest, s->snpc);
   rtl_j(s, s->pc + id_src1->imm);
+}
+
+def_EHelper(ret) {
+  // wait
+  rtl_j(s, id_src1->imm);
 }
 
 // def_EHelper(j) {
