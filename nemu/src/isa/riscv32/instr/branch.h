@@ -22,3 +22,14 @@ def_EHelper(bltu) {
 def_EHelper(bgeu) {
   rtl_jrelop(s, RELOP_GEU, dsrc1, dsrc2, s->pc + id_dest->imm);
 }
+
+def_EHelper(jal) {
+  rtl_li(s, ddest, s->snpc);
+  rtl_j(s, s->pc + id_src1->imm);
+}
+
+def_EHelper(jalr) {
+    rtl_li(s, ddest, s->snpc);
+    rtl_addi(s, s0, dsrc1, id_src2->imm);
+    rtl_jr(s, s0);
+}
