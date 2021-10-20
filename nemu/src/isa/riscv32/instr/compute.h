@@ -17,13 +17,11 @@ def_EHelper(addi) {
 }
 
 def_EHelper(jal) {
-  // wait
   rtl_li(s, ddest, s->snpc);
   rtl_j(s, s->pc + id_src1->imm);
 }
 
 def_EHelper(ret) {
-  // wait
   rtl_jr(s, dsrc1);
 }
 
