@@ -46,7 +46,7 @@ def_EHelper(rem) {
 }
 
 def_EHelper(sltu) {
-  rtl_setrelop(s, RELOP_LTU, dsrc1, dsrc2);
+  rtl_setrelop(s, RELOP_LTU, ddest, dsrc1, dsrc2);
 }
 
 def_EHelper(xor) {
