@@ -3,7 +3,7 @@
 
 #define INSTR_LIST(f) f(li) f(auipc)\
     f(lb) f(lh) f(lw) f(lbu) f(lhu) f(sb) f(sh) f(sw)\
-    f(bne) f(beq) f(bge) f(blt)\
+    f(beq) f(bne) f(blt) f(bge) f(bltu) f(bgeu)\
     f(mul) f(mulh) f(mulhu) f(div) f(divu) f(rem) f(remu)\
     f(addi) f(jal) f(ret)\
     f(add) f(sub) f(sll) f(slt) f(sltu) f(xor) f(srl) f(sra) f(or) f(and)\
