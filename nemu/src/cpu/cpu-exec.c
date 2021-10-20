@@ -61,7 +61,6 @@ void fetch_decode(Decode *s, vaddr_t pc) {
   s->snpc = pc;
   int idx = isa_fetch_decode(s);
   s->dnpc = s->snpc;
-  printf("%08x\n",s->dnpc);
   s->EHelper = g_exec_table[idx];
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
