@@ -21,7 +21,7 @@ def_EHelper(addi) {
 
 def_EHelper(jal) {
   //wait buggy
-  rtl_li(s, ddest, s->pc + 4);
+  rtl_li(s, ddest, id_src1->imm);
   s->dnpc = s->pc + id_src1->imm;
 }
 
