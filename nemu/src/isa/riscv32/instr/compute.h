@@ -37,6 +37,10 @@ def_EHelper(bne) {
   rtl_jrelop(s, RELOP_NE, dsrc1, dsrc2, s->pc + id_dest->imm);
 }
 
+def_EHelper(blt) {
+  rtl_jrelop(s, RELOP_LT, dsrc1, dsrc2, s->pc + id_dest->imm);
+}
+
 def_EHelper(add) {
   rtl_add(s, ddest, dsrc1, dsrc2);
 }
@@ -47,6 +51,10 @@ def_EHelper(rem) {
 
 def_EHelper(sltu) {
   rtl_setrelop(s, RELOP_LTU, ddest, dsrc1, dsrc2);
+}
+
+def_EHelper(slt) {
+  rtl_setrelop(s, RELOP_LT, ddest, dsrc1, dsrc2);
 }
 
 def_EHelper(xor) {
