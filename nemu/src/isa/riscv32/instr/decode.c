@@ -23,8 +23,8 @@ static def_DopHelper(r) {
 }
 
 static def_DHelper(J) {
-  sword_t offset = (s->isa.instr.j.imm20 << 19) | (s->isa.instr.j.imm19_12 << 11) |
-    (s->isa.instr.j.imm11 << 10) | (s->isa.instr.j.imm10_1);
+  sword_t offset = (s->isa.instr.j.imm20 << 20) | (s->isa.instr.j.imm19_12 << 12) |
+    (s->isa.instr.j.imm11 << 11) | (s->isa.instr.j.imm10_1 << 1);
   decode_op_i(s, id_src1, offset, true);
   decode_op_r(s, id_dest, s->isa.instr.j.rd, true);
 }
