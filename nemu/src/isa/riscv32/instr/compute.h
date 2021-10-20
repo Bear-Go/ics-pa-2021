@@ -19,11 +19,11 @@ def_EHelper(addi) {
   rtl_addi(s, ddest, dsrc1, id_src2->imm);
 }
 
-// def_EHelper(jal) {
-//   //wait
-//   rtl_li(s, ddest, s->pc + 4);
-//   s->dnpc = s->pc + id_src1->imm;
-// }
+def_EHelper(jal) {
+  //wait
+  rtl_li(s, ddest, s->pc + 4);
+  s->dnpc = s->pc + id_src1->imm;
+}
 
 // def_EHelper(j) {
 //   //wait
