@@ -5,12 +5,10 @@ def_EHelper(lui) {
 //My own code below
 
 def_EHelper(li) {
-  // wait
   rtl_li(s, ddest, id_src1->imm);
 }
 
 def_EHelper(auipc) {
-  // wait
   rtl_li(s, ddest, s->pc + id_src1->imm);
 }
 
