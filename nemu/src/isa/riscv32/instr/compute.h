@@ -41,9 +41,9 @@ def_EHelper(blt) {
   rtl_jrelop(s, RELOP_LT, dsrc1, dsrc2, s->pc + id_dest->imm);
 }
 
-def_EHelper(add) {
-  rtl_add(s, ddest, dsrc1, dsrc2);
-}
+// def_EHelper(add) {
+//   rtl_add(s, ddest, dsrc1, dsrc2);
+// }
 
 def_EHelper(rem) {
   rtl_divu_r(s, ddest, dsrc1, dsrc2);
