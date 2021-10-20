@@ -16,9 +16,7 @@ def_EHelper(auipc) {
 
 def_EHelper(addi) {
   // wait
-  uint32_t t = (id_src1->imm) << 20;
-  t = t >> 20;
-  rtl_li(s, ddest, t);
+  rtl_li(s, ddest, id-src1->imm);
 }
 
 // def_EHelper(jal) {
