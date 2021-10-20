@@ -34,6 +34,10 @@ def_EHelper(beq) {
   rtl_jrelop(s, RELOP_EQ, dsrc1, dsrc2, id_dest->imm);
 }
 
+def_EHelper(add) {
+  rtl_add(s, ddest, dsrc1, dsrc2);
+}
+
 // def_EHelper(j) {
 //   //wait
 //   rtl_j(s, id_src1->imm);
