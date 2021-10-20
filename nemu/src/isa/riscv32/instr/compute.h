@@ -16,8 +16,7 @@ def_EHelper(auipc) {
 
 def_EHelper(addi) {
   // wait
-  rtl_li(s, ddest, -4);
-  // rtl_li(s, ddest, id_src1->imm);
+  rtl_li(s, ddest, id_src2->imm);
 }
 
 // def_EHelper(jal) {
