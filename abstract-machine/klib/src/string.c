@@ -34,13 +34,17 @@ char *strcat(char *dst, const char *src) {
 
 int strcmp(const char *s1, const char *s2) {
   int ret = 0;
-  while (!(ret = *(unsigned char*) s1 - *(unsigned char*) s2) && *s1) {++ s1; ++ s2;}
+  const char *p1 = s1;
+  const char *p2 = s2;
+  while (!(ret = *p1 - *p2) && (*p1)) {++ p1; ++ p2;}
   return ret;
 }
 
 int strncmp(const char *s1, const char *s2, size_t n) {
   int ret = 0;
-  while (!(ret = *(unsigned char*) s1 - *(unsigned char*) s2) && *(unsigned char*) s1 && n -- > 0) {++ s1; ++ s2;}
+  const char *p1 = s1;
+  const char *p2 = s2;
+  while (!(ret = *p1 - *p2) && (*p1) && n > 0) {-- n; ++ p1; ++ p2;}
   return ret;
 }
 
@@ -74,7 +78,7 @@ int memcmp(const void *s1, const void *s2, size_t n) {
   int ret = 0;
   const unsigned char *p1 = s1;
   const unsigned char *p2 = s2;
-  while (!(ret = *p1 - *p2) && (*p1) && n -- > 0) {++ p1; ++ p2;}
+  while (!(ret = *p1 - *p2) && (*p1) && n > 0) {++ p1; ++ p2; -- n;}
   return ret;
 }
 
