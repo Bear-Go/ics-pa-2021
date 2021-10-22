@@ -72,7 +72,9 @@ void *memcpy(void *out, const void *in, size_t n) {
 
 int memcmp(const void *s1, const void *s2, size_t n) {
   int ret = 0;
-  while (!(ret = *(const unsigned char*) s1 - *(const unsigned char*) s2) && *(const unsigned char*) s1 && n -- > 0) {++ s1; ++ s2;}
+  const unsigned char *p1 = s1;
+  const unsigned char *p2 = s2;
+  while (!(ret = *p1 - *p2) && (*p1) && n -- > 0) {++ p1; ++ p2;}
   return ret;
 }
 
