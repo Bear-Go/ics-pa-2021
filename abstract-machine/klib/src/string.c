@@ -26,10 +26,12 @@ char *strncpy(char *dst, const char *src, size_t n) {
 }
 
 char *strcat(char *dst, const char *src) {
-  char *ret = dst;
-  while (*dst) dst++;
-  while ((*dst++ = *src++)) ;
-  return ret;
+  // char *ret = dst;
+  // while (*dst) dst++;
+  // while ((*dst++ = *src++)) ;
+  // return ret;
+  strcpy(dst + strlen(dst), src);
+  return dst;
 }
 
 char *strncat(char *dst, const char *src, size_t n) {
