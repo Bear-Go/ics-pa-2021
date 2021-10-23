@@ -5,8 +5,8 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 size_t strlen(const char *s) {
-  size_t i;
-  for (i = 0; s[i] != '\0'; i++) ;
+  size_t i = 0;
+  for (; s[i] != '\0'; i++) ;
   return i;
 }
 
@@ -21,7 +21,7 @@ char *strncpy(char *dst, const char *src, size_t n) {
   do {
     if (!n--) return ret;
   } while ((*dst++ = *src++));
-  while (n--) *dst++ = 0;
+  while (n--) *dst++ = '\0';
   return ret;
 }
 
