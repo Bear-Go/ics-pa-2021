@@ -17,12 +17,6 @@ char *strcpy(char *dst, const char *src) {
 }
 
 char *strncpy(char *dst, const char *src, size_t n) {
-  // char *ret = dst;
-  // do {
-  //   if (!n--) return ret;
-  // } while ((*dst++ = *src++));
-  // while (n--) *dst++ = '\0';
-  // return ret;
   size_t i;
   for (i = 0; i < n && src[i] != '\0'; i++)
     dst[i] = src[i];
@@ -36,6 +30,15 @@ char *strcat(char *dst, const char *src) {
   while (*dst) dst++;
   while ((*dst++ = *src++)) ;
   return ret;
+}
+
+char *strncat(char *dst, const char *src, size_t n) {
+  size_t dst_len = strlen(dst);
+  size_t i;
+  for (i = 0; i < n && src[i] != '\0'; i++)
+    dst[dst_len + i] = src[i];
+  dst[dst_len + i] = '\0';
+  return dst;
 }
 
 int strcmp(const char *s1, const char *s2) {
