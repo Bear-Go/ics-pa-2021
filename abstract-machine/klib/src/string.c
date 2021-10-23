@@ -5,9 +5,12 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 size_t strlen(const char *s) {
-  size_t i = 0;
-  for (; s[i] != '\0'; i++) ;
-  return i;
+  // size_t i = 0;
+  // for (; s[i] != '\0'; i++) ;
+  // return i;
+  const char *str;
+  for (str = s; *str; ++str) {}
+  return (str - s);
 }
 
 char *strcpy(char *dst, const char *src) {
@@ -44,9 +47,6 @@ int strcmp(const char *s1, const char *s2) {
     if (*s1 == 0)
       return 0;
   return *(unsigned char*) s1 < *(unsigned char *) s2 ? -1 : 1;
-  // while (*s1 && (*s1==*s2))
-  //   s1++, s2++;
-  // return *(const unsigned char*) s1 - *(const unsigned char*) s2;
 }
 
 int strncmp(const char *s1, const char *s2, size_t n) {
