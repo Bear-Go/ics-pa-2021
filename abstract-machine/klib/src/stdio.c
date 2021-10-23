@@ -34,16 +34,16 @@ int sprintf(char *out, const char *fmt, ...) {
     switch (*fmt) {
       case 'd': {
         int val = va_arg(ap, int);
-        char bufa[64];
+        char temp[20];
         int cnt = 0;
         while (val >= 10) {
           int t = val % 10;
-          bufa[cnt++] = '0' + t;
+          temp[cnt++] = '0' + t;
           val /= 10;
         }
-        bufa[cnt++] = '0' + val;
+        temp[cnt++] = '0' + val;
         while (cnt) {
-          *buf = bufa[--cnt];
+          *buf = temp[--cnt];
           ++ buf;
         }
         ++fmt;
@@ -59,9 +59,7 @@ int sprintf(char *out, const char *fmt, ...) {
       }
       default : assert(0);
     }
-
   }
-
   size_t len = strlen(out);
   va_end(ap);
   return len;
