@@ -1,7 +1,9 @@
 #include <am.h>
 #include <nemu.h>
 
+static uint64_t timez;
 void __am_timer_init() {
+  timez = 0;
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
