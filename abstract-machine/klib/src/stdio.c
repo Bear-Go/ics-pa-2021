@@ -35,7 +35,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     }
 
     // width
-    int width = 0;
+    size_t width = 0;
     if (*fmt >= '0' && *fmt <= '9') {
       while (*fmt >= '0' && *fmt <= '9') {
         width = width * 10 + *fmt - '0';
@@ -47,7 +47,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
       case 'd': {
         int val = va_arg(ap, int);
         char temp[20];
-        int cnt = 0;
+        size_t cnt = 0;
         while (val >= 10) {
           int t = val % 10;
           temp[cnt++] = '0' + t;
