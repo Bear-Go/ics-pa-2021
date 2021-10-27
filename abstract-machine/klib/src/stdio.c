@@ -6,7 +6,7 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 int printf(const char *fmt, ...) {
-  char out[256];
+  char out[1024];
   va_list ap;
   va_start(ap, fmt);
   int len = vsprintf(out, fmt, ap);
@@ -23,6 +23,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
       // regular char 
       *buf = *fmt;
       ++buf, ++fmt;
+      assert(buf < out + 1024);
       continue;
     }
     // format start at %
@@ -65,6 +66,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         while (cnt) {
           *buf = temp[--cnt];
           ++ buf;
+          assert(buf < out + 1024);
         }
         ++fmt;
         break;
@@ -76,12 +78,12 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         for (; cnt < width; ++cnt) {
           if (flagzero) {
             *buf = '0';
-            ++buf;
           }
           else {
             *buf = ' ';
-            ++buf;
           }
+          ++buf;
+          assert(buf < out + 1024);
         }
         strcat(buf, p);
         buf += len + 1;
