@@ -28,11 +28,11 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     // format start at %
     ++fmt;
     // flags
-    // bool flagzero = 0;
-    // switch (*fmt) {
-    //   case '0': flagzero = 1; ++fmt; break;
-    //   default : break;
-    // }
+    bool flagzero = 0;
+    switch (*fmt) {
+      case '0': flagzero = 1; ++fmt; break;
+      default : break;
+    }
 
     // width
     int width = 0;
@@ -54,14 +54,16 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           val /= 10;
         }
         temp[cnt++] = '0' + val;
-        // while (cnt - 1 < width) {
-        //   if (flagzero) {
-        //     temp[cnt++] = '0';
-        //   }
-        //   else {
-        //     temp[cnt++] = ' ';
-        //   }
-        // }
+        while (cnt - 1 < width) {
+          if (flagzero) {
+            temp[cnt++] = '0';
+          }
+          else {
+            temp[cnt++] = ' ';
+          }
+        }
+        if (cnt == 4) putch('4');
+        if (cnt == 3) putch('3');
         while (cnt) {
           *buf = temp[--cnt];
           ++ buf;
