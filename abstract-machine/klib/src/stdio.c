@@ -54,8 +54,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           val /= 10;
         }
         temp[cnt++] = '0' + val;
-        if (cnt == 2) putch('2');
-        while (cnt - 1 < width) {
+        while (cnt < width) {
           if (flagzero) {
             temp[cnt++] = '0';
           }
@@ -63,8 +62,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
             temp[cnt++] = ' ';
           }
         }
-        if (cnt == 4) putch('4');
-        if (cnt == 3) putch('3');
         while (cnt) {
           *buf = temp[--cnt];
           ++ buf;
