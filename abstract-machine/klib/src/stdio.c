@@ -42,6 +42,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         ++fmt;
       }
     }
+    if (width == 3) putch('R');
 
     switch (*fmt) {
       case 'd': {
