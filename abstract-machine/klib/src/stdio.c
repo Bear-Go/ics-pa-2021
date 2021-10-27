@@ -50,6 +50,7 @@ int printf(const char *fmt, ...) {
     }
   }
   size_t len = strlen(out);
+  putstr(out);
   va_end(ap);
   return len;
 }
