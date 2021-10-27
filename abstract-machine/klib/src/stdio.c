@@ -48,23 +48,26 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
       case 'd': {
         int val = va_arg(ap, int);
         char temp[20];
-        size_t cnt = 0;
+        size_t len = 0;
         while (val >= 10) {
           int t = val % 10;
-          temp[cnt++] = '0' + t;
+          temp[len++] = '0' + t;
           val /= 10;
         }
-        temp[cnt++] = '0' + val;
-        while (cnt < width) {
+        temp[len] = '0' + val;
+        size_t cnt = len;
+        for (; cnt < width; ++cnt) {
           if (flagzero) {
-            temp[cnt++] = '0';
+            *buf = '0';
           }
           else {
-            temp[cnt++] = ' ';
+            *buf = ' ';
           }
+          ++buf;
+          assert(buf < out + 1024);
         }
-        while (cnt) {
-          *buf = temp[--cnt];
+        while (len) {
+          *buf = temp[--len];
           ++ buf;
           assert(buf < out + 1024);
         }
@@ -90,6 +93,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         ++fmt;
         break;
       }
+      case 'x':
       default : assert(0);
     }
   }
