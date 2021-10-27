@@ -39,7 +39,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     if ((*fmt >= '0') && (*fmt <= '9')) {
       width = atoi(fmt);
     }
-    ++fmt;
+    // ++fmt;
 
     switch (*fmt) {
       case 'd': {
