@@ -57,12 +57,8 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         temp[len] = '0' + val;
         size_t cnt = len;
         for (; cnt < width; ++cnt) {
-          if (flagzero) {
-            *buf = '0';
-          }
-          else {
-            *buf = ' ';
-          }
+          if (flagzero) *buf = '0';
+          else *buf = ' ';
           ++buf;
           assert(buf < out + 1024);
         }
@@ -80,12 +76,8 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         size_t len = strlen(p);
         size_t cnt = len;
         for (; cnt < width; ++cnt) {
-          if (flagzero) {
-            *buf = '0';
-          }
-          else {
-            *buf = ' ';
-          }
+          if (flagzero) *buf = '0';
+          else *buf = ' ';
           ++buf;
           assert(buf < out + 1024);
         }
