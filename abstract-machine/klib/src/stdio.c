@@ -54,6 +54,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           val /= 10;
         }
         temp[cnt++] = '0' + val;
+        if (cnt == 2) putch('2');
         while (cnt - 1 < width) {
           if (flagzero) {
             temp[cnt++] = '0';
