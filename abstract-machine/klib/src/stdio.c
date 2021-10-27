@@ -66,6 +66,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           ++buf;
           assert(buf < out + 1024);
         }
+        len += 1;
         while (len) {
           *buf = temp[--len];
           ++ buf;
