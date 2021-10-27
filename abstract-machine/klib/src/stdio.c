@@ -72,8 +72,8 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
       case 's': {
         char *p = va_arg(ap, char*);
         size_t len = strlen(p);
-        int cnt = width - len;
-        while (cnt) {
+        size_t cnt = width - len;
+        while (cnt--) {
           if (flagzero) {
             *buf = '0';
             ++buf;
