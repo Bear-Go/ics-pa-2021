@@ -29,7 +29,7 @@ int atoi(const char* nptr) {
   return x;
 }
 
-// #define MY_MALLOC
+#define MY_MALLOC
 #ifdef MY_MALLOC
 static int cnt = 0;
 static char *addr;// buggy maybe
