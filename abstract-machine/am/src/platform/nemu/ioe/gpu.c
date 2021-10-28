@@ -21,8 +21,18 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 }
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
-  // Put the image stored in pixels into window at (x, y) of size (w * h) 
-
+  // Put the image stored in pixels into window (FB_ADDR) at (x, y) of size (w * h) 
+  int i, j;
+  uint32_t *pixels = ctl->pixels;
+  uint32_t *fb = (uint32_t *)(uintptr_t) FB_ADDR;
+  // int x = ctl->x, y = ctl->y;
+  int w = ctl->w, h = ctl->h;
+  for (i = 0; i < w; ++ i) {
+    for (j = 0; j < h; ++j) {
+      *fb = *pixels;
+      fb++; pixels++;
+    }
+  }
   if (ctl->sync) {
     outl(SYNC_ADDR, 1);
   }
