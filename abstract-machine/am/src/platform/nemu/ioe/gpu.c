@@ -27,13 +27,14 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   int i, j;
   uint32_t *pixels = ctl->pixels;
   int x = ctl->x, y = ctl-> y, w = ctl->w, h = ctl->h;
+  uint32_t *pen = (uint32_t *)(uintptr_t) FB_ADDR + y * fbw + x;
   // if (x + w >= fbw || y + h >= fbh) return;
   for (i = 0; i < w; ++ i) {
-    uint32_t *pen = (uint32_t *)(uintptr_t) FB_ADDR + (y + i) * fbw + x;
     for (j = 0; j < h; ++j) {
       *pen = *pixels;
       pen++; pixels++;
     }
+    pen += (fbw - w);
   }
   if (ctl->sync) {
     outl(SYNC_ADDR, 1);
