@@ -3,8 +3,13 @@
 
 #define SYNC_ADDR (VGACTL_ADDR + 4)
 
-#define SCREEN_W (MUXDEF(CONFIG_VGA_SIZE_800x600, 800, 400))
-#define SCREEN_H (MUXDEF(CONFIG_VGA_SIZE_800x600, 600, 300))
+#ifndef SIZE_800x600
+  #define SCREEN_W 400
+  #define SCREEN_H 300
+#else
+  #define SCREEN_W 800
+  #define SCREEN_H 600
+#endif
 
 void __am_gpu_init() {
   int i;
