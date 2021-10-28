@@ -5,9 +5,8 @@
 
 void __am_gpu_init() {
   int i;
-  uint32_t size = inl(VGACTL_ADDR);
-  int w = (size & 0xffff0000) >> 16;  // TODO: get the correct width
-  int h = size & 0xffff;  // TODO: get the correct height
+  int w = inw(VGACTL_ADDR + 2);  // TODO: get the correct width
+  int h = inw(VGACTL_ADDR);  // TODO: get the correct height
   uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
    for (i = 0; i < w * h; i ++) fb[i] = i;
   outl(SYNC_ADDR, 1);
@@ -22,6 +21,8 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 }
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
+  // Put the image stored in pixels into window at (x, y) of size (w * h) 
+
   if (ctl->sync) {
     outl(SYNC_ADDR, 1);
   }
