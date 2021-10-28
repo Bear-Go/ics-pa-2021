@@ -3,14 +3,6 @@
 
 #define SYNC_ADDR (VGACTL_ADDR + 4)
 
-#ifndef SIZE_800x600
-  #define SCREEN_W 400
-  #define SCREEN_H 300
-#else
-  #define SCREEN_W 800
-  #define SCREEN_H 600
-#endif
-
 void __am_gpu_init() {
   int i;
   uint32_t size = inl(VGACTL_ADDR);
