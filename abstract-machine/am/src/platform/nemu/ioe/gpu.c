@@ -22,11 +22,10 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   // Put the image stored in pixels into window (FB_ADDR) at (x, y) of size (w * h) 
-  int fbw = inw(VGACTL_ADDR + 2);
-  int fbh = inw(VGACTL_ADDR);
+  int fbw = inw(VGACTL_ADDR + 2), fbh = inw(VGACTL_ADDR);
   int i, j;
-  uint32_t *pixels = ctl->pixels;
   int x = ctl->x, y = ctl-> y, w = ctl->w, h = ctl->h;
+  uint32_t *pixels = ctl->pixels;
   uint32_t *pen = (uint32_t *)(uintptr_t) FB_ADDR + y * fbw + x;
   if (x + w < fbw || y + h < fbh) {
     for (i = 0; i < h; ++ i) {
@@ -44,5 +43,5 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 }
 
 void __am_gpu_status(AM_GPU_STATUS_T *status) {
-  status->ready = false;
+  status->ready = true;
 }
