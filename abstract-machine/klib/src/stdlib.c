@@ -29,8 +29,10 @@ int atoi(const char* nptr) {
   return x;
 }
 
+#if !(defined(__ISA_NATIVE__) && defined(__NATIVE_USE_KLIB__))
 static int cnt = 0;
 static char *addr;// buggy maybe
+#endif
 
 void *malloc(size_t size) {
   // On native, malloc() will be called during initializaion of C runtime.
