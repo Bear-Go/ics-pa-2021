@@ -89,9 +89,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         ++fmt;
         break;
       }
-      case 'x': putch('x');
-      case 'u': putch('u');
-      case 'f': putch('f');
+      case 'x': putch('\n');putch('x');
+      case 'u': putch('\n');putch('u');
+      case 'f': putch('\n');putch('f');
       default : assert(0);
     }
   }
