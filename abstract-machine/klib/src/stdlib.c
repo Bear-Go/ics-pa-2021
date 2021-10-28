@@ -29,7 +29,8 @@ int atoi(const char* nptr) {
   return x;
 }
 
-static char *addr = (void *)ROUNDUP(heap.start, 8); // buggy maybe
+static int cnt = 0;
+static char *addr;// buggy maybe
 
 void *malloc(size_t size) {
   // On native, malloc() will be called during initializaion of C runtime.
@@ -39,6 +40,10 @@ void *malloc(size_t size) {
   panic("Not implemented");
 #endif
   // buggy maybe
+  if (cnt == 0) {
+    addr = (void *)ROUNDUP(heap.start, 8);
+    cnt += 1;
+  }
   size = (size_t)ROUNDUP(size, 8);
   char *old = addr;
   addr += size;
