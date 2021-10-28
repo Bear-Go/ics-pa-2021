@@ -6,7 +6,6 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 #define STD_STDIO
-
 #ifdef STD_STDIO
 
 #ifndef PRINTF_NTOA_BUFFER_SIZE
@@ -23,7 +22,6 @@
 #define FLAGS_SHORT     (1U <<  7U)
 #define FLAGS_LONG      (1U <<  8U)
 #define FLAGS_PRECISION (1U << 10U)
-#define FLAGS_ADAPT_EXP (1U << 11U)
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -365,7 +363,7 @@ int printf(const char *fmt, ...) {
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
-  return 0;
+  return _vsnprintf(_out_buffer, out, (size_t)-1, fmt, ap);
 }
 
 int sprintf(char *out, const char *fmt, ...) {
@@ -377,11 +375,15 @@ int sprintf(char *out, const char *fmt, ...) {
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
-  return 0;
+  va_list ap;
+  va_start(ap, fmt);
+  const int ret = _vsnprintf(_out_buffer, out, n, fmt, ap);
+  va_end(ap);
+  return ret;
 }
 
 int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
-  return 0;
+  return _vsnprintf(_out_buffer, out, n, fmt, ap);
 }
 
 #ifndef STD_STDIO
