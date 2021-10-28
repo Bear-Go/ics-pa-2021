@@ -28,7 +28,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   uint32_t *pixels = ctl->pixels;
   int x = ctl->x, y = ctl-> y, w = ctl->w, h = ctl->h;
   uint32_t *pen = (uint32_t *)(uintptr_t) FB_ADDR + y * fbw + x;
-  if (x + w >= fbw || y + h >= fbh) {
+  if (x + w < fbw || y + h < fbh) {
     for (i = 0; i < h; ++ i) {
       for (j = 0; j < w; ++j) {
         *pen = *pixels;
