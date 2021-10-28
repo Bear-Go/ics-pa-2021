@@ -29,7 +29,7 @@ int atoi(const char* nptr) {
   return x;
 }
 
-static char *addr = (void *)ROUNDUP(heap.start, 8);
+static char *addr = (void *)ROUNDUP(heap.start, 8); // buggy maybe
 
 void *malloc(size_t size) {
   // On native, malloc() will be called during initializaion of C runtime.
@@ -38,6 +38,7 @@ void *malloc(size_t size) {
 #if !(defined(__ISA_NATIVE__) && defined(__NATIVE_USE_KLIB__))
   panic("Not implemented");
 #endif
+  // buggy maybe
   size = (size_t)ROUNDUP(size, 8);
   char *old = addr;
   addr += size;
