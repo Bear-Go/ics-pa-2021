@@ -36,9 +36,11 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
       pen += (fbw - w);
     }
   }
+  else {
+    printf("image too big\n");
+  }
   // display the window
   if (ctl->sync) {
-    printf("out ok\n");
     outl(SYNC_ADDR, 1);
   }
 }
