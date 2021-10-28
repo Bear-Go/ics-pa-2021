@@ -22,11 +22,12 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   // Put the image stored in pixels into window (FB_ADDR) at (x, y) of size (w * h) 
-  int fbw = inw(VGACTL_ADDR + 2), fbh = inw(VGACTL_ADDR);
+  int fbw = inw(VGACTL_ADDR + 2);
+  // int fbh = inw(VGACTL_ADDR);
   int i, j;
   uint32_t *pixels = ctl->pixels;
   int x = ctl->x, y = ctl-> y, w = ctl->w, h = ctl->h;
-  if (x + w >= fbw || y + h >= fbh) return;
+  // if (x + w >= fbw || y + h >= fbh) return;
   for (i = 0; i < w; ++ i) {
     uint32_t *pen = (uint32_t *)(uintptr_t) FB_ADDR + (y + i) * fbw + x;
     for (j = 0; j < h; ++j) {
