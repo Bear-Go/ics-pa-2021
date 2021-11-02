@@ -146,7 +146,7 @@ static inline def_rtl(host_sm, void *addr, const rtlreg_t *src1, int len) {
 //   s->dnpc = target;
 // }
 
-static inline def_rtl(j, vaddr_t target) {
+inline def_rtl(j, vaddr_t target) {
   s->dnpc = target;
 }
 
