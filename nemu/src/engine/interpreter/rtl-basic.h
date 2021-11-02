@@ -101,7 +101,7 @@ static inline def_rtl(div64s_r, rtlreg_t* dest,
 
 // memory
 
-inline def_rtl(lm, rtlreg_t *dest, const rtlreg_t* addr, word_t offset, int len) {
+static def_rtl(lm, rtlreg_t *dest, const rtlreg_t* addr, word_t offset, int len) {
   *dest = vaddr_read(*addr + offset, len);
 }
 
