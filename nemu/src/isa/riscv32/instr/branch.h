@@ -29,7 +29,8 @@ def_EHelper(jal) {
 }
 
 def_EHelper(jalr) {
-    rtl_li(s, ddest, s->snpc);
-    rtl_addi(s, s0, dsrc1, id_src2->imm);
-    rtl_jr(s, s0);
+    rtl_li(s, s0, s->snpc);
+    rtl_addi(s, s1, dsrc1, id_src2->imm);
+    rtl_jr(s, s1);
+    rtl_mv(s, ddest, s0);
 }
