@@ -31,8 +31,10 @@ int atoi(const char* nptr) {
 
 #define MY_MALLOC
 #ifdef MY_MALLOC
+#ifndef __ISA_NATIVE__
 static int cnt = 0;
 static char *addr;// buggy maybe
+#endif
 #endif
 
 void *malloc(size_t size) {
