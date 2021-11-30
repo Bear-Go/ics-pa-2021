@@ -7,6 +7,7 @@
     f(mul) f(mulh) f(mulhu) f(div) f(divu) f(rem) f(remu)\
     f(addi) f(slti) f(sltiu) f(xori) f(ori) f(andi) f(slli) f(srli) f(srai)\
     f(add) f(sub) f(slt) f(sltu) f(xor) f(or) f(and) f(sll) f(srl) f(sra)\
-    f(inv) f(nemu_trap)
+    f(inv) f(nemu_trap)\
+    f(csrrs)
 
 def_all_EXEC_ID();
