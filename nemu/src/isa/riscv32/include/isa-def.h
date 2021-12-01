@@ -9,6 +9,9 @@ typedef struct {
   } gpr[32];
 
   vaddr_t pc;
+  vaddr_t mepc;
+  vaddr_t mstatus;
+  vaddr_t mcause;
 } riscv32_CPU_state;
 
 // decode
