@@ -45,6 +45,7 @@ enum {
   HOSTCALL_INV,   // invalid opcode
   HOSTCALL_PIO,   // port I/O
   HOSTCALL_CSR,   // system csr
+  HOSTCALL_TRAP,  // system trap
 };
 
 def_rtl(hostcall, uint32_t id, rtlreg_t *dest, const rtlreg_t *src1,
