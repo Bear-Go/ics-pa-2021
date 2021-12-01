@@ -41,6 +41,7 @@ static inline word_t* csr_decode(uint32_t csr) {
     case 0x305: return &cpu.mtvec;
     case 0x342: return &cpu.mcause;
     case 0x300: return &cpu.mstatus;
+    case 0x341: return &cpu.mepc;
     default: panic("unimplemented CSR 0x%x", csr);
   }
   return NULL;
