@@ -7,7 +7,7 @@ static Context* (*user_handler)(Event, Context*) = NULL;
 Context* __am_irq_handle(Context *c) {
   printf("Running ## __am_irq_handle() ##\n...\n");
   for (int i = 0; i < 32; ++i) {
-    printf("gpr[%d] 0x%08x\t", i, c->gpr[i]);
+    printf("gpr[%d] 0x%08x ", i, c->gpr[i]);
     if (i % 8 == 7) printf("\n");
   }
   printf("(1) 0x%08x\n(2) 0x%08x\n", c->gpr[0], c->gpr[1]);
