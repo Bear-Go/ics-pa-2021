@@ -6,12 +6,12 @@ static Context* (*user_handler)(Event, Context*) = NULL;
 
 Context* __am_irq_handle(Context *c) {
   printf("Running ## __am_irq_handle() ##\n...\n");
-  for (int i = 0; i < 33; ++i) {
-    printf("(%d) 0x%08x\t", i, *(c + i));
-    if (i % 8 == 7) printf("\n");
-  }
-  // printf("(1) 0x%08x\n(2) 0x%08x\n", c->mcause, c->mstatus);
-  // printf("%d\n", &c->mstatus-&c->mcause);
+  // for (int i = 0; i < 33; ++i) {
+  //   printf("(%d) 0x%08x\t", i, *(c + i));
+  //   if (i % 8 == 7) printf("\n");
+  // }
+  printf("(1) 0x%08x\n(2) 0x%08x\n", c->ra, c->gp);
+  printf("%d\n", &c->mstatus-&c->mcause);
   if (user_handler) {
     Event ev = {0};
     switch (c->mcause) {
