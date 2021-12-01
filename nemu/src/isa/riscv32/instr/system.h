@@ -11,6 +11,6 @@ def_EHelper(csrrs) {
 }
 
 def_EHelper(ecall) {
-    rtl_trap(s, s->pc, 1); // 1
+    rtl_trap(s, s->pc, 66); // 1
     rtl_jr(s, t0);
 }
