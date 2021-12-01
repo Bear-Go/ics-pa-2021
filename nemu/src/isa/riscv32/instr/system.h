@@ -9,3 +9,7 @@ def_EHelper(csrrs) {
     rtl_mv(s, ddest, s0);
     rtl_hostcall(s, HOSTCALL_CSR, NULL, s1, NULL, id_src2->imm);
 }
+
+def_EHelper(ecall) {
+    // rtl_trap(s)
+}
