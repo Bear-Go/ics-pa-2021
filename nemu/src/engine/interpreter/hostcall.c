@@ -53,6 +53,8 @@ def_rtl(hostcall, uint32_t id, rtlreg_t *dest, const rtlreg_t *src1,
       break;
     }
 #endif
+
     default: panic("Unsupport hostcall ID = %d", id); break;
   }
 }
+
