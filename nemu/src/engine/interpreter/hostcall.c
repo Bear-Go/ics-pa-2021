@@ -38,6 +38,7 @@ static void invalid_instr(vaddr_t thispc) {
 
 static inline word_t* csr_decode(uint32_t csr) {
   switch (csr) {
+    case 0x305: return &cpu.mtvec;
     default: panic("unimplemented CSR 0x%x", csr);
   }
   return NULL;
