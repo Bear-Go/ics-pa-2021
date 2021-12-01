@@ -52,10 +52,13 @@ static void csrrw(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
 }
 
 static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint32_t imm) {
+  word_t ret = 0;
   switch (id) {
-  case HOSTCALL_CSR: csrrw(dest, src, imm); break;
-  default: panic("Unsupport hostcall ID = %d", id); break;
+    case HOSTCALL_CSR: csrrw(dest, src, imm); break;
+    case HOSTCALL_TRAP: ret = isa_raise_intr(imm, *src); break;
+    default: panic("Unsupport hostcall ID = %d", id); break;
   }
+  if (dest) *dest = ret;
 }
 
 def_rtl(hostcall, uint32_t id, rtlreg_t *dest, const rtlreg_t *src1,
