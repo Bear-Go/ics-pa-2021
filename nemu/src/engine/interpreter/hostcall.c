@@ -36,10 +36,23 @@ static void invalid_instr(vaddr_t thispc) {
   set_nemu_state(NEMU_ABORT, thispc, -1);
 }
 
+static inline word_t* csr_decode(uint32_t csr) {
+  switch (csr) {
+    default: panic("unimplemented CSR 0x%x", csr);
+  }
+  return NULL;
+}
+
+static void csrrw(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
+  word_t *csr = csr_decode(csrid);
+  word_t t = (src != NULL ? *src : 0);
+  if (dest != NULL) *dest = *csr;
+  if (src != NULL) *csr = t;
+}
+
 static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint32_t imm) {
   switch (id) {
-  // case HOSTCALL_CSR: break;
-  
+  case HOSTCALL_CSR: csrrw(dest, src, imm); break;
   default: panic("Unsupport hostcall ID = %d", id); break;
   }
 }
