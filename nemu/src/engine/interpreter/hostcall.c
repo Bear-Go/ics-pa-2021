@@ -36,6 +36,14 @@ static void invalid_instr(vaddr_t thispc) {
   set_nemu_state(NEMU_ABORT, thispc, -1);
 }
 
+static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint32_t imm) {
+  switch (id) {
+  // case HOSTCALL_CSR: break;
+  
+  default: panic("Unsupport hostcall ID = %d", id); break;
+  }
+}
+
 def_rtl(hostcall, uint32_t id, rtlreg_t *dest, const rtlreg_t *src1,
     const rtlreg_t *src2, word_t imm) {
   switch (id) {
@@ -53,8 +61,7 @@ def_rtl(hostcall, uint32_t id, rtlreg_t *dest, const rtlreg_t *src1,
       break;
     }
 #endif
-
-    default: panic("Unsupport hostcall ID = %d", id); break;
+    default: isa_hostcall(id, dest, src1, imm); break;
   }
 }
 
