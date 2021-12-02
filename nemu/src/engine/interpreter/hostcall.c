@@ -77,11 +77,9 @@ static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint3
     case HOSTCALL_CSRRW: csrrw(dest, src, imm); break;
     case HOSTCALL_CSRRS: csrrs(dest, src, imm); break;
     case HOSTCALL_TRAP: printf("Running ## isa_hostcall() HOSTCALL_TRAP ##\n...\n");
-      ret = isa_raise_intr(imm, *src); isa_reg_display(); break;
+      ret = isa_raise_intr(imm, *src); if (dest) *dest = ret; isa_reg_display(); break;
     default: panic("Unsupport hostcall ID = %d", id); break;
   }
-  if (dest) *dest = ret;
-
 }
 
 def_rtl(hostcall, uint32_t id, rtlreg_t *dest, const rtlreg_t *src1,
