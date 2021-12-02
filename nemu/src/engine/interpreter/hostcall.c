@@ -62,7 +62,7 @@ static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint3
     default: panic("Unsupport hostcall ID = %d", id); break;
   }
   if (dest) *dest = ret;
-  printf("t0 = 0x%08x\n", *dest);
+  printf("ret = 0x%08x\n", ret);
 }
 
 def_rtl(hostcall, uint32_t id, rtlreg_t *dest, const rtlreg_t *src1,
