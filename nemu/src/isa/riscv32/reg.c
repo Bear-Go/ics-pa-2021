@@ -9,11 +9,11 @@ const char *regs[] = {
 };
 
 void isa_reg_display() {
-  printf("%9s: 0x%08x\n", "pc", cpu.pc);
-  printf("%9s: 0x%08x\n", "mtvec", cpu.mtvec);
-  printf("%9s: 0x%08x\n", "mcause", cpu.mcause);
-  printf("%9s: 0x%08x\n", "mepc", cpu.mepc);
-  printf("%9s: 0x%08x\n", "mstatus", cpu.mstatus);
+  printf("%8s: 0x%08x\n", "pc", cpu.pc);
+  printf("%8s: 0x%08x\n", "mtvec", cpu.mtvec);
+  printf("%8s: 0x%08x\n", "mcause", cpu.mcause);
+  printf("%8s: 0x%08x\n", "mepc", cpu.mepc);
+  printf("%8s: 0x%08x\n", "mstatus", cpu.mstatus);
 	for (int i = 0; i < 32; ++ i) {
 		printf("%3s: 0x%08x ", regs[i], cpu.gpr[i]._32);
     if (i % 4 == 3) printf("\n");
