@@ -53,6 +53,8 @@ static void csrrw(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
   word_t t = *csr;
   if (src) *csr = *src; else printf("## csrrw() ## error: src == NULL\n");
   if (dest) *dest = t; else printf("## csrrw() ## error: dest == NULL\n");
+  printf("## after csrrw\n");
+  isa_reg_display();
 }
 
 static void csrrs(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
@@ -60,9 +62,8 @@ static void csrrs(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
   printf("csrrs csr[csrid] = %08x\n", *csr);
   word_t t = *csr;
   if (src) *csr = t | *src; else printf("## csrrw() ## error: src == NULL\n");
-  printf("\tafter csr[csrid] = %08x\n", *csr);
   if (dest) *dest = t; else printf("## csrrw() ## error: dest == NULL\n");
-  printf("\tafter x[rd] = %08x\n", *dest);
+  printf("## after csrrs\n");
   isa_reg_display();
 }
 
