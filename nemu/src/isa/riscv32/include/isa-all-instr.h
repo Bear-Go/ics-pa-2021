@@ -8,6 +8,6 @@
     f(addi) f(slti) f(sltiu) f(xori) f(ori) f(andi) f(slli) f(srli) f(srai)\
     f(add) f(sub) f(slt) f(sltu) f(xor) f(or) f(and) f(sll) f(srl) f(sra)\
     f(inv) f(nemu_trap)\
-    f(csrrw) f(csrrs) f(ecall)
+    f(csrrw) f(csrrs) f(ecall) f(mret)
 
 def_all_EXEC_ID();
