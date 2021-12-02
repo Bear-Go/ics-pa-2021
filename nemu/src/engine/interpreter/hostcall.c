@@ -73,9 +73,9 @@ static void csrrs(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
 
 static void mret(rtlreg_t *dest) {
   word_t *mcause = csr_decode(0x342);
-  dest = csr_decode(0x341);
+  word_t pc = *csr_decode(0x341);
   switch (*mcause) {
-    case 66: *dest = *dest + 4; printf("1 t0 0x%08x\n", *dest); return;
+    case 66: pc += 4; printf("1 t0 0x%08x\n", pc); *dest = pc; break;
     default: panic("unimplemented mcause %d", *mcause);
   }
 }
