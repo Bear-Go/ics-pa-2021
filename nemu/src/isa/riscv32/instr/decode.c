@@ -23,35 +23,35 @@ static def_DopHelper(r) {
 }
 
 static def_DHelper(R) {
-  decode_op_r(s, id_src1, s->isa.instr.r.rs1, false);
-  decode_op_r(s, id_src2, s->isa.instr.r.rs2, false);
-  decode_op_r(s, id_dest, s->isa.instr.r.rd, true);
+  decode_op_r(s, id_src1, s->isa.instr.r.rs1, true);
+  decode_op_r(s, id_src2, s->isa.instr.r.rs2, true);
+  decode_op_r(s, id_dest, s->isa.instr.r.rd, false);
 }
 
 static def_DHelper(B) {
   sword_t offset = (s->isa.instr.b.simm12 << 12) | (s->isa.instr.b.imm11 << 11) |
     (s->isa.instr.b.imm10_5 << 5) | (s->isa.instr.b.imm4_1 << 1);
   decode_op_i(s, id_dest, offset, true);
-  decode_op_r(s, id_src1, s->isa.instr.b.rs1, false);
-  decode_op_r(s, id_src2, s->isa.instr.b.rs2, false);
+  decode_op_r(s, id_src1, s->isa.instr.b.rs1, true);
+  decode_op_r(s, id_src2, s->isa.instr.b.rs2, true);
 }
 
 static def_DHelper(J) {
   sword_t offset = (s->isa.instr.j.simm20 << 20) | (s->isa.instr.j.imm19_12 << 12) |
     (s->isa.instr.j.imm11 << 11) | (s->isa.instr.j.imm10_1 << 1);
   decode_op_i(s, id_src1, offset, true);
-  decode_op_r(s, id_dest, s->isa.instr.j.rd, true);
+  decode_op_r(s, id_dest, s->isa.instr.j.rd, false);
 }
 
 static def_DHelper(I) {
-  decode_op_r(s, id_src1, s->isa.instr.i.rs1, false);
+  decode_op_r(s, id_src1, s->isa.instr.i.rs1, true);
   decode_op_i(s, id_src2, s->isa.instr.i.simm11_0, false);
-  decode_op_r(s, id_dest, s->isa.instr.i.rd, true);
+  decode_op_r(s, id_dest, s->isa.instr.i.rd, false);
 }
 
 static def_DHelper(U) {
   decode_op_i(s, id_src1, s->isa.instr.u.imm31_12 << 12, true);
-  decode_op_r(s, id_dest, s->isa.instr.u.rd, true);
+  decode_op_r(s, id_dest, s->isa.instr.u.rd, false);
 }
 
 static def_DHelper(S) {
@@ -62,7 +62,7 @@ static def_DHelper(S) {
 }
 
 static def_DHelper(csr) {
-  decode_op_r(s, id_src1, s->isa.instr.csr.rs1, false);
+  decode_op_r(s, id_src1, s->isa.instr.csr.rs1, true);
   decode_op_i(s, id_src2, s->isa.instr.csr.csr, true);
   decode_op_r(s, id_dest, s->isa.instr.csr.rd, false);
 }
