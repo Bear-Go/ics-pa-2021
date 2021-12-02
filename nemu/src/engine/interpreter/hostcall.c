@@ -76,9 +76,8 @@ static void mret(rtlreg_t *dest) {
   printf("\nmcause %d\n", *mcause);
   dest = csr_decode(0x341);
   printf("\nmepc %08x\n", *dest);
-  panic("here");
   switch (*mcause) {
-    case 66: *dest += 4; break;
+    case 66: *dest += 4; panic("here"); break;
     default: panic("unimplemented mcause %d", *mcause);
   }
 }
