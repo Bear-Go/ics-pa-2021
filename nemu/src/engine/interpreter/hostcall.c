@@ -75,7 +75,7 @@ static void mret(rtlreg_t *dest) {
   word_t *mcause = csr_decode(0x342);
   word_t pc = *csr_decode(0x341);
   switch (*mcause) {
-    case 66: pc += 4; printf("1 t0 0x%08x\n", pc); *dest = pc; break;
+    case 66: pc += 4; *dest = pc; break;
     default: panic("unimplemented mcause %d", *mcause);
   }
 }
@@ -86,7 +86,7 @@ static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint3
     case HOSTCALL_CSRRW: csrrw(dest, src, imm); break;
     case HOSTCALL_CSRRS: csrrs(dest, src, imm); break;
     case HOSTCALL_TRAP: ret = isa_raise_intr(imm, *src); if (dest) *dest = ret; break;
-    case HOSTCALL_MRET: mret(dest); printf("2 t0 0x%08x\n", *dest); break;
+    case HOSTCALL_MRET: mret(dest); break;
     default: panic("Unsupport hostcall ID = %d", id); break;
   }
 }
