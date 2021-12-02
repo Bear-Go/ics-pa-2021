@@ -1,7 +1,7 @@
 #include <common.h>
 
 static Context* do_event(Event e, Context* c) {
-  printf("Running ## do_event() ##\n...\n");
+  // printf("Running ## do_event() ##\n...\n");
   // printf("")
   switch (e.event) {
     case EVENT_YIELD: printf("###!!!event: yield!!!###\n"); break;
