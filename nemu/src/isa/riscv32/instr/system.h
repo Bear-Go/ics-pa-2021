@@ -15,5 +15,5 @@ def_EHelper(mret) {
     rtl_hostcall(s, HOSTCALL_MRET, t0, NULL, NULL, 0);
     printf("0x%08x\n", *t0);
     rtl_jr(s, t0);
-    panic("here");
+    // panic("here");
 }
