@@ -9,5 +9,4 @@ def_EHelper(csrrs) {
 
 def_EHelper(ecall) {
     rtl_trap(s, s->pc, 66); // 66
-    // rtl_jr(s, t0);
 }
