@@ -60,6 +60,7 @@ static void csrrs(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
   printf("csrrs csr[csrid] = %08x\n", *csr);
   word_t t = *csr;
   if (src) *csr = t | *src; else printf("## csrrw() ## error: src == NULL\n");
+  printf("after csr[csrid] = %08x\n", *csr);
   if (dest) *dest = t; else printf("## csrrw() ## error: dest == NULL\n");
 }
 
