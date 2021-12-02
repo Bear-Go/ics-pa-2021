@@ -3,15 +3,12 @@
 
 struct Context {
   // // TODO: fix the order of these members to match trap.S
-  uintptr_t gpr[35];
-  // uintptr_t mcause, mstatus, mepc;
+  uintptr_t gpr[32];
+  uintptr_t mcause, mstatus, mepc;
   void *pdir;
 };
 
 #define GPR1 gpr[17] // a7
-#define MCAUSE gpr[32]
-#define MSTATUS gpr[33]
-#define MEPC gpr[34]
 
 #define GPR2 gpr[0]
 #define GPR3 gpr[0]
