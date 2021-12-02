@@ -75,7 +75,7 @@ static void mret(rtlreg_t *dest) {
   word_t *mcause = csr_decode(0x342);
   dest = csr_decode(0x341);
   switch (*mcause) {
-    case 66: *dest += 4; isa_reg_display(); break;
+    case 66: *dest += 4; printf("t0 0x%08x", *dest); break;
     default: panic("unimplemented mcause %d", *mcause);
   }
 }
