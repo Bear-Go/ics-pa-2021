@@ -48,6 +48,8 @@ static inline word_t* csr_decode(uint32_t csr) {
 }
 
 static void csrrw(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
+  printf("\n\n## before csrrw\n");
+  isa_reg_display();
   word_t *csr = csr_decode(csrid);
   printf("csrrw csr[%x] = %08x\n", csrid, *csr);
   word_t t = *csr;
