@@ -60,6 +60,8 @@ static void csrrw(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
 }
 
 static void csrrs(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
+  printf("\n\n## before csrrw\n");
+  isa_reg_display();
   word_t *csr = csr_decode(csrid);
   printf("csrrs csr[%x] = %08x\n", csrid, *csr);
   word_t t = *csr;
