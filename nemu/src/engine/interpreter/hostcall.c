@@ -63,6 +63,7 @@ static void csrrs(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
   printf("\tafter csr[csrid] = %08x\n", *csr);
   if (dest) *dest = t; else printf("## csrrw() ## error: dest == NULL\n");
   printf("\tafter x[rd] = %08x\n", *dest);
+  isa_reg_display();
 }
 
 static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint32_t imm) {
