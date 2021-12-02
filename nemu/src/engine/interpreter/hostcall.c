@@ -49,9 +49,12 @@ static inline word_t* csr_decode(uint32_t csr) {
 
 static void csrrw(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
   word_t *csr = csr_decode(csrid);
-  word_t t = (src != NULL ? *src : 0);
-  if (dest != NULL) *dest = *csr;
-  if (src != NULL) *csr = t;
+  word_t t = *csr;
+  *csr = *src;
+  *dest = t;
+  // word_t t = (src != NULL ? *csr : 0);
+  // if (dest != NULL) *dest = *csr;
+  // if (src != NULL) *csr = t;
 }
 
 static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint32_t imm) {
