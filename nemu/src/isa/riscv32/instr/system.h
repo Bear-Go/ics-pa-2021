@@ -13,5 +13,7 @@ def_EHelper(ecall) {
 
 def_EHelper(mret) {
     rtl_hostcall(s, HOSTCALL_MRET, t0, NULL, NULL, 0);
+    
     rtl_jr(s, t0);
+    panic("here");
 }
