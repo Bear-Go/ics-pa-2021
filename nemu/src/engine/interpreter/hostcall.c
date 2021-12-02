@@ -50,17 +50,22 @@ static inline word_t* csr_decode(uint32_t csr) {
 static void csrrw(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
   word_t *csr = csr_decode(csrid);
   word_t t = *csr;
-  *csr = *src;
-  *dest = t;
-  // word_t t = (src != NULL ? *csr : 0);
-  // if (dest != NULL) *dest = *csr;
-  // if (src != NULL) *csr = t;
+  if (src) *csr = *src; else printf("## csrrw() ## error: src == NULL\n");
+  if (dest) *dest = t; else printf("## csrrw() ## error: dest == NULL\n");
+}
+
+static void csrrs(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
+  word_t *csr = csr_decode(csrid);
+  word_t t = *csr;
+  if (src) *csr = t | *src; else printf("## csrrw() ## error: src == NULL\n");
+  if (dest) *dest = t; else printf("## csrrw() ## error: dest == NULL\n");
 }
 
 static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint32_t imm) {
   word_t ret = 0;
   switch (id) {
-    case HOSTCALL_CSR: csrrw(dest, src, imm); break;
+    case HOSTCALL_CSRRW: csrrw(dest, src, imm); break;
+    case HOSTCALL_CSRRS: csrrs(dest, src, imm); break;
     case HOSTCALL_TRAP: printf("Running ## isa_hostcall() HOSTCALL_TRAP ##\n...\n");
       ret = isa_raise_intr(imm, *src); isa_reg_display(); break;
     default: panic("Unsupport hostcall ID = %d", id); break;

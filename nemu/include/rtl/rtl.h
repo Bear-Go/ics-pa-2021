@@ -44,7 +44,8 @@ enum {
   HOSTCALL_EXIT,  // handling nemu_trap
   HOSTCALL_INV,   // invalid opcode
   HOSTCALL_PIO,   // port I/O
-  HOSTCALL_CSR,   // system csr
+  HOSTCALL_CSRRW, // csrrw
+  HOSTCALL_CSRRS, // csrrs
   HOSTCALL_TRAP,  // system trap
 };
 
