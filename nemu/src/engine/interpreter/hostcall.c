@@ -55,11 +55,11 @@ static void csrrw(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
 }
 
 static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint32_t imm) {
-  printf("Running ## isa_hostcall() ##\n...\n");
   word_t ret = 0;
   switch (id) {
     case HOSTCALL_CSR: csrrw(dest, src, imm); break;
-    case HOSTCALL_TRAP: ret = isa_raise_intr(imm, *src); isa_reg_display(); break;
+    case HOSTCALL_TRAP: printf("Running ## isa_hostcall() HOSTCALL_TRAP ##\n...\n");
+      ret = isa_raise_intr(imm, *src); isa_reg_display(); break;
     default: panic("Unsupport hostcall ID = %d", id); break;
   }
   if (dest) *dest = ret;
