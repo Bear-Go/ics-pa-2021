@@ -55,6 +55,7 @@ static void csrrw(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
 }
 
 static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint32_t imm) {
+  printf("Running ## isa_hostcall() ##\n...\n");
   word_t ret = 0;
   switch (id) {
     case HOSTCALL_CSR: csrrw(dest, src, imm); break;
