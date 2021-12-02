@@ -10,9 +10,9 @@ Context* __am_irq_handle(Context *c) {
     printf("gpr[%d] 0x%08x ", i, c->gpr[i]);
     if (i % 4 == 3) printf("\n");
   }
-  printf("0x%08x\n", c->mcause);
-  printf("0x%08x\n", c->mstatus);
-  printf("0x%08x\n", c->mepc);
+  printf("mcause  0x%08x\n", c->mcause);
+  printf("mstatus 0x%08x\n", c->mstatus);
+  printf("mepc    0x%08x\n", c->mepc);
   if (user_handler) {
     Event ev = {0};
     switch (c->mcause) {
