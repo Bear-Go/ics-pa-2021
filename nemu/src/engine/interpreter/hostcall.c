@@ -71,6 +71,17 @@ static void csrrs(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
   // isa_reg_display();
 }
 
+static void mret(rtlreg_t *dest) {
+  word_t *mcause = csr_decode(0x342);
+  printf("\nmcause %d\n", *mcause);
+  dest = csr_decode(0x341);
+  printf("\nmepc %08x\n", *dest);
+  switch (*mcause) {
+    case 66: *dest += 4; break;
+    default: panic("unimplemented mcause %d", *mcause);
+  }
+}
+
 static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint32_t imm) {
   word_t ret = 0;
   switch (id) {
@@ -78,6 +89,7 @@ static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint3
     case HOSTCALL_CSRRS: csrrs(dest, src, imm); break;
     case HOSTCALL_TRAP: /* printf("Running ## isa_hostcall() HOSTCALL_TRAP ##\n...\n"); */
       ret = isa_raise_intr(imm, *src); if (dest) *dest = ret; break;
+    case HOSTCALL_MRET: mret(dest); break;
     default: panic("Unsupport hostcall ID = %d", id); break;
   }
 }
