@@ -47,6 +47,7 @@ enum {
   HOSTCALL_CSRRW, // csrrw
   HOSTCALL_CSRRS, // csrrs
   HOSTCALL_TRAP,  // system trap
+  HOSTCALL_MRET,  // system mret
 };
 
 def_rtl(hostcall, uint32_t id, rtlreg_t *dest, const rtlreg_t *src1,
