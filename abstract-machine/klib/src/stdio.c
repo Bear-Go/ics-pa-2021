@@ -54,8 +54,6 @@ static inline bool _is_digit(char ch) {
   return (ch >= '0') && (ch <= '9');
 }
 
-
-// internal ASCII string to unsigned int conversion
 static unsigned int _atoi(const char** str) {
   unsigned int i = 0U;
   while (_is_digit(**str)) {
@@ -98,7 +96,7 @@ static size_t _ntoa_format(out_fct_type out, char* buffer, size_t idx, size_t ma
       buf[len++] = '0';
     }
   }
-  // handle hash
+  // hash
   if (flags & FLAGS_HASH) {
     if (!(flags & FLAGS_PRECISION) && len && ((len == prec) || (len == width))) {
       len--;
@@ -140,7 +138,7 @@ static size_t _ntoa_long(out_fct_type out, char* buffer, size_t idx, size_t maxl
   if (!value) {
     flags &= ~FLAGS_HASH;
   }
-  // write if precision != 0 and value is != 0
+  // write if precision != 0 and value != 0
   if (!(flags & FLAGS_PRECISION) || value) {
     do {
       const char digit = (char)(value % base);
@@ -331,6 +329,14 @@ static int _vsnprintf(out_fct_type out, char* buffer, const size_t maxlen, const
             out(' ', buffer, idx++, maxlen);
           }
         }
+        fmt++;
+        break;
+      }
+
+      case 'p' : {
+        width = sizeof(void*) * 2U;
+        flags |= FLAGS_ZEROPAD | FLAGS_UPPERCASE;
+        idx = _ntoa_long(out, buffer, idx, maxlen, (unsigned long)((uintptr_t)va_arg(va, void*)), false, 16U, precision, width, flags);
         fmt++;
         break;
       }
