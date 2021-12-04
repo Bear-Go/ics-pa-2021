@@ -15,11 +15,11 @@ size_t get_ramdisk_size();
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   // assert(*(uint32_t *)elf->e_ident == 0x7f454c46);
-  uint32_t offset = 0x001000;
-  uint32_t *virtaddr = (uint32_t *)0x80000000;
-  uint32_t filesiz = 0x08edc;
-  uint32_t memsiz = 0x11010;
-  uint32_t *p = malloc(filesiz);
+  size_t offset = 0x001000;
+  uint8_t *virtaddr = (uint8_t *)0x80000000;
+  size_t filesiz = 0x08edc;
+  size_t memsiz = 0x11010;
+  uint8_t *p = malloc(filesiz);
   ramdisk_read(p, offset, filesiz);
   memcpy(virtaddr, p, filesiz);
   memset(virtaddr+filesiz, 0, memsiz-filesiz);
