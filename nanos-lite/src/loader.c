@@ -9,16 +9,20 @@
 # define Elf_Phdr Elf32_Phdr
 #endif
 
+size_t ramdisk_read(void *buf, size_t offset, size_t len);
+size_t ramdisk_write(const void *buf, size_t offset, size_t len);
+size_t get_ramdisk_size();
+
 static uintptr_t loader(PCB *pcb, const char *filename) {
   // assert(*(uint32_t *)elf->e_ident == 0x7f454c46);
-  // uint32_t offset = 0x001000;
+  uint32_t offset = 0x001000;
   // uint32_t virtaddr = 0x80000000;
-  // uint32_t filesiz = 0x08edc;
-  // uint32_t memsiz = 0x11010;
-  // uint32_t *p = malloc(memsiz);
-  // memset(p, 0, memsiz);
-  // ramdisk_read(p, offset, filesiz);
-  // io_write(virtaddr, p);
+  uint32_t filesiz = 0x08edc;
+  uint32_t memsiz = 0x11010;
+  uint32_t *p = malloc(memsiz);
+  memset(p, 0, memsiz);
+  ramdisk_read(p, offset, filesiz);
+  // memcpy(virtaddr, );
   panic("here");
   return 0;
 }
