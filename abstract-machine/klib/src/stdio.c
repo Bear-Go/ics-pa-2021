@@ -333,13 +333,13 @@ static int _vsnprintf(out_fct_type out, char* buffer, const size_t maxlen, const
         break;
       }
 
-      // case 'p' : {
-      //   width = sizeof(void*) * 2U;
-      //   flags |= FLAGS_ZEROPAD | FLAGS_UPPERCASE;
-      //   idx = _ntoa_long(out, buffer, idx, maxlen, (unsigned long)((uintptr_t)va_arg(va, void*)), false, 16U, precision, width, flags);
-      //   fmt++;
-      //   break;
-      // }
+      case 'p' : {
+        width = sizeof(void*) * 2U;
+        flags |= FLAGS_ZEROPAD | FLAGS_UPPERCASE;
+        idx = _ntoa_long(out, buffer, idx, maxlen, (unsigned long)((uintptr_t)va_arg(va, void*)), false, 16U, precision, width, flags);
+        fmt++;
+        break;
+      }
 
       case '%':
         out('%', buffer, idx++, maxlen);
