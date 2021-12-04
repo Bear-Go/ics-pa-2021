@@ -10,7 +10,16 @@
 #endif
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  TODO();
+  // assert(*(uint32_t *)elf->e_ident == 0x7f454c46);
+  // uint32_t offset = 0x001000;
+  // uint32_t virtaddr = 0x80000000;
+  // uint32_t filesiz = 0x08edc;
+  // uint32_t memsiz = 0x11010;
+  // uint32_t *p = malloc(memsiz);
+  // memset(p, 0, memsiz);
+  // ramdisk_read(p, offset, filesiz);
+  // io_write(virtaddr, p);
+  panic("here");
   return 0;
 }
 
