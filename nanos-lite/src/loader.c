@@ -27,9 +27,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     printf("0x%08x:\t0x%08x\n", p, *p);
   }
   memset((void *)elf_phdr->p_vaddr + elf_phdr->p_filesz, 0, elf_phdr->p_memsz - elf_phdr->p_filesz);
-  // panic("here");
-  uintptr_t entry = elf_ehdr->e_entry;
-  return entry;
+  return elf_ehdr->e_entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
