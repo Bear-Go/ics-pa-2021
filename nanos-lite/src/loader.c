@@ -20,6 +20,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   ramdisk_read(elf_ehdr, 0, ramdisk_size);
   assert(*(uint32_t *)elf_ehdr->e_ident == 0x464c457f);
   Elf_Phdr *elf_phdr = (Elf_Phdr *)(base+elf_ehdr->e_phoff);
+  printf("%d\n",elf_ehdr->e_phnum);
   if (elf_phdr->p_type == PT_LOAD) {
     printf("0x%08x\n", elf_phdr->p_vaddr);
     memcpy((void *)elf_phdr->p_vaddr, (void *)base + elf_phdr->p_offset, elf_phdr->p_filesz);
