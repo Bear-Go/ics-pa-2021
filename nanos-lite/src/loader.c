@@ -15,6 +15,7 @@ size_t get_ramdisk_size();
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr *elf_ehdr = NULL;
+  printf("ramdisk_size = %d bytes\n", get_ramdisk_size());
   ramdisk_read(elf_ehdr, 0, get_ramdisk_size());
   // Elf_Phdr *elf_phdr = NULL;
   panic("here");
