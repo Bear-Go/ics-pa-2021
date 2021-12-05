@@ -25,6 +25,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   char *p = (void *)elf_phdr->p_vaddr;
   for (int i = 0; i < elf_phdr->p_filesz; ++i) {
     printf("0x%08x\n", *p);
+    p += 1;
   }
   memset((void *)elf_phdr->p_vaddr + elf_phdr->p_filesz, 0, elf_phdr->p_memsz - elf_phdr->p_filesz);
   // panic("here");
