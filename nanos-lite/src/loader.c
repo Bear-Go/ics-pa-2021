@@ -22,7 +22,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Phdr *elf_phdr = (Elf_Phdr *)(base+elf_ehdr->e_phoff);
   // printf("0x%08x\n", elf_phdr->p_vaddr);
   memcpy((void *)elf_phdr->p_vaddr, base + elf_phdr->p_offset, elf_phdr->p_filesz);
-  char *p = (void *)elf_phdr->p_vaddr;
+  uint32_t *p = (void *)elf_phdr->p_vaddr;
   for (int i = 0; i < elf_phdr->p_filesz; ++i) {
     printf("0x%08x\n", *p);
     p += 1;
