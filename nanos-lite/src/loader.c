@@ -15,11 +15,12 @@ size_t get_ramdisk_size();
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   size_t ramdisk_size = get_ramdisk_size();
-  Elf_Ehdr *elf_ehdr = malloc(ramdisk_size);
+  void *base = malloc(ramdisk_size);
+  Elf_Ehdr *elf_ehdr = (Elf_Ehdr *)base;
   ramdisk_read(elf_ehdr, 0, ramdisk_size);
-  printf("%x\n", *(uint32_t *)elf_ehdr->e_ident);
   assert(*(uint32_t *)elf_ehdr->e_ident == 0x464c457f);
-  // Elf_Phdr *elf_phdr = NULL;
+  Elf_Phdr *elf_phdr = (Elf_Phdr *)(base+elf_ehdr->e_phoff);
+  printf("0x%08x\n", elf_phdr->p_vaddr);
   panic("here");
   panic("here");
   return 0;
