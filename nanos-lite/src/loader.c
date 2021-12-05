@@ -21,7 +21,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   assert(*(uint32_t *)elf_ehdr->e_ident == 0x464c457f);
   Elf_Phdr *elf_phdr = (Elf_Phdr *)(base+elf_ehdr->e_phoff);
   printf("0x%08x\n", elf_phdr->p_vaddr);
-  panic("here");
+  
   panic("here");
   return 0;
 }
