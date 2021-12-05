@@ -17,7 +17,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   size_t ramdisk_size = get_ramdisk_size();
   Elf_Ehdr *elf_ehdr = malloc(ramdisk_size);
   ramdisk_read(elf_ehdr, 0, ramdisk_size);
-  assert(*(uint32_t *)elf_ehdr->e_ident == 0xBadC0de);
+  assert(*(uint32_t *)elf_ehdr->e_ident == 0x7f454c46);
   // Elf_Phdr *elf_phdr = NULL;
   panic("here");
   panic("here");
