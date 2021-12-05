@@ -14,7 +14,10 @@ size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 size_t get_ramdisk_size();
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-
+  Elf_Ehdr *elf_ehdr = NULL;
+  ramdisk_read(elf_ehdr, 0, get_ramdisk_size());
+  // Elf_Phdr *elf_phdr = NULL;
+  assert(*(uint32_t *)elf_ehdr->e_ident == 0xBadC0de);
   panic("here");
   return 0;
 }
