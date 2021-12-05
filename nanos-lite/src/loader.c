@@ -21,7 +21,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   assert(*(uint32_t *)elf_ehdr->e_ident == 0x464c457f);
   Elf_Phdr *elf_phdr = (Elf_Phdr *)(base+elf_ehdr->e_phoff);
   printf("0x%08x\n", elf_phdr->p_vaddr);
-  memcpy((void *)elf_phdr->p_vaddr, base + elf_phdr->p_offset, elf_phdr->p_filesz);
+  memcpy((void *)elf_phdr->p_vaddr, (void *)base + elf_phdr->p_offset, elf_phdr->p_filesz);
   // uint32_t *p = (void *)elf_phdr->p_vaddr;
   // for (; p <(uint32_t *)elf_phdr->p_vaddr + 800; ++p) {
   //   printf("0x%08x:\t0x%08x\n", p, *p);
