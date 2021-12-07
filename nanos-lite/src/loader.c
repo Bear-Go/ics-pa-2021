@@ -26,6 +26,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     Elf_Phdr *elf_phdr = (Elf_Phdr *)malloc(sizeof(Elf_Phdr));
     ramdisk_read(elf_phdr, elf_ehdr->e_phoff + i * sizeof(Elf_Phdr), sizeof(Elf_Phdr));
     if (elf_phdr->p_type == PT_LOAD) {
+      printf("i = %d, vaddr = 0x%08x, filesz = 0x%08x\n", i, elf_phdr->p_vaddr, elf_phdr->p_filesz);
       memcpy((void *)elf_phdr->p_vaddr, (void *)base + elf_phdr->p_offset, elf_phdr->p_filesz);
       memset((void *)elf_phdr->p_vaddr + elf_phdr->p_filesz, 0, elf_phdr->p_memsz - elf_phdr->p_filesz);
       ++cnt;
