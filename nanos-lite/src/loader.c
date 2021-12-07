@@ -19,9 +19,9 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr *elf_ehdr = (Elf_Ehdr *)base;
   ramdisk_read(elf_ehdr, 0, sizeof(Elf_Ehdr));
   assert(*(uint32_t *)elf_ehdr->e_ident == 0x464c457f);
-  panic("##!! here !!##");
   int cnt = 0;
   Elf_Phdr *elf_phdr = (Elf_Phdr *)(base + elf_ehdr->e_phoff);
+  printf("%d\n", elf_ehdr->e_phnum);
   for (int i = 0; i < elf_ehdr->e_phnum; ++i) {
     if (elf_phdr->p_type == PT_LOAD) {
       memcpy((void *)elf_phdr->p_vaddr, (void *)base + elf_phdr->p_offset, elf_phdr->p_filesz);
