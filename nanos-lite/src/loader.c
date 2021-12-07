@@ -20,6 +20,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   ramdisk_read(elf_ehdr, 0, sizeof(Elf_Ehdr));
   assert(*(uint32_t *)elf_ehdr->e_ident == 0x464c457f);
   int cnt = 0;
+  printf("0x%08x\n", elf_ehdr->e_phoff);
   Elf_Phdr *elf_phdr = (Elf_Phdr *)(base + elf_ehdr->e_phoff);
   printf("0x%08x\n", elf_phdr->p_vaddr);
   for (int i = 0; i < elf_ehdr->e_phnum; ++i) {
