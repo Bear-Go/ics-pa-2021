@@ -30,7 +30,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     }
   }
   printf("%d\n", cnt);
-  panic("##!! here !!##");
+  // panic("##!! here !!##");
   return elf_ehdr->e_entry;
 }
 
