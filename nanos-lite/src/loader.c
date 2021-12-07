@@ -21,7 +21,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   ramdisk_read(elf_ehdr, 0, sizeof(Elf_Ehdr));
   assert(*(uint32_t *)elf_ehdr->e_ident == 0x464c457f);
 
-  int cnt = 0;
   for (int i = 0; i < elf_ehdr->e_phnum; ++i) {
     Elf_Phdr *elf_phdr = (Elf_Phdr *)malloc(sizeof(Elf_Phdr));
     ramdisk_read(elf_phdr, elf_ehdr->e_phoff + i * sizeof(Elf_Phdr), sizeof(Elf_Phdr));
@@ -29,10 +28,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       printf("i = %d, vaddr = 0x%08x, filesz = 0x%08x\n", i, elf_phdr->p_vaddr, elf_phdr->p_filesz);
       memcpy((void *)elf_phdr->p_vaddr, (void *)base + elf_phdr->p_offset, elf_phdr->p_filesz);
       memset((void *)elf_phdr->p_vaddr + elf_phdr->p_filesz, 0, elf_phdr->p_memsz - elf_phdr->p_filesz);
-      ++cnt;
     }
   }
-  printf("%d\n", cnt);
+
+  printf("entry = 0x%08x\n", elf_ehdr->e_entry);
   // panic("##!! here !!##");
   return elf_ehdr->e_entry;
 }
