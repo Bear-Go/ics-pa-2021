@@ -29,7 +29,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       memcpy((void *)elf_phdr->p_vaddr, (void *)base + elf_phdr->p_offset, elf_phdr->p_filesz);
       memset((void *)elf_phdr->p_vaddr + elf_phdr->p_filesz, 0, elf_phdr->p_memsz - elf_phdr->p_filesz);
       ++cnt;
-      printf("1\n");
     }
   }
   printf("%d\n", cnt);
