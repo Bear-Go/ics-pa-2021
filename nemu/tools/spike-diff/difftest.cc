@@ -24,8 +24,16 @@ static debug_module_config_t difftest_dm_config = {
 };
 
 struct diff_context_t {
-  word_t gpr[32];
-  word_t pc;
+  rtlreg_t gpr[32];
+
+  vaddr_t pc;
+  vaddr_t mtvec;
+  vaddr_t mcause;
+  vaddr_t mepc;
+  vaddr_t mstatus;
+  // below is origin
+  // word_t gpr[32];
+  // word_t pc;
 };
 
 static sim_t* s = NULL;
