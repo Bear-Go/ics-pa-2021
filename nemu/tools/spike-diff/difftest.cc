@@ -25,7 +25,6 @@ static debug_module_config_t difftest_dm_config = {
 
 struct diff_context_t {
   rtlreg_t gpr[32];
-
   vaddr_t pc;
   vaddr_t mtvec;
   vaddr_t mcause;
