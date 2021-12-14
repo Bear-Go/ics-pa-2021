@@ -19,18 +19,13 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   ramdisk_read(&ehdr, 0, sizeof(Elf_Ehdr));
   assert(*(uint32_t *)ehdr.e_ident == 0x464c457f);
 
-  Elf_Phdr *phdr = (Elf_Phdr *)malloc(ehdr.e_phentsize * ehdr.e_phnum);
-  ramdisk_read(phdr, ehdr.e_phoff, ehdr.e_phentsize * ehdr.e_phnum);
-
   for (int i = 0; i < ehdr.e_phnum; ++ i) {
-
-    if (phdr[i].p_type == PT_LOAD) {
-      void *buf = malloc(phdr[i].p_filesz);
-      ramdisk_read(buf, phdr[i].p_offset, phdr[i].p_filesz);
-      memcpy((void *)phdr[i].p_vaddr, buf, phdr[i].p_filesz);
-      memset((void *)phdr[i].p_vaddr, 0, phdr[i].p_memsz - phdr[i].p_filesz);
+    Elf_Phdr phdr;
+    ramdisk_read(&phdr, ehdr.e_phoff + ehdr.e_phentsize * i, sizeof(Elf_Phdr));
+    if (phdr.p_type == PT_LOAD) {
+      ramdisk_read((void *)phdr.p_vaddr, phdr.p_offset, phdr.p_filesz);
+      memset((void *)phdr.p_vaddr + phdr.p_filesz, 0, phdr.p_memsz - phdr.p_filesz);
     } 
-
   }
 
   // panic("##!! here !!##");
