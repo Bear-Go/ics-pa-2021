@@ -16,7 +16,9 @@ size_t get_ramdisk_size();
 static uintptr_t loader(PCB *pcb, const char *filename) {
 
   size_t size = get_ramdisk_size();
-  Elf_Ehdr *ehdr = (Elf_Ehdr *)malloc(size);
+  void *buf = malloc(size);
+  ramdisk_read(buf, 0, size);
+  Elf_Ehdr *ehdr = (Elf_Ehdr *)buf;
   printf("%p\n", ehdr->e_entry);
 
   panic("##!! here !!##");
