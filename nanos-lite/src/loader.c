@@ -14,27 +14,11 @@ size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 size_t get_ramdisk_size();
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  // size_t ramdisk_size = get_ramdisk_size(); 
-  // void *base = malloc(sizeof(ramdisk_size));
 
-  Elf_Ehdr *elf_ehdr = (Elf_Ehdr *)malloc(sizeof(Elf_Ehdr));
-  ramdisk_read(elf_ehdr, 0, sizeof(Elf_Ehdr));
-  assert(*(uint32_t *)elf_ehdr->e_ident == 0x464c457f);
+  
 
-  Elf_Phdr *elf_phdr = (Elf_Phdr *)malloc(sizeof(Elf_Phdr));
-  for (int i = 0; i < elf_ehdr->e_phnum; ++i) {
-    ramdisk_read(elf_phdr, elf_ehdr->e_phoff + i * sizeof(Elf_Phdr), sizeof(Elf_Phdr));
-    if (elf_phdr->p_type == PT_LOAD) {
-      printf("i = %d, vaddr = 0x%08x, filesz = 0x%08x\n", i, elf_phdr->p_vaddr, elf_phdr->p_filesz);
-      memset((void *)elf_phdr->p_vaddr, 0, elf_phdr->p_memsz);
-
-      // memcpy((void *)elf_phdr->p_vaddr, (void *)base + elf_phdr->p_offset, elf_phdr->p_filesz);
-      // memset((void *)elf_phdr->p_vaddr + elf_phdr->p_filesz, 0, elf_phdr->p_memsz - elf_phdr->p_filesz);
-    }
-  }
-
-  // panic("##!! here !!##");
-  return elf_ehdr->e_entry;
+  panic("##!! here !!##");
+  return 0;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
