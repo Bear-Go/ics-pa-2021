@@ -17,7 +17,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   for (int i = 0; i < 32; ++ i) {
     if (!difftest_check_reg(reg_name(i, sizeof(word_t)), pc, ref_r->gpr[i]._32, gpr(i))) {
       
-      Log("right regs :");
+      printf("right regs :\n");
       for (int i = 0; i < 32; ++ i) {
 		    printf("%3s: 0x%08x ", stdregs[i], ref_r->gpr[i]._32);
         if (i % 4 == 3) printf("\n");
