@@ -22,7 +22,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Phdr *phdr = (Elf_Phdr *)malloc(sizeof(ehdr->e_phentsize * ehdr->e_phnum));
   printf("%d\n", ehdr->e_phnum);
   for (int i = 0; i < ehdr->e_phnum; ++ i) {
-    // printf("%d\n", i);
+    printf("%d\n", phdr[i].p_type);
     if (phdr[i].p_type == PT_LOAD) {
       printf("%d\n", i);
     } 
