@@ -10,16 +10,19 @@ const char *stdregs[] = {
 };
 
 void std_reg_display() {
-	for (int i = 0; i < 32; ++ i) {
-		printf("%3s: 0x%08x ", stdregs[i], gpr(i));
-    if (i % 4 == 3) printf("\n");
-	}
+	
 }
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   for (int i = 0; i < 32; ++ i) {
     if (!difftest_check_reg(reg_name(i, sizeof(word_t)), pc, ref_r->gpr[i]._32, gpr(i))) {
-      std_reg_display();
+      
+      Log("right regs :");
+      for (int i = 0; i < 32; ++ i) {
+		    printf("%3s: 0x%08x ", stdregs[i], ref_r->gpr[i]._32);
+        if (i % 4 == 3) printf("\n");
+	    }
+
       return false;
     }
   }
