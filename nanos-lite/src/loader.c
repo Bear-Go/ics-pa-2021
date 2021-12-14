@@ -19,6 +19,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   void *buf = malloc(size);
   ramdisk_read(buf, 0, size);
   Elf_Ehdr *ehdr = (Elf_Ehdr *)buf;
+  printf("%x\n", *(uint32_t *)ehdr->e_ident);
   assert(*(uint32_t *)ehdr->e_ident == 0xBadC0de);
   printf("%p\n", ehdr->e_entry);
 
