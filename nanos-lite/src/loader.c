@@ -28,8 +28,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     } 
   }
 
-  // panic("##!! here !!##");
-
   return ehdr.e_entry;
 }
 
