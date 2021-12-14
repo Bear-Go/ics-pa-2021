@@ -33,7 +33,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   }
 
   printf("0x%08x\n", *(uintptr_t *)(0x83004d10));
-  printf("0x%08x\n", *(uintptr_t *)(0x83004d12));
+  printf("0x%08x\n", *(uintptr_t *)(0x83004d11));
 
   panic("##!! here !!##");
   return ehdr->e_entry;
