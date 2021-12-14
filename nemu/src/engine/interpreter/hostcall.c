@@ -50,15 +50,15 @@ static inline word_t* csr_decode(uint32_t csr) {
 static void csrrw(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
   word_t *csr = csr_decode(csrid);
   word_t t = *csr;
-  if (src) *csr = *src; else printf("## csrrw() ## error: src == NULL\n");
-  if (dest) *dest = t; else printf("## csrrw() ## error: dest == NULL\n");
+  if (src) *csr = *src;
+  if (dest) *dest = t;
 }
 
 static void csrrs(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
   word_t *csr = csr_decode(csrid);
   word_t t = *csr;
-  if (src) *csr = t | *src; else printf("## csrrw() ## error: src == NULL\n");
-  if (dest) *dest = t; else printf("## csrrw() ## error: dest == NULL\n");
+  if (src) *csr = t | *src;
+  if (dest) *dest = t;
 }
 
 static void mret(rtlreg_t *dest) {
