@@ -63,7 +63,7 @@ static void csrrs(rtlreg_t *dest, const rtlreg_t *src, uint32_t csrid) {
 
 static void mret(rtlreg_t *dest) {
   word_t pc = *csr_decode(0x341);
-  *dest = pc + 2;
+  *dest = pc + 4;
 }
 
 static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint32_t imm) {
