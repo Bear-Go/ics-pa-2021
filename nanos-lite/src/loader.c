@@ -15,6 +15,8 @@ size_t get_ramdisk_size();
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
 
+  panic("##!! here !!##");
+
   Elf_Ehdr *ehdr = (Elf_Ehdr *)malloc(sizeof(Elf_Ehdr));
   ramdisk_read(ehdr, 0, sizeof(Elf_Ehdr));
   assert(*(uint32_t *)ehdr->e_ident == 0x464c457f);
@@ -29,12 +31,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       memset((void *)phdr[i].p_vaddr, 0, phdr[i].p_memsz - phdr[i].p_filesz);
     } 
   }
-
-  uintptr_t *p = (uintptr_t *)ehdr->e_entry;
-  printf("0x%08x\n", *p);
-  printf("0x%08x\n", *(p + 1));
-  printf("0x%08x\n", *(uintptr_t *)(0x83002fd4));
-  // panic("##!! here !!##");
 
   return ehdr->e_entry;
 }
