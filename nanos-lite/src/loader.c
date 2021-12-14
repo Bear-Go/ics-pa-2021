@@ -25,7 +25,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     // printf("%d\n", i);
     if (phdr[i].p_type == PT_LOAD) {
       printf("%d\n", i);
-    }
+    } 
+    else printf("wrong!\n");
   }
   panic("##!! here !!##");
   return ehdr->e_entry;
