@@ -82,6 +82,7 @@ static void mret(rtlreg_t *dest) {
 
 static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint32_t imm) {
   word_t ret = 0;
+  isa_reg_display();
   switch (id) {
     case HOSTCALL_CSRRW: csrrw(dest, src, imm); break;
     case HOSTCALL_CSRRS: csrrs(dest, src, imm); break;
