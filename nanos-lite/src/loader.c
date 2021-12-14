@@ -25,6 +25,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   for (int i = 0; i < ehdr->e_phnum; ++ i) {
     if (phdr[i].p_type == PT_LOAD) {
       printf("%d\n", i);
+      void *buf = malloc(phdr[i].p_filesz);
+      ramdisk_read(buf, phdr[i].p_offset, phdr[i].p_filesz);
+      memcpy((void *)phdr[i].p_vaddr, buf, phdr[i].p_filesz);
+      memset((void *)phdr[i].p_vaddr, 0, phdr[i].p_memsz - phdr[i].p_filesz);
     } 
   }
   panic("##!! here !!##");
