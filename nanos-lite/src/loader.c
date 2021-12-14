@@ -31,7 +31,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       memset((void *)phdr[i].p_vaddr, 0, phdr[i].p_memsz - phdr[i].p_filesz);
     } 
   }
-  panic("##!! here !!##");
+  // panic("##!! here !!##");
   return ehdr->e_entry;
 }
 
