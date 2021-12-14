@@ -20,6 +20,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   assert(*(uint32_t *)ehdr->e_ident == 0x464c457f);
 
   Elf_Phdr *phdr = (Elf_Phdr *)malloc(sizeof(ehdr->e_phentsize * ehdr->e_phnum));
+  printf("%d\n", ehdr->e_phnum);
   for (int i = 0; i < ehdr->e_phnum; ++ i) {
     Elf_Phdr *ph = &phdr[i];
     if (ph->p_type == PT_LOAD) {
