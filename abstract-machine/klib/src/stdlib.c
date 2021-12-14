@@ -29,12 +29,9 @@ int atoi(const char* nptr) {
   return x;
 }
 
-#define MY_MALLOC
-#ifdef MY_MALLOC
-#ifndef __ISA_NATIVE__
+#if !(defined(__ISA_NATIVE__) && defined(__NATIVE_USE_KLIB__))
 static int cnt = 0;
 static char *addr;// buggy maybe
-#endif
 #endif
 
 void *malloc(size_t size) {
@@ -43,7 +40,6 @@ void *malloc(size_t size) {
   //   panic() -> putchar() -> (glibc) -> malloc() -> panic()
 #if !(defined(__ISA_NATIVE__) && defined(__NATIVE_USE_KLIB__))
 
-#ifdef MY_MALLOC
   // buggy maybe
   if (cnt == 0) {
     addr = (void *)ROUNDUP(heap.start, 8);
@@ -57,7 +53,7 @@ void *malloc(size_t size) {
     *p = 0;
   }
   return old;
-#endif
+  
 #endif
   return NULL;
 }
