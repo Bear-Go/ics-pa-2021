@@ -30,8 +30,11 @@ int atoi(const char* nptr) {
 }
 
 #if !(defined(__ISA_NATIVE__) && defined(__NATIVE_USE_KLIB__))
+
+// buggy maybe
 static int cnt = 0;
-static char *addr;// buggy maybe
+static char *addr;
+
 #endif
 
 void *malloc(size_t size) {
@@ -53,7 +56,7 @@ void *malloc(size_t size) {
     *p = 0;
   }
   return old;
-  
+
 #endif
   return NULL;
 }
