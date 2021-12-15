@@ -30,7 +30,7 @@ Context* __am_irq_handle(Context *c) {
           case 1:
             printf("syscall\n");
             ev.event = EVENT_SYSCALL; 
-            // c->mstatus = 0x00021800; 
+            c->mstatus = 0x00021800; 
             break;
         }
         c->mepc += 4;
