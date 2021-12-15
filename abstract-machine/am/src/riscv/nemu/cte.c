@@ -27,7 +27,7 @@ Context* __am_irq_handle(Context *c) {
           case -1:
             printf("yield\n");
             ev.event = EVENT_YIELD; break;
-          case 0:
+          case 1:
             printf("syscall\n");
             ev.event = EVENT_SYSCALL; 
             // c->mstatus = 0x00021800; 
