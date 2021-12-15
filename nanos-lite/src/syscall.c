@@ -14,6 +14,7 @@ void do_syscall(Context *c) {
       halt(a[1]);
       break;
     case SYS_yield: 
+      printf("SYS_yield!\n");
       yield();
       c->mstatus = 0x00021800;
       c->GPRx = 0;
