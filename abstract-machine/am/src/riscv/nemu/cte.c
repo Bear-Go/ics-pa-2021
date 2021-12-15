@@ -23,8 +23,12 @@ Context* __am_irq_handle(Context *c) {
     Event ev = {0};
     switch (c->mcause) {
       case 11:  
-        ev.event = EVENT_SYSCALL;
-        if (c->GPR1 == -1) ev.event = EVENT_YIELD;
+        switch (c->GPR1) {
+        case -1:
+          ev.event = EVENT_YIELD; break;
+        default:
+          ev.event = EVENT_SYSCALL; c->mstatus = 0x00021800; break;
+        }
         c->mepc += 4;
         break;
       default: ev.event = EVENT_ERROR; break;
