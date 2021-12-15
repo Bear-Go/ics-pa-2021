@@ -4,33 +4,18 @@
 
 static Context* (*user_handler)(Event, Context*) = NULL;
 
-const char *conregs[] = {
-  "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
-  "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5",
-  "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7",
-  "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
-};
-
 Context* __am_irq_handle(Context *c) {
-  printf("%8s: 0x%08x\n", "mcause", c->mcause);
-  printf("%8s: 0x%08x\n", "mepc", c->mepc);
-  printf("%8s: 0x%08x\n", "mstatus", c->mstatus);
-	for (int i = 0; i < 32; ++ i) {
-		printf("%3s: 0x%08x ", conregs[i], c->gpr[i]);
-    if (i % 4 == 3) printf("\n");
-	}
+
   if (user_handler) {
     Event ev = {0};
     switch (c->mcause) {
       case 11:  
         switch (c->GPR1) {
           case -1:
-            printf("yield\n");
             ev.event = EVENT_YIELD; break;
           default:
-            printf("syscall\n");
             ev.event = EVENT_SYSCALL; 
-            c->mstatus = 0x00021800; 
+            c->mstatus = 0x00021800; // where to change ?
             break;
         }
         c->mepc += 4;
