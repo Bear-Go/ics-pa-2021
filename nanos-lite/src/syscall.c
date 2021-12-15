@@ -7,7 +7,9 @@ void do_syscall(Context *c) {
   a[1] = c->GPR2;
   switch (a[0]) {
     case SYS_exit:
+      printf("exit\n");
       halt(a[1]);
+      break;
     case SYS_yield: 
       printf("yield\n");
       yield();
