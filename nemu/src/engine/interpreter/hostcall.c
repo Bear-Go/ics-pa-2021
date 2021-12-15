@@ -71,7 +71,7 @@ static void isa_hostcall(uint32_t id, rtlreg_t *dest, const rtlreg_t *src, uint3
   switch (id) {
     case HOSTCALL_CSRRW: csrrw(dest, src, imm); break;
     case HOSTCALL_CSRRS: csrrs(dest, src, imm); break;
-    case HOSTCALL_TRAP: ret = isa_raise_intr(imm, *src); isa_reg_display(); if (dest) *dest = ret; break;
+    case HOSTCALL_TRAP: ret = isa_raise_intr(imm, *src); if (dest) *dest = ret; break;
     case HOSTCALL_MRET: mret(dest); break;
     default: panic("Unsupport hostcall ID = %d", id); break;
   }
