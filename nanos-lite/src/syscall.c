@@ -9,6 +9,7 @@ void do_syscall(Context *c) {
     case SYS_exit:
       halt(a[1]);
     case SYS_yield: 
+      printf("yield\n");
       yield();
       c->GPRx = 0;
       break;
