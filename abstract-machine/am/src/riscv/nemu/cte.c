@@ -15,7 +15,6 @@ Context* __am_irq_handle(Context *c) {
             ev.event = EVENT_YIELD; break;
           default:
             ev.event = EVENT_SYSCALL; 
-            c->mstatus = 0x00021800; // where to change ?
             break;
         }
         c->mepc += 4;
