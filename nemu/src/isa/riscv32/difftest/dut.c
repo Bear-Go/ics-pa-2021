@@ -9,10 +9,6 @@ const char *stdregs[] = {
   "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
 };
 
-void std_reg_display() {
-	
-}
-
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   for (int i = 0; i < 32; ++ i) {
     if (!difftest_check_reg(reg_name(i, sizeof(word_t)), pc, ref_r->gpr[i]._32, gpr(i))) {
