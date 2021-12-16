@@ -17,11 +17,11 @@ void free_page(void *p) {
   panic("not implement yet");
 }
 
+
+static uintptr_t programbrk;
 /* The brk() system call handler. */
 int mm_brk(uintptr_t brk) {
-  if (current->max_brk >= brk) {
-    return 0;
-  }
+  programbrk = brk;
   return 0;
 }
 

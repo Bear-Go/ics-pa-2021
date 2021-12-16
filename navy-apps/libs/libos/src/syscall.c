@@ -69,7 +69,7 @@ static void *program_break = &_end;
 
 void *_sbrk(intptr_t increment) {
   void *addr = program_break;
-  if (!_syscall_(SYS_brk, (intptr_t)program_break + increment, 0, 0)) {
+  if (!_syscall_(SYS_brk,(intptr_t)program_break + increment, 0, 0)) {
     program_break += increment;
     return addr;
   }
