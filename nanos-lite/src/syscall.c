@@ -27,11 +27,11 @@ void do_syscall(Context *c) {
       printf("a[1]%d\n", a[1]);
       printf("a[2]%d\n", a[2]);
       printf("a[3]%d\n", a[3]);
-      if (a[0] == 1 || a[0] ==  2) {
-        for (int i = 0; i < a[2]; ++ i) {
-            putch(((char*)a[1])[i]);
+      if (a[1] == 1 || a[1] ==  2) {
+        for (int i = 0; i < a[3]; ++ i) {
+            putch(((char*)a[2])[i]);
         }
-        c->GPRx = a[2];
+        c->GPRx = a[3];
       }
       break;
     default: panic("Unhandled syscall ID = %d", a[0]);
