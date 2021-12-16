@@ -15,9 +15,7 @@ void do_syscall(Context *c) {
       break;
     case SYS_yield: 
       printf("SYS_yield!\n");
-      // c->mstatus = 0x00021800;
       // yield();
-      // c->mstatus = 0x00021800;
       c->GPRx = 0;
       break;
     default: panic("Unhandled syscall ID = %d", a[0]);
