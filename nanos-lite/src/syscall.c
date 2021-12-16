@@ -22,10 +22,10 @@ void do_syscall(Context *c) {
       break;
     case SYS_write:
       printf("write!\n");
-      printf("a[0]%d", a[0]);
-      printf("a[1]%d", a[1]);
-      printf("a[2]%d", a[2]);
-      printf("a[3]%d", a[3]);
+      printf("a[0]%d\n", a[0]);
+      printf("a[1]%d\n", a[1]);
+      printf("a[2]%d\n", a[2]);
+      printf("a[3]%d\n", a[3]);
       if (a[0] == 1 || a[0] ==  2) {
         for (int i = 0; i < a[2]; ++ i) {
             putch(((char*)a[1])[i]);
