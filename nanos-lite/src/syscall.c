@@ -14,7 +14,8 @@ void do_syscall(Context *c) {
       halt(a[1]);
       break;
     case SYS_yield: 
-      // yield(); // if yield here then mstatus will get diff right = 0x000218000 wrong = 0x00001800
+      // if yield here then mstatus will get diff right = 0x000218000 wrong = 0x00001800
+      // yield(); 
       c->GPRx = 0;
       break;
     default: panic("Unhandled syscall ID = %d", a[0]);
