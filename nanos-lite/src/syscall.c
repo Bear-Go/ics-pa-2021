@@ -21,6 +21,7 @@ void do_syscall(Context *c) {
       c->GPRx = 0;
       break;
     case SYS_write:
+      putch('!');
       printf("write!\n");
       printf("a[0]%d\n", a[0]);
       printf("a[1]%d\n", a[1]);
