@@ -18,6 +18,14 @@ void do_syscall(Context *c) {
       // yield(); 
       c->GPRx = 0;
       break;
+    case SYS_write:
+      if (a[0] == 1 || a[0] ==  2) {
+        for (int i = 0; i < a[2]; ++ i) {
+            putch(((char*)a[1])[i]);
+        }
+        c->GPRx = a[2];
+      }
+      break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 }
