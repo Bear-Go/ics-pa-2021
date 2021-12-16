@@ -19,6 +19,7 @@ void do_syscall(Context *c) {
       c->GPRx = 0;
       break;
     case SYS_write:
+      printf("write!\n");
       if (a[0] == 1 || a[0] ==  2) {
         for (int i = 0; i < a[2]; ++ i) {
             putch(((char*)a[1])[i]);
