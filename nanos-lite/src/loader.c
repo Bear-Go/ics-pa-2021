@@ -26,7 +26,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   fs_lseek(fd, 0, SEEK_SET);
   fs_read(fd, &ehdr, sizeof(Elf_Ehdr));
   assert(*(uint32_t *)ehdr.e_ident == 0x464c457f);
-  panic("here");
+  // panic("here");
   for (int i = 0; i < ehdr.e_phnum; ++ i) {
     Elf_Phdr phdr;
     fs_read(fd, &phdr, sizeof(Elf_Phdr));
