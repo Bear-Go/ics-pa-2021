@@ -29,11 +29,12 @@ void do_syscall(Context *c) {
       c->GPRx = fs_read(a[1], (void*)a[2], a[3]);
       break;
     case SYS_write:
-      // if (a[1] == 1 || a[1] ==  2) {
-      //   for (int i = 0; i < a[3]; ++ i) {
-      //       putch(((char*)a[2])[i]);
-      //   }
-      // }
+      if (a[1] == 1 || a[1] ==  2) {
+        for (int i = 0; i < a[3]; ++ i) {
+            putch(((char*)a[2])[i]);
+        }
+        c->GPRx = a[3]; break;
+      }
       c->GPRx = fs_write(a[1], (const void*)a[2], a[3]);
       break;
     case SYS_close:
