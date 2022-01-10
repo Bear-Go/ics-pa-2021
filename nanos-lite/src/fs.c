@@ -38,7 +38,10 @@ void init_fs() {
 }
 
 int fs_open(const char* pathname, int flags, int mode) {
-  return 0;
+  for (int i = 3; i < file_num; ++ i) {
+    if (strcmp(pathname, file_table[i].name) == 0) return i;
+  }
+  panic("Invalid pathname: %s", pathname);
 }
 
 size_t fs_read(int fd, void* buf, size_t len) {
