@@ -41,12 +41,12 @@ void init_fs() {
   file_num = sizeof(file_table) / sizeof(file_table[0]);
 }
 
-// int fs_open(const char* pathname, int flags, int mode) {
-//   for (int i = 3; i < file_num; ++ i) {
-//     if (strcmp(pathname, file_table[i].name) == 0) return i;
-//   }
-//   panic("Invalid pathname in fs_open: %s", pathname);
-// }
+int fs_open(const char* pathname, int flags, int mode) {
+  for (int i = 3; i < file_num; ++ i) {
+    if (strcmp(pathname, file_table[i].name) == 0) return i;
+  }
+  panic("Invalid pathname in fs_open: %s", pathname);
+}
 
 // size_t fs_read(int fd, void* buf, size_t len) {
 //   // assert(file_table[fd].open_offset <= file_table[fd].size);
@@ -90,17 +90,6 @@ void init_fs() {
 //   file_table[fd].open_offset = 0;
 //   return 0;
 // }
-
-#define NR_FILES (sizeof(file_table) / sizeof(file_table[0]))
-
-int fs_open(const char *pathname, int flags, int mode){
-    for(int i = 3; i < NR_FILES;i++){
-        if(strcmp(pathname, file_table[i].name) == 0){
-            return i;
-        }
-    }
-    assert(0 && "Can't find file");
-}
 
 size_t fs_read(int fd, void *buf, size_t len){
     if(fd>=3 &&(file_table[fd].open_offset+len >= file_table[fd].size)){
