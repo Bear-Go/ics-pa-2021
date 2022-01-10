@@ -25,8 +25,8 @@ void do_syscall(Context *c) {
     case SYS_open:
       c->GPRx = fs_open((const char*)a[1], a[2], a[3]);
       break;
-    case SYS_read:
-      break;
+    // case SYS_read:
+    //   break;
     case SYS_write:
       if (a[1] == 1 || a[1] ==  2) {
         for (int i = 0; i < a[3]; ++ i) {
