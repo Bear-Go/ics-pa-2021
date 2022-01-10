@@ -3,12 +3,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/time.h>
 
 static int evtdev = -1;
 static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
 
 uint32_t NDL_GetTicks() {
+  struct timeval tv;
+  if (gettimeofday(&tv, NULL) == 0) 
+    return tv.tv_usec;
   return 0;
 }
 
