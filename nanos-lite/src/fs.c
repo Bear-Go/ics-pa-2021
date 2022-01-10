@@ -1,5 +1,8 @@
 #include <fs.h>
 
+size_t ramdisk_read(void *buf, size_t offset, size_t len);
+size_t ramdisk_write(const void *buf, size_t offset, size_t len);
+
 typedef size_t (*ReadFn) (void *buf, size_t offset, size_t len);
 typedef size_t (*WriteFn) (const void *buf, size_t offset, size_t len);
 
@@ -41,11 +44,14 @@ int fs_open(const char* pathname, int flags, int mode) {
   for (int i = 3; i < file_num; ++ i) {
     if (strcmp(pathname, file_table[i].name) == 0) return i;
   }
-  panic("Invalid pathname: %s", pathname);
+  panic("Invalid pathname in fs_open: %s", pathname);
 }
 
 size_t fs_read(int fd, void* buf, size_t len) {
-  return 0;
+  if (file_table[fd].read) {
+    ramdisk_read(buf, file_table[fd].disk_offset, len);
+  }
+  panic("here");
 }
 
 size_t fs_write(int fd, const void* buf, size_t len) {
