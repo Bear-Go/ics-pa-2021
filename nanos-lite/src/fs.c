@@ -32,7 +32,7 @@ static Finfo file_table[] __attribute__((used)) = {
   [FD_STDIN]  = {"stdin", 0, 0, 0, invalid_read, invalid_write},
   [FD_STDOUT] = {"stdout", 0, 0, 0, invalid_read, invalid_write},
   [FD_STDERR] = {"stderr", 0, 0, 0, invalid_read, invalid_write},
-#include "files.h"
+#include "ramdisk.h"
 };
 
 static int file_num;
@@ -124,3 +124,4 @@ size_t fs_write(int fd, const void *buf, size_t len){
     file_table[fd].open_offset += len;
     return len;
 }
+
