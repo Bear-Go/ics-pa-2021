@@ -68,28 +68,28 @@ int fs_open(const char* pathname, int flags, int mode) {
 //   return len;
 // }
 
-// size_t fs_lseek(int fd, size_t offset, int whence) {
-//   switch (whence) {
-//     case SEEK_SET:
-//       file_table[fd].open_offset = offset;
-//       break;
-//     case SEEK_CUR:
-//       file_table[fd].open_offset += offset;
-//       break;
-//     case SEEK_END:
-//       file_table[fd].open_offset += file_table[fd].size + offset;
-//       break;
-//     default: 
-//       panic("Wrong whence in fs_lseek: %d", whence);
-//       break;
-//   }
-//   return file_table[fd].open_offset;
-// }
+size_t fs_lseek(int fd, size_t offset, int whence) {
+  switch (whence) {
+    case SEEK_SET:
+      file_table[fd].open_offset = offset;
+      break;
+    case SEEK_CUR:
+      file_table[fd].open_offset += offset;
+      break;
+    case SEEK_END:
+      file_table[fd].open_offset += file_table[fd].size + offset;
+      break;
+    default: 
+      panic("Wrong whence in fs_lseek: %d", whence);
+      break;
+  }
+  return file_table[fd].open_offset;
+}
 
-// int fs_close(int fd) {
-//   file_table[fd].open_offset = 0;
-//   return 0;
-// }
+int fs_close(int fd) {
+  file_table[fd].open_offset = 0;
+  return 0;
+}
 
 size_t fs_read(int fd, void *buf, size_t len){
     if(fd>=3 &&(file_table[fd].open_offset+len >= file_table[fd].size)){
@@ -123,24 +123,4 @@ size_t fs_write(int fd, const void *buf, size_t len){
     }
     file_table[fd].open_offset += len;
     return len;
-}
-
-size_t fs_lseek(int fd, size_t offset, int whence){
-    switch(whence){
-        case SEEK_SET:
-            file_table[fd].open_offset = offset;
-            break;
-        case SEEK_CUR:
-            file_table[fd].open_offset += offset;
-            break;
-        case SEEK_END:
-            file_table[fd].open_offset = file_table[fd].size + offset;
-            break;
-    }
-    return file_table[fd].open_offset;
-}
-
-int fs_close(int fd){
-    file_table[fd].open_offset = 0;
-    return 0;
 }
