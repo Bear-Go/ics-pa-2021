@@ -27,11 +27,11 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     Elf_Phdr phdr;
     fs_lseek(fd, ehdr.e_phoff + ehdr.e_phentsize * i, SEEK_SET);
     fs_read(fd, &phdr, sizeof(Elf_Phdr));
-      panic("here");
     if (phdr.p_type == PT_LOAD) {
       fs_lseek(fd, phdr.p_offset, SEEK_SET);
       fs_read(fd, (void *)phdr.p_vaddr, phdr.p_filesz);
       memset((void *)phdr.p_vaddr + phdr.p_filesz, 0, phdr.p_memsz - phdr.p_filesz);
+      panic("here");
     } 
   }
   fs_close(fd);
