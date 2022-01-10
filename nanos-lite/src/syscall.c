@@ -17,13 +17,9 @@ void do_syscall(Context *c) {
 
   switch (a[0]) {
     case SYS_exit:
-      // printf("exit!\n");
       halt(a[1]);
       break;
-    case SYS_yield: 
-      // printf("yield!\n");
-      // if yield here then mstatus will get diff right = 0x000218000 wrong = 0x00001800
-      // yield(); 
+    case SYS_yield:
       c->GPRx = 0;
       break;
     case SYS_write:
