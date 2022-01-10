@@ -31,7 +31,7 @@ void do_syscall(Context *c) {
       }
       break;
     case SYS_open:
-      fs_open((char*)a[1],a[2],a[3]);
+      c->GPRx = fs_open((const char*)a[1], a[2], a[3]);
       break;
     case SYS_brk:
       c->GPRx = 0;
