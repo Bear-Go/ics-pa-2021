@@ -95,7 +95,9 @@ void NDL_OpenCanvas(int *w, int *h) {
   canvas = (uint32_t*)malloc(sizeof(uint32_t) * (*w) * (*h));
   memset(canvas, 0 ,sizeof(canvas));
   printf("screen : h = %d w = %d\n", *h, *w);
+
   if (getenv("NWM_APP")) {
+    printf("getenv(NWM_APP)");
     int fbctl = 4;
     fbdev = 5;
     screen_w = *w; screen_h = *h;
@@ -123,7 +125,6 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
     }
   for(int i = 0;i < canvas_h;i ++)
   {
-    //printf("seek %d color = %x\n",4*((i+place_y)*screen_w+place_x),*(canvas+i*canvas_w+canvas_w/2));
     fseek(fb,4*((i)*screen_w),SEEK_SET);
     fwrite((void*)(canvas+i*canvas_w),1,4*canvas_w,fb);
   }
