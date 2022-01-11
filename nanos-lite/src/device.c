@@ -21,23 +21,20 @@ size_t serial_write(const void *buf, size_t offset, size_t len) {
   return len;
 }
 
-static bool has_kbd;
 size_t events_read(void *buf, size_t offset, size_t len) {
-  has_kbd = io_read(AM_INPUT_CONFIG).present;
-  if (has_kbd) {
-    AM_INPUT_KEYBRD_T ev = io_read(AM_INPUT_KEYBRD);
-
-    if (ev.keycode == AM_KEY_NONE) {
-      ev.keycode = 43;
-    }
-    else {
-      panic("fuck here");
-    }
-    len = sprintf(buf, "%s %s\n", ev.keydown ? "kd" : "ku", keyname[ev.keycode]);
-    printf("\n");
+  AM_INPUT_KEYBRD_T key = io_read(AM_INPUT_KEYBRD);
+  int ret = key.keycode;
+  if (key.keydown) ret |= 0x8000;
+  int kc = ret;
+  char tmp[3]="ku";
+  if((kc & 0xfff) == AM_KEY_NONE){
+    int time = io_read(AM_TIMER_UPTIME).us;
+    len = sprintf(buf,"t %d\n", time);
   }
   else {
-    panic("here");
+    if(kc&0x8000)
+      tmp[1] = 'd';
+    len = sprintf(buf,"%s %s\n",tmp,keyname[kc&0xfff]);
   }
   return len;
 }
