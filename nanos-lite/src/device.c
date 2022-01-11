@@ -34,6 +34,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
       panic("fuck here");
     }
     len = sprintf(buf, "%s %s\n", ev.keydown ? "kd" : "ku", keyname[ev.keycode]);
+    printf("\n");
     printf("%s\n", buf);
   }
   else {
