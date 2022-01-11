@@ -2,6 +2,7 @@
 #include <NDL.h>
 
 int main() {
+  printf("event-test\n");
   NDL_Init(0);
   while (1) {
     char buf[64];

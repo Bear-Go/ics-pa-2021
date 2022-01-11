@@ -46,7 +46,10 @@ void init_fs() {
 
 int fs_open(const char* pathname, int flags, int mode) {
   for (int i = 3; i < file_num; ++ i) {
-    if (strcmp(pathname, file_table[i].name) == 0) return i;
+    if (strcmp(pathname, file_table[i].name) == 0) {
+      printf("%s is open", pathname);
+      return i;
+    }
   }
   panic("Invalid pathname in fs_open: %s", pathname);
 }
@@ -105,5 +108,6 @@ size_t fs_lseek(int fd, size_t offset, int whence) {
 
 int fs_close(int fd) {
   file_table[fd].open_offset = 0;
+  printf("%s is closed\n", file_table[fd].name);
   return 0;
 }

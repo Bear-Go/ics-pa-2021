@@ -19,16 +19,8 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
-  char *p = buf;
-  char ch;
-
-  while (1) {
-    while ((ch = getc(envfp)) != -1) {
-      *p ++ = ch;
-      if (ch == '\n') break;
-    }
-    return 1;
-  }
+  printf("in ndlevent\n");
+  fscanf(envfp, "%s", buf);
   return 0;
 }
 
@@ -73,7 +65,10 @@ int NDL_Init(uint32_t flags) {
   if (getenv("NWM_APP")) {
     evtdev = 3;
   }
+  printf("before fopen\n");
   envfp = fopen("/dev/events", "r");
+  assert(envfp);
+  printf("after fopen\n");
   return 0;
 }
 

@@ -29,6 +29,9 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     if (ev.keycode == AM_KEY_NONE) return 0;
     len = sprintf(buf, "%s %s\n", ev.keydown ? "kd" : "ku", keyname[ev.keycode]);
   }
+  else {
+    panic("here");
+  }
   return len;
 }
 
