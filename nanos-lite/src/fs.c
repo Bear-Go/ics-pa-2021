@@ -47,7 +47,7 @@ void init_fs() {
 int fs_open(const char* pathname, int flags, int mode) {
   for (int i = 3; i < file_num; ++ i) {
     if (strcmp(pathname, file_table[i].name) == 0) {
-      printf("%s is open", pathname);
+      printf("%s is open\n", pathname);
       return i;
     }
   }
