@@ -26,9 +26,8 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   if (ev.keycode == AM_KEY_NONE) {
     return 0;
   }
-  else{
+  else {
     return sprintf((char*)buf, ev.keydown ? "kd %s\n" : "ku %s\n", keyname[ev.keycode]);
-    // return strlen((char*)buf);
   }
 }
 
@@ -44,7 +43,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
   assert(offset <= w * h * 4);
   int x = (offset / 4) % w;
   int y = (offset / 4) / w;
-  if (offset + len > w * h * 4) len = w * h * 4 - offset;
+  len = (offset + len > w * h * 4) ? w * h * 4 - offset : len;
   io_write(AM_GPU_FBDRAW, x, y,(uint32_t*)buf, len / 4, 1, true);
   return len;
 }
