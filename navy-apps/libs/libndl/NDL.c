@@ -22,7 +22,7 @@ uint32_t NDL_GetTicks() {
 int NDL_PollEvent(char *buf, int len) {
   printf("in ndlevent\n");
   fscanf(envfp, "%s", buf);
-  return 0;
+  return 1;
 }
 
 void NDL_OpenCanvas(int *w, int *h) {
