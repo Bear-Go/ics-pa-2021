@@ -45,6 +45,7 @@ static int file_num;
 void init_fs() {
   Log("Initializing file system...");
   file_num = sizeof(file_table) / sizeof(file_table[0]);
+  file_table[FD_FB].size = io_read(AM_GPU_CONFIG).width * io_read(AM_GPU_CONFIG).height * 4;
 }
 
 int fs_open(const char* pathname, int flags, int mode) {
