@@ -9,8 +9,10 @@
 static int evtdev = -1;
 static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
-static FILE* envfp;
-
+static uint32_t* canvas;
+static FILE* events;
+static FILE* dispinfo;
+static FILE* fb;
 
 uint32_t NDL_GetTicks() {
   struct timeval tv;
@@ -20,10 +22,10 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
-  assert(envfp != NULL);
-  fseek(envfp, 0, SEEK_SET);
+  assert(events != NULL);
+  fseek(events, 0, SEEK_SET);
   memset(buf, 0, len);
-  int ret = fread(buf, 1, len, envfp);
+  int ret = fread(buf, 1, len, events);
   if (ret == 0) 
     return 0;
   else {
@@ -36,7 +38,60 @@ int NDL_PollEvent(char *buf, int len) {
   }
 }
 
+void get_displayinfo() {
+  assert(dispinfo != NULL);
+  int w = 0, h = 0;
+  char width[20]={0},height[20]={0},after[20]={0};
+
+  fscanf(dispinfo,"%s",width);
+  if(width[strlen(width)-1] == ':') {
+    fscanf(dispinfo,"%d", &w);//WIDTH:  W
+  }
+  else if(width[strlen(width)-1] == 'H') {
+    fscanf(dispinfo,"%s",after);
+    strcat(width,after);
+    fscanf(dispinfo,"%d",&w);
+  }//WIDTH   :   W
+  else {
+    w = 0;
+    for(int i = 0;i < strlen(width);i++) {
+      if(width[i] > '9'||width[i] < '0') continue;
+      w = w * 10 + width[i] - '0';
+    }
+  }//WIDTH:W
+
+  fscanf(dispinfo,"%s",height);
+  if(height[strlen(height)-1] == ':')
+    fscanf(dispinfo,"%d",&h);//HEIGHT:   H
+  else if(height[strlen(height)-1] == 'T') {
+    fscanf(dispinfo,"%s",after);
+    strcat(height,after);
+    fscanf(dispinfo,"%d",&h);
+  }//HEIGHT   :   H
+  else {
+    h = 0;
+    for(int i = 0;i < strlen(height);i++) {
+      if(height[i] > '9'||height[i] < '0') continue;
+      h = h * 10 + height[i] - '0';
+    }
+  }//WIDTH:W
+  screen_h = h;
+  screen_w = w;
+}
+
 void NDL_OpenCanvas(int *w, int *h) {
+  get_displayinfo();
+  if (*w == 0 && *h == 0) {
+    *w = screen_w;
+    *h = screen_h;
+  }
+  else {
+    *w = (*w > screen_w) ? screen_w : *w;
+    *h = (*h > screen_h) ? screen_h : *h;
+  }
+  canvas = (uint32_t*)malloc(sizeof(uint32_t) * (*w) * (*h));
+  memset(canvas, 0 ,sizeof(canvas));
+  printf("screen : h = %d w = %d\n", *h, *w);
   if (getenv("NWM_APP")) {
     int fbctl = 4;
     fbdev = 5;
@@ -57,6 +112,7 @@ void NDL_OpenCanvas(int *w, int *h) {
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
+
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {
@@ -77,9 +133,15 @@ int NDL_Init(uint32_t flags) {
   if (getenv("NWM_APP")) {
     evtdev = 3;
   }
-  envfp = fopen("/dev/events", "r");
+
+  fb = fopen("/dev/fb", "w");
+  events = fopen("/dev/eventss", "r");
+  dispinfo = fopen("/proc/dispinfo", "r");
   return 0;
 }
 
 void NDL_Quit() {
+  fclose(fb);
+  fclose(events);
+  fclose(dispinfo);
 }
