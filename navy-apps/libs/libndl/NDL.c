@@ -135,7 +135,7 @@ int NDL_Init(uint32_t flags) {
   }
 
   fb = fopen("/dev/fb", "w");
-  events = fopen("/dev/eventss", "r");
+  events = fopen("/dev/events", "r");
   dispinfo = fopen("/proc/dispinfo", "r");
   return 0;
 }
