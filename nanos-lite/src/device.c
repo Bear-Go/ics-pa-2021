@@ -25,8 +25,8 @@ static bool has_kbd;
 size_t events_read(void *buf, size_t offset, size_t len) {
   has_kbd = io_read(AM_INPUT_CONFIG).present;
   if (has_kbd) {
-    panic("hereeee");
     AM_INPUT_KEYBRD_T ev = io_read(AM_INPUT_KEYBRD);
+    panic("hereeee");
     if (ev.keycode == AM_KEY_NONE) {
       
       return 0;
