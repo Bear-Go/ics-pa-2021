@@ -14,6 +14,7 @@ static uint32_t* canvas;
 static FILE* events;
 static FILE* dispinfo;
 static FILE* fb;
+static int gap_w, gap_h;
 
 uint32_t NDL_GetTicks() {
   struct timeval tv;
@@ -41,17 +42,17 @@ void get_displayinfo() {
   assert(dispinfo != NULL);
   char buf[16];
 
-  fscanf(dispinfo,"%s",buf);
+  fscanf(dispinfo, "%s", buf);
   int w = 0;
-  for(int i = 0;i < strlen(buf);i++) {
-    if(buf[i] > '9'||buf[i] < '0') continue;
+  for (int i = 0;i < strlen(buf); ++ i) {
+    if (buf[i] > '9'|| buf[i] < '0') continue;
     w = w * 10 + buf[i] - '0';
   }
 
-  fscanf(dispinfo,"%s",buf);
+  fscanf(dispinfo, "%s", buf);
   int h = 0;
-  for(int i = 0;i < strlen(buf);i++) {
-    if(buf[i] > '9'||buf[i] < '0') continue;
+  for (int i = 0;i < strlen(buf); ++ i) {
+    if (buf[i] > '9'|| buf[i] < '0') continue;
     h = h * 10 + buf[i] - '0';
   }
   screen_h = h;
@@ -70,6 +71,8 @@ void NDL_OpenCanvas(int *w, int *h) {
   }
   canvas_w = *w;
   canvas_h = *h;
+  gap_w = (screen_w - canvas_w) / 2;
+  gap_h = (screen_h - canvas_h) / 2;
   canvas = (uint32_t*)malloc(sizeof(uint32_t) * (*w) * (*h));
   memset(canvas, 0 ,sizeof(canvas));
   printf("screen : h = %d w = %d\n", *h, *w);
@@ -96,15 +99,13 @@ void NDL_OpenCanvas(int *w, int *h) {
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   assert(fb != NULL);
-  for(int i = 0;i < h;i ++)
-    for(int j = 0;j < w;j ++) {
-      canvas[(y+i)*canvas_w+x+j] = pixels[i*w+j];
-    }
+  for (int i = 0; i < h; ++ i)
+    for (int j = 0; j < w; ++ j)
+      canvas[(y+i)*canvas_w + x + j] = pixels[i*w + j];
 
-  for(int i = 0;i < canvas_h;i ++)
-  {
-    fseek(fb,4*((i)*screen_w),SEEK_SET);
-    fwrite((void*)(canvas+i*canvas_w),1,4*canvas_w,fb);
+  for (int i = 0; i < canvas_h;++ i){
+    fseek(fb, 4 * ((i+gap_h) * screen_w + gap_w), SEEK_SET);
+    fwrite((void*)(canvas+i*canvas_w), 1, 4 * canvas_w, fb);
   }
 }
 
