@@ -28,10 +28,10 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   }
   else{
     memset(buf, 0, len);
-    if (ev.keydown) {
+    if (ev.keydown)
       sprintf((char*)buf,"kd %s\n",keyname[ev.keycode]);
-    }
-    else sprintf((char*)buf,"ku %s\n",keyname[ev.keycode]);
+    else 
+      sprintf((char*)buf,"ku %s\n",keyname[ev.keycode]);
     return strlen((char*)buf);
   }
 }
