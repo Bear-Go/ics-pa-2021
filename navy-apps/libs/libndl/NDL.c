@@ -8,6 +8,8 @@
 static int evtdev = -1;
 static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
+static FILE* envfp;
+
 
 uint32_t NDL_GetTicks() {
   struct timeval tv;
@@ -17,6 +19,16 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
+  char *p = buf;
+  char ch;
+
+  while (1) {
+    while ((ch = getc(envfp)) != -1) {
+      *p ++ = ch;
+      if (ch == '\n') break;
+    }
+    return 1;
+  }
   return 0;
 }
 
@@ -61,6 +73,7 @@ int NDL_Init(uint32_t flags) {
   if (getenv("NWM_APP")) {
     evtdev = 3;
   }
+  envfp = fopen("/dev/events", "r");
   return 0;
 }
 
