@@ -10,6 +10,7 @@ static const char *keyname[] = {
   _KEYS(keyname)
 };
 
+static int  key_num = sizeof(keyname) / sizeof(keyname[0]);
 extern uint8_t* keystate;
 
 int SDL_PushEvent(SDL_Event *ev) {
@@ -25,31 +26,22 @@ int SDL_PollEvent(SDL_Event *ev) {
 }
 
 int SDL_WaitEvent(SDL_Event *event) {
-  char buf[32];
+  char buf[128];
   buf[0] = '\0';
   int keycode = 0;
   while (!NDL_PollEvent(buf, sizeof(buf)));
 
-  char* name = buf + 3;
-  for (int i = 0, cnt = 0; i < sizeof(keyname); i += strlen(keyname[cnt]), ++ cnt) {
-    bool is_find = !strncmp(keyname[cnt], buf, strlen(keyname[cnt]));
-    if (is_find) {
-      keycode = cnt;
+  char name[16];
+  sscanf(buf + 3, "%s", name);
+  for (int i = 0; i < key_num; ++ i)
+    if (strcmp(keyname[i], name) == 0) {
+      keycode = i;
       break;
     }
-  }
-
-  if (buf[1] == 'u') {
-    event->key.keysym.sym = keycode;
-    event->type = SDL_KEYUP;
-    keystate[keycode] = 0;
-  }
-  else if(buf[1] == 'd') {
-    event->key.keysym.sym = keycode;
-    event->type = SDL_KEYDOWN;
-    keystate[keycode] = 1;
-  }
-  else assert(0);
+  event->type = buf[1] == 'u' ? SDL_KEYUP : SDL_KEYDOWN;
+  event->key.keysym.sym = keycode;
+  keystate[keycode] == buf[1] == 'u' ? 0 : 1;
+  assert(keycode >= 1 && keycode < key_num);
   return 0;
 }
 
