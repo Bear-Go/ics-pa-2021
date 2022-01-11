@@ -20,17 +20,18 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
-  fseek(envfp,0,SEEK_SET);
   assert(envfp != NULL);
-  memset(buf,0,len);
-  int ret = fread(buf,1,len,envfp);
-  if(ret == 0) return 0;
-  for(int i = 0; i < len&&ret != 0;i++)
-  {
-    if(buf[i] == '\n') 
-    {
-      buf[i] = '\0';
-      return ret;
+  fseek(envfp, 0, SEEK_SET);
+  memset(buf, 0, len);
+  int ret = fread(buf, 1, len, envfp);
+  if (ret == 0) 
+    return 0;
+  else {
+    for (int i = 0; i < len; ++ i) {
+      if (buf[i] == '\n') {
+        buf[i] = '\0';
+        return 1;
+      }
     }
   }
 }
@@ -76,10 +77,7 @@ int NDL_Init(uint32_t flags) {
   if (getenv("NWM_APP")) {
     evtdev = 3;
   }
-  printf("before fopen\n");
   envfp = fopen("/dev/events", "r");
-  assert(envfp);
-  printf("after fopen\n");
   return 0;
 }
 
