@@ -13,6 +13,30 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 }
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
+  if (s->format->BitsPerPixel == 32)
+    NDL_DrawRect((uint32_t*)s->pixels, x, y, w, h);
+  if (s->format->BitsPerPixel == 8) {
+    if (w == 0 && h == 0) {
+      w = s->w;
+      h = s->h;
+    }
+    else {
+      w = (w > s->w) ? s->w : w;
+      h = (h > s->h) ? s->h : h;
+    }
+    uint32_t * p = malloc(sizeof(uint32_t) * w * h);
+    memset(p, 0, sizeof(p));
+    for (int i = 0; i < h; ++ i)
+      for (int j = 0; j < w; ++ j) {
+        int tmp = s->pixels[(i+y) * s->w + j + x];
+        uint8_t r = s->format->palette->colors[tmp].r;
+        uint8_t g = s->format->palette->colors[tmp].g;
+        uint8_t b = s->format->palette->colors[tmp].b;
+        p[i * w + j] = ((r << 16) | (g << 8) | b);
+      }
+    NDL_DrawRect(p, x, y, w, h);
+    free(p);
+  }
 }
 
 // APIs below are already implemented.
@@ -29,7 +53,7 @@ static inline int maskToShift(uint32_t mask) {
 }
 
 SDL_Surface* SDL_CreateRGBSurface(uint32_t flags, int width, int height, int depth,
-    uint32_t Rmask, uint32_t Gmask, uint32_t Bmask, uint32_t Amask) {
+  uint32_t Rmask, uint32_t Gmask, uint32_t Bmask, uint32_t Amask) {
   assert(depth == 8 || depth == 32);
   SDL_Surface *s = malloc(sizeof(SDL_Surface));
   assert(s);
