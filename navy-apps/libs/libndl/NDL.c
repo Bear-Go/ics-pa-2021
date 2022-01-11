@@ -20,8 +20,19 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
-  fscanf(envfp, "%s", buf);
-  if (strlen(buf) == 0) return 0; else return 1;
+  fseek(envfp,0,SEEK_SET);
+  assert(envfp != NULL);
+  memset(buf,0,len);
+  int ret = fread(buf,1,len,envfp);
+  if(ret == 0) return 0;
+  for(int i = 0; i < len&&ret != 0;i++)
+  {
+    if(buf[i] == '\n') 
+    {
+      buf[i] = '\0';
+      return ret;
+    }
+  }
 }
 
 void NDL_OpenCanvas(int *w, int *h) {

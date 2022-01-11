@@ -22,21 +22,20 @@ size_t serial_write(const void *buf, size_t offset, size_t len) {
 }
 
 size_t events_read(void *buf, size_t offset, size_t len) {
-  AM_INPUT_KEYBRD_T key = io_read(AM_INPUT_KEYBRD);
-  int ret = key.keycode;
-  if (key.keydown) ret |= 0x8000;
-  int kc = ret;
-  char tmp[3]="ku";
-  if((kc & 0xfff) == AM_KEY_NONE){
-    int time = io_read(AM_TIMER_UPTIME).us;
-    len = sprintf(buf,"t %d\n", time);
+  AM_INPUT_KEYBRD_T ev = io_read(AM_INPUT_KEYBRD);
+  if(ev.keycode == AM_KEY_NONE) {
+    return 0;
   }
-  else {
-    if(kc&0x8000)
-      tmp[1] = 'd';
-    len = sprintf(buf,"%s %s\n",tmp,keyname[kc&0xfff]);
+  else{
+    memset(buf,0,len);
+    if(ev.keydown) {
+      sprintf((char*)buf,"kd %s\n",keyname[ev.keycode]);
+    }
+    else sprintf((char*)buf,"ku %s\n",keyname[ev.keycode]);
+
+    return strlen((char*)buf);
+
   }
-  return len;
 }
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
