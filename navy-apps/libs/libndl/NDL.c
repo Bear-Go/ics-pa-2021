@@ -24,58 +24,36 @@ uint32_t NDL_GetTicks() {
 
 int NDL_PollEvent(char *buf, int len) {
   assert(events != NULL);
-  fseek(events, 0, SEEK_SET);
-  memset(buf, 0, len);
+  // fseek(events, 0, SEEK_SET);
+  // memset(buf, 0, len);
   int ret = fread(buf, 1, len, events);
   if (ret == 0) 
     return 0;
-  else {
-    for (int i = 0; i < len; ++ i) {
+  else
+    for (int i = 0; i < len; ++ i)
       if (buf[i] == '\n') {
         buf[i] = '\0';
         return 1;
       }
-    }
-  }
 }
 
 void get_displayinfo() {
   assert(dispinfo != NULL);
-  int w = 0, h = 0;
-  char width[20]={0},height[20]={0},after[20]={0};
+  char buf[16];
 
-  fscanf(dispinfo,"%s",width);
-  if(width[strlen(width)-1] == ':') {
-    fscanf(dispinfo,"%d", &w);//WIDTH:  W
+  fscanf(dispinfo,"%s",buf);
+  int w = 0;
+  for(int i = 0;i < strlen(buf);i++) {
+    if(buf[i] > '9'||buf[i] < '0') continue;
+    w = w * 10 + buf[i] - '0';
   }
-  else if(width[strlen(width)-1] == 'H') {
-    fscanf(dispinfo,"%s",after);
-    strcat(width,after);
-    fscanf(dispinfo,"%d",&w);
-  }//WIDTH   :   W
-  else {
-    w = 0;
-    for(int i = 0;i < strlen(width);i++) {
-      if(width[i] > '9'||width[i] < '0') continue;
-      w = w * 10 + width[i] - '0';
-    }
-  }//WIDTH:W
 
-  fscanf(dispinfo,"%s",height);
-  if(height[strlen(height)-1] == ':')
-    fscanf(dispinfo,"%d",&h);//HEIGHT:   H
-  else if(height[strlen(height)-1] == 'T') {
-    fscanf(dispinfo,"%s",after);
-    strcat(height,after);
-    fscanf(dispinfo,"%d",&h);
-  }//HEIGHT   :   H
-  else {
-    h = 0;
-    for(int i = 0;i < strlen(height);i++) {
-      if(height[i] > '9'||height[i] < '0') continue;
-      h = h * 10 + height[i] - '0';
-    }
-  }//WIDTH:W
+  fscanf(dispinfo,"%s",buf);
+  int h = 0;
+  for(int i = 0;i < strlen(buf);i++) {
+    if(buf[i] > '9'||buf[i] < '0') continue;
+    h = h * 10 + buf[i] - '0';
+  }
   screen_h = h;
   screen_w = w;
 }
@@ -122,7 +100,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
     for(int j = 0;j < w;j ++) {
       canvas[(y+i)*canvas_w+x+j] = pixels[i*w+j];
     }
-    
+
   for(int i = 0;i < canvas_h;i ++)
   {
     fseek(fb,4*((i)*screen_w),SEEK_SET);
