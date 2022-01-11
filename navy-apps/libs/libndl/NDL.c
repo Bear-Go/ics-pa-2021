@@ -9,6 +9,7 @@
 static int evtdev = -1;
 static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
+static int canvas_w = 0, canvas_h = 0;
 static uint32_t* canvas;
 static FILE* events;
 static FILE* dispinfo;
@@ -89,6 +90,8 @@ void NDL_OpenCanvas(int *w, int *h) {
     *w = (*w > screen_w) ? screen_w : *w;
     *h = (*h > screen_h) ? screen_h : *h;
   }
+  canvas_w = *w;
+  canvas_h = *h;
   canvas = (uint32_t*)malloc(sizeof(uint32_t) * (*w) * (*h));
   memset(canvas, 0 ,sizeof(canvas));
   printf("screen : h = %d w = %d\n", *h, *w);
@@ -112,7 +115,18 @@ void NDL_OpenCanvas(int *w, int *h) {
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
-
+  assert(fb != NULL);
+  for(int i = 0;i < h;i ++)
+    for(int j = 0;j < w;j ++)
+    {
+      canvas[(y+i)*canvas_w+x+j] = pixels[i*w+j];
+    }
+  for(int i = 0;i < canvas_h;i ++)
+  {
+    //printf("seek %d color = %x\n",4*((i+place_y)*screen_w+place_x),*(canvas+i*canvas_w+canvas_w/2));
+    fseek(fb,4*((i)*screen_w),SEEK_SET);
+    fwrite((void*)(canvas+i*canvas_w),1,4*canvas_w,fb);
+  }
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {
