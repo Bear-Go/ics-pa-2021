@@ -19,19 +19,14 @@ static struct timeval start;
 
 uint32_t NDL_GetTicks() {
   struct timeval now;
-  
   if (gettimeofday(&now, NULL) == 0) {
-    time_t sec = now.tv_sec - start.tv_sec;
-    suseconds_t usec = now.tv_usec - start.tv_usec;
-    return (sec*1000 + usec/1000);
+    return ((now.tv_sec - start.tv_sec)*1000 + (now.tv_usec - start.tv_usec)/1000);
   }
-  return 0;
+  assert(0);
 }
 
 int NDL_PollEvent(char *buf, int len) {
   assert(events != NULL);
-  fseek(events, 0, SEEK_SET);
-  memset(buf, 0, len);
   int ret = fread(buf, 1, len, events);
   if (ret == 0) 
     return 0;
