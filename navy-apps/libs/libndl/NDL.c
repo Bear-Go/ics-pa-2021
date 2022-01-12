@@ -46,7 +46,7 @@ void get_displayinfo() {
   char buf[128];
 
   fscanf(dispinfo, "%s", buf);
-  sscanf(buf, "%*[^:]:%*[ ]%d\n%*[^:]:%*[ ]%d\n", &screen_w, &screen_h);
+  sscanf(buf, "WIDTH:%d\nHEIGHT:%d\n", &screen_w, &screen_h);
   // int w = 0;
   // for (int i = 0;i < strlen(buf); ++ i) {
   //   if (buf[i] > '9'|| buf[i] < '0') continue;
