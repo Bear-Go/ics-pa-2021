@@ -11,6 +11,7 @@ static const char *keyname[] = {
 };
 
 static int  key_num = sizeof(keyname) / sizeof(keyname[0]);
+extern uint8_t* keystate;
 
 int SDL_PushEvent(SDL_Event *ev) {
   printf("sdl_pushevent\n");
@@ -37,6 +38,7 @@ int SDL_PollEvent(SDL_Event *ev) {
     }
   ev->type = buf[1] == 'u' ? SDL_KEYUP : SDL_KEYDOWN;
   ev->key.keysym.sym = keycode;
+  keystate[keycode] == buf[1] == 'u' ? 0 : 1;
   assert(keycode >= 1 && keycode < key_num);
   return 1;
 }
@@ -56,6 +58,7 @@ int SDL_WaitEvent(SDL_Event *event) {
     }
   event->type = buf[1] == 'u' ? SDL_KEYUP : SDL_KEYDOWN;
   event->key.keysym.sym = keycode;
+  keystate[keycode] == buf[1] == 'u' ? 0 : 1;
   assert(keycode >= 1 && keycode < key_num);
   return 1;
 }
@@ -65,5 +68,8 @@ int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {
 }
 
 uint8_t* SDL_GetKeyState(int *numkeys) {
+  if(numkeys == NULL)
+    return keystate;
+  else assert(0);
   return NULL;
 }
