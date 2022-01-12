@@ -43,7 +43,7 @@ void do_syscall(Context *c) {
       break;
     case SYS_gettimeofday: {
       if ((void*)a[1] != NULL) {
-        struct timeval* tv = (void*)a[1]; 
+        struct timeval* tv = (struct timeval*)a[1]; 
         (*tv).tv_usec = io_read(AM_TIMER_UPTIME).us;
         (*tv).tv_sec = io_read(AM_TIMER_UPTIME).us / 1000000;
         c->GPRx = 0;
