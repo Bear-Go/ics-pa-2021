@@ -15,11 +15,16 @@ static FILE* events;
 static FILE* dispinfo;
 static FILE* fb;
 static int gap_w, gap_h;
+static struct timeval start;
 
 uint32_t NDL_GetTicks() {
-  struct timeval tv;
-  if (gettimeofday(&tv, NULL) == 0) 
-    return tv.tv_usec;
+  struct timeval now;
+  
+  if (gettimeofday(&now, NULL) == 0) {
+    time_t sec = now.tv_sec - start.tv_sec;
+    suseconds_t usec = now.tv_usec - start.tv_usec;
+    return (sec*1000 + usec/1000);
+  }
   return 0;
 }
 
@@ -129,6 +134,10 @@ int NDL_Init(uint32_t flags) {
   fb = fopen("/dev/fb", "w");
   events = fopen("/dev/events", "r");
   dispinfo = fopen("/proc/dispinfo", "r");
+
+  start.tv_sec = 0;
+  start.tv_usec = 0;
+
   return 0;
 }
 
