@@ -10,8 +10,8 @@ int main() {
   printf("%x  %d  %d\n",fixedpt_rconst(-1.2),fixedpt_rconst(1.2),fixedpt_abs(fixedpt_rconst(-1.2)));
   printf("res a  floor = %d  ceil = %d\n",fixedpt_floor(a),fixedpt_ceil(a));
   printf("res b  floor = %d  ceil = %d\n",fixedpt_floor(b),fixedpt_ceil(b));
-  assert(fixedpt_toint(fixedpt_abs(fixedpt_floor(a)-fixedpt_ceil(a)) == 1));
-  assert(fixedpt_toint(fixedpt_abs(fixedpt_floor(b)-fixedpt_ceil(b)) == 1));
-  assert(fixedpt_toint(fixedpt_abs(fixedpt_floor(c)-fixedpt_ceil(c)) == 1));
+  assert(fixedpt_toint(fixedpt_abs(fixedpt_floor(a)-fixedpt_ceil(a))) == 1);
+  assert(fixedpt_toint(fixedpt_abs(fixedpt_floor(b)-fixedpt_ceil(b))) == 1);
+  assert(fixedpt_toint(fixedpt_abs(fixedpt_floor(c)-fixedpt_ceil(c))) == 1);
   return 0;
 }
