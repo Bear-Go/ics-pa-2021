@@ -151,18 +151,22 @@ static inline fixedpt fixedpt_abs(fixedpt A) {
 }
 
 static inline fixedpt fixedpt_floor(fixedpt A) {
-	fixedpt f = fixedpt_fracpart(A);
-	if(f == 0) return A;
-	
-	fixedpt ret = fixedpt_toint(A) << 8;
-	return ret;
+	if(fixedpt_fracpart(A) == 0){
+		return A;
+	}
+	else{
+			return A &(~FIXEDPT_FMASK);
+	}
 }
 
 static inline fixedpt fixedpt_ceil(fixedpt A) {
-	fixedpt f = fixedpt_fracpart(A);
-	if(f == 0) return A;
-	fixedpt ret = fixedpt_toint(A) << 8;
-	return fixedpt_add(ret,FIXEDPT_ONE);
+	if(fixedpt_fracpart(A) == 0){
+		return A;
+	}
+	else{
+			return fixedpt_add(fixedpt_floor(A),fixedpt_fromint(1));
+		//return fixedpt_floor(fixedpt_add(A,FIXEDPT_ONE_HALF));
+	}
 }
 
 /*
