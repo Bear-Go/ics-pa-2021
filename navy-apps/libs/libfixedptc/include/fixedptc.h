@@ -137,13 +137,13 @@ static inline fixedpt fixedpt_divi(fixedpt A, int B) {
 
 /* Multiplies two fixedpt numbers, returns the result. */
 static inline fixedpt fixedpt_mul(fixedpt A, fixedpt B) {
-	return (fixedpt)((fixedptd)(A * B) >> 8);
+	return (((fixedptd)A * (fixedptd)B) >> FIXEDPT_FBITS);
 }
 
 
 /* Divides two fixedpt numbers, returns the result. */
 static inline fixedpt fixedpt_div(fixedpt A, fixedpt B) {
-	return (fixedpt)(A * FIXEDPT_ONE / B);
+	return (((fixedptd)A << FIXEDPT_FBITS) / (fixedptd)B);
 }
 
 static inline fixedpt fixedpt_abs(fixedpt A) {
@@ -151,22 +151,18 @@ static inline fixedpt fixedpt_abs(fixedpt A) {
 }
 
 static inline fixedpt fixedpt_floor(fixedpt A) {
-	if(fixedpt_fracpart(A) == 0){
+	if (fixedpt_fracpart(A) == 0)
 		return A;
-	}
-	else{
-			return A &(~FIXEDPT_FMASK);
-	}
+	else
+		return A &(~FIXEDPT_FMASK);
+
 }
 
 static inline fixedpt fixedpt_ceil(fixedpt A) {
-	if(fixedpt_fracpart(A) == 0){
+	if (fixedpt_fracpart(A) == 0)
 		return A;
-	}
-	else{
-			return fixedpt_add(fixedpt_floor(A),fixedpt_fromint(1));
-		//return fixedpt_floor(fixedpt_add(A,FIXEDPT_ONE_HALF));
-	}
+	else
+		return fixedpt_floor(A) + fixedpt_fromint(1);
 }
 
 /*

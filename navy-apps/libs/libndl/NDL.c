@@ -46,6 +46,7 @@ void get_displayinfo() {
   char buf[128];
 
   fscanf(dispinfo, "%s", buf);
+  printf("%s\n", buf);
   int w = 0;
   for (int i = 0;i < strlen(buf); ++ i) {
     if (buf[i] > '9'|| buf[i] < '0') continue;
