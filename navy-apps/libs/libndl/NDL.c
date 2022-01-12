@@ -46,19 +46,22 @@ void get_displayinfo() {
   char buf[128];
 
   fscanf(dispinfo, "%s", buf);
-  printf("%s\n", buf);
   int w = 0;
-  for (int i = 0;i < strlen(buf); ++ i) {
-    if (buf[i] > '9'|| buf[i] < '0') continue;
-    w = w * 10 + buf[i] - '0';
-  }
-
+  sscanf(buf, "WIDTH:%d", &w);
   fscanf(dispinfo, "%s", buf);
   int h = 0;
-  for (int i = 0;i < strlen(buf); ++ i) {
-    if (buf[i] > '9'|| buf[i] < '0') continue;
-    h = h * 10 + buf[i] - '0';
-  }
+  sscanf(buf, "HEIGHT:%d", &w);
+
+  // for (int i = 0;i < strlen(buf); ++ i) {
+  //   if (buf[i] > '9'|| buf[i] < '0') continue;
+  //   w = w * 10 + buf[i] - '0';
+  // }
+
+  // fscanf(dispinfo, "%s", buf);
+  // for (int i = 0;i < strlen(buf); ++ i) {
+  //   if (buf[i] > '9'|| buf[i] < '0') continue;
+  //   h = h * 10 + buf[i] - '0';
+  // }
    screen_h = h;
    screen_w = w;
 }
