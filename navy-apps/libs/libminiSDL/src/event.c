@@ -39,6 +39,7 @@ int SDL_PollEvent(SDL_Event *ev) {
   ev->type = buf[1] == 'u' ? SDL_KEYUP : SDL_KEYDOWN;
   ev->key.keysym.sym = keycode;
   keystate[keycode] == buf[1] == 'u' ? 0 : 1;
+  printf("%s\n", buf);
   assert(keycode >= 1 && keycode < key_num);
   return 1;
 }
