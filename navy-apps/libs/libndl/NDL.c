@@ -26,40 +26,41 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
-  fseek(events,0,SEEK_SET);
   assert(events != NULL);
-  memset(buf,0,len);
-  int ret = fread(buf,1,len,events);
-  if(ret == 0) return 0;
-  for(int i = 0; i < len&&ret != 0;i++)
-  {
-    if(buf[i] == '\n') 
-    {
-      buf[i] = '\0';
-      return ret;
-    }
+  fseek(events, 0, SEEK_SET);
+  memset(buf, 0, len);
+  if (fread(buf, 1, len, events) == 0) 
+    return 0;
+  else {
+    for (int i = 0; i < len; ++ i)
+      if(buf[i] == '\n') {
+        buf[i] = '\0';
+        return 1;
+      }
   }
+  assert(0);
 }
 
 void get_displayinfo() {
   assert(dispinfo != NULL);
-  char buf[16];
+  char buf[128];
 
   fscanf(dispinfo, "%s", buf);
-  int w = 0;
-  for (int i = 0;i < strlen(buf); ++ i) {
-    if (buf[i] > '9'|| buf[i] < '0') continue;
-    w = w * 10 + buf[i] - '0';
-  }
+  sscanf(buf, "%*[^:]:%*[ ]%d\n%*[^:]:%*[ ]%d\n", &screen_w, &screen_h);
+  // int w = 0;
+  // for (int i = 0;i < strlen(buf); ++ i) {
+  //   if (buf[i] > '9'|| buf[i] < '0') continue;
+  //   w = w * 10 + buf[i] - '0';
+  // }
 
-  fscanf(dispinfo, "%s", buf);
-  int h = 0;
-  for (int i = 0;i < strlen(buf); ++ i) {
-    if (buf[i] > '9'|| buf[i] < '0') continue;
-    h = h * 10 + buf[i] - '0';
-  }
-  screen_h = h;
-  screen_w = w;
+  // fscanf(dispinfo, "%s", buf);
+  // int h = 0;
+  // for (int i = 0;i < strlen(buf); ++ i) {
+  //   if (buf[i] > '9'|| buf[i] < '0') continue;
+  //   h = h * 10 + buf[i] - '0';
+  // }
+  //  screen_h = h;
+  //  screen_w = w;
 }
 
 void NDL_OpenCanvas(int *w, int *h) {
