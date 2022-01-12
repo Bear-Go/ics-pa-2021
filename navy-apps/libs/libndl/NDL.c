@@ -61,14 +61,9 @@ void get_displayinfo() {
 
 void NDL_OpenCanvas(int *w, int *h) {
   get_displayinfo();
-  if (*w == 0 && *h == 0) {
-    *w = screen_w;
-    *h = screen_h;
-  }
-  else {
-    *w = (*w > screen_w) ? screen_w : *w;
-    *h = (*h > screen_h) ? screen_h : *h;
-  }
+  *w = (*w == 0 || *w > screen_w) ? screen_w : *w;
+  *h = (*h == 0 || *h > screen_h) ? screen_h : *h;
+  
   canvas_w = *w;
   canvas_h = *h;
   gap_w = (screen_w - canvas_w) / 2;
@@ -99,10 +94,9 @@ void NDL_OpenCanvas(int *w, int *h) {
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   assert(fb != NULL);
-  if (h == 0 || h > canvas_h)
-    h = canvas_h;
-  if (w == 0 || w > canvas_w)
-    w = canvas_w; 
+  h = (h == 0 || h > canvas_h) ? canvas_h : h;
+  w = (w == 0 || w > canvas_w) ? canvas_w : w;
+
   for (int i = 0; i < h; ++ i)
     for (int j = 0; j < w; ++ j)
       canvas[(y+i)*canvas_w + x + j] = pixels[i*w + j];

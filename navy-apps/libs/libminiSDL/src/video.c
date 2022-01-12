@@ -3,27 +3,63 @@
 #include <assert.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
   assert(dst && src);
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
+
+  int sx, sy, sw, sh;
+  sx = srcrect == NULL ? 0 : srcrect->x;
+  sy = srcrect == NULL ? 0 : srcrect->y;
+  sw = srcrect == NULL ? src->w : srcrect->w;
+  sh = srcrect == NULL ? src->h : srcrect->h;
+
+  int dx, dy, dw, dh;
+  dx = dstrect == NULL ? 0 : dstrect->x;
+  dy = dstrect == NULL ? 0 : dstrect->y;
+  dw = dstrect == NULL ? dst->w : dstrect->w;
+  dh = dstrect == NULL ? dst->h : dstrect->h;
+
+  uint8_t* spixels = src->pixels;
+  uint8_t* dpixels = dst->pixels;
+  uint8_t depth = dst->format->BitsPerPixel / 8;
+  for (int i = 0; i < sh; ++ i) {
+    void* target = dpixels+depth*((i+dy)*dst->w+dx);
+    void* source = spixels+depth*((i+sy)*src->w+sx);
+    memcpy(target, source, depth*sw);
+  }
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
+  assert(dst);
+  int x, y, w, h;
+  x = dstrect == NULL ? 0 : dstrect->x;
+  y = dstrect == NULL ? 0 : dstrect->y;
+  w = dstrect == NULL ? dst->w : dstrect->w;
+  h = dstrect == NULL ? dst->h : dstrect->h;
+
+  if (dst->format->BitsPerPixel == 32) {
+    uint32_t* pixels = (uint32_t*)dst->pixels;
+    for (int i = 0; i < h; ++ i) 
+      for (int j = 0; j < w; ++ j)
+        pixels[(i+y) * dst->w + j + y] = color;
+  } 
+  else if (dst->format->BitsPerPixel == 8) {
+    printf("8 not implemented\n");
+    assert(0);
+  }
+  else assert(0);
 }
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   if (s->format->BitsPerPixel == 32)
     NDL_DrawRect((uint32_t*)s->pixels, x, y, w, h);
   if (s->format->BitsPerPixel == 8) {
-    if (w == 0 && h == 0) {
-      w = s->w;
-      h = s->h;
-    }
-    else {
-      w = (w > s->w) ? s->w : w;
-      h = (h > s->h) ? s->h : h;
-    }
+    assert(0);
+    w = (w == 0 || w > s->w) ? s->w : w;
+    h = (h == 0 || h > s->h) ? s->h : h;
+
     uint32_t * p = malloc(sizeof(uint32_t) * w * h);
     memset(p, 0, sizeof(p));
     for (int i = 0; i < h; ++ i)
