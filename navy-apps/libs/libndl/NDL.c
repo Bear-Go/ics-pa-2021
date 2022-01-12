@@ -27,6 +27,8 @@ uint32_t NDL_GetTicks() {
 
 int NDL_PollEvent(char *buf, int len) {
   assert(events != NULL);
+  // fseek(events, 0, SEEK_SET);
+  memset(buf, 0, len);
   int ret = fread(buf, 1, len, events);
   if (ret == 0) 
     return 0;
