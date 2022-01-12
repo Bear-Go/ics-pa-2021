@@ -46,24 +46,9 @@ void get_displayinfo() {
   char buf[128];
 
   fscanf(dispinfo, "%s", buf);
-  int w = 0;
-  sscanf(buf, "WIDTH:%d", &w);
+  sscanf(buf, "WIDTH:%d", &screen_w);
   fscanf(dispinfo, "%s", buf);
-  int h = 0;
-  sscanf(buf, "HEIGHT:%d", &h);
-
-  // for (int i = 0;i < strlen(buf); ++ i) {
-  //   if (buf[i] > '9'|| buf[i] < '0') continue;
-  //   w = w * 10 + buf[i] - '0';
-  // }
-
-  // fscanf(dispinfo, "%s", buf);
-  // for (int i = 0;i < strlen(buf); ++ i) {
-  //   if (buf[i] > '9'|| buf[i] < '0') continue;
-  //   h = h * 10 + buf[i] - '0';
-  // }
-   screen_h = h;
-   screen_w = w;
+  sscanf(buf, "HEIGHT:%d", &screen_h);
 }
 
 void NDL_OpenCanvas(int *w, int *h) {
@@ -77,7 +62,7 @@ void NDL_OpenCanvas(int *w, int *h) {
   gap_h = (screen_h - canvas_h) / 2;
   canvas = (uint32_t*)malloc(sizeof(uint32_t) * (*w) * (*h));
   memset(canvas, 0 ,sizeof(canvas));
-  printf("screen : h = %d w = %d\n", *h, *w);
+  printf("screen : w = %d h = %d\n", *w, *h);
 
   if (getenv("NWM_APP")) {
     printf("getenv(NWM_APP)");
