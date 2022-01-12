@@ -26,18 +26,19 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
+  fseek(events,0,SEEK_SET);
   assert(events != NULL);
-  // fseek(events, 0, SEEK_SET);
-  memset(buf, 0, len);
-  int ret = fread(buf, 1, len, events);
-  if (ret == 0) 
-    return 0;
-  else
-    for (int i = 0; i < len; ++ i)
-      if (buf[i] == '\n') {
-        buf[i] = '\0';
-        return 1;
-      }
+  memset(buf,0,len);
+  int ret = fread(buf,1,len,events);
+  if(ret == 0) return 0;
+  for(int i = 0; i < len&&ret != 0;i++)
+  {
+    if(buf[i] == '\n') 
+    {
+      buf[i] = '\0';
+      return ret;
+    }
+  }
 }
 
 void get_displayinfo() {
@@ -132,9 +133,7 @@ int NDL_Init(uint32_t flags) {
   events = fopen("/dev/events", "r");
   dispinfo = fopen("/proc/dispinfo", "r");
 
-  start.tv_sec = 0;
-  start.tv_usec = 0;
-
+  gettimeofday(&start, NULL);
   return 0;
 }
 
