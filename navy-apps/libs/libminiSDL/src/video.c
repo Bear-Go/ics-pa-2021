@@ -23,11 +23,12 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 
   uint8_t* spixels = src->pixels;
   uint8_t* dpixels = dst->pixels;
-  uint8_t depth = dst->format->BitsPerPixel / 8;
+  uint8_t depth = dst->format->BytesPerPixel;
+  assert(depth == 4 || depth == 1);
   for (int i = 0; i < sh; ++ i) {
-    void* target = dpixels+depth*((i+dy)*dst->w+dx);
-    void* source = spixels+depth*((i+sy)*src->w+sx);
-    memcpy(target, source, depth*sw);
+    void* source = spixels + depth*((i+sy)*src->w+sx);
+    void* target = dpixels + depth*((i+dy)*dst->w+dx);
+    memcpy(target, source, depth * sw);
   }
 }
 
@@ -47,6 +48,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
         pixels[(i+y) * dst->w + j + x] = color;
   } 
   if (dst->format->BitsPerPixel == 8) {
+    printf("update 8bit\n");
     assert(0);
   }
 }
@@ -60,7 +62,8 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   if (s->format->BitsPerPixel == 32)
     NDL_DrawRect((uint32_t*)s->pixels, x, y, w, h);
   if (s->format->BitsPerPixel == 8) {
-
+    printf("update 8bit\n");
+    assert(0);
     uint32_t * p = malloc(sizeof(uint32_t) * s->w * s->h);
     memset(p, 0, sizeof(p));
     for (int i = 0; i < h; ++ i)
