@@ -67,6 +67,7 @@ size_t sys_gettimeofday(struct timeval* tv, struct timezone* tz) {
 }
 
 size_t sys_execve(const char* filename, char* const argv[], char* const envp[]) {
+  printf("load %s\n", filename);
   naive_uload(NULL, filename);
   return -1;
 }
