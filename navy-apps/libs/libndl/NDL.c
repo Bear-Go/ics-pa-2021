@@ -50,7 +50,7 @@ void get_displayinfo() {
   sscanf(buf, "WIDTH:%d", &w);
   fscanf(dispinfo, "%s", buf);
   int h = 0;
-  sscanf(buf, "HEIGHT:%d", &w);
+  sscanf(buf, "HEIGHT:%d", &h);
 
   // for (int i = 0;i < strlen(buf); ++ i) {
   //   if (buf[i] > '9'|| buf[i] < '0') continue;
