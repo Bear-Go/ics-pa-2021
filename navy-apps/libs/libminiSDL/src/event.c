@@ -45,6 +45,7 @@ int SDL_PollEvent(SDL_Event *ev) {
     ev->type = SDL_KEYUP;
     keystate[keycode] = 0;
   }
+  else assert(0);
   ev->key.keysym.sym = keycode;
   assert(keycode >= 1 && keycode < key_num);
   return 1;
@@ -62,10 +63,10 @@ int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {
 }
 
 uint8_t* SDL_GetKeyState(int *numkeys) {
-  for (int i = 0; i < 256; ++ i) {
-    if (keystate[i] == 1) {
-      printf("keystate[%d] == 1\n", i);
-    }
-  }
+  // for (int i = 0; i < 256; ++ i) {
+  //   if (keystate[i] == 1) {
+  //     printf("keystate[%d] == 1\n", i);
+  //   }
+  // }
   return keystate;
 }
