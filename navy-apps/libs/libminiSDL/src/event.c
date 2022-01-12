@@ -40,7 +40,7 @@ int SDL_PollEvent(SDL_Event *ev) {
   ev->key.keysym.sym = keycode;
   keystate[keycode] == buf[1] == 'u' ? 0 : 1;
   assert(keycode >= 1 && keycode < key_num);
-  return 0;
+  return 1;
 }
 
 int SDL_WaitEvent(SDL_Event *event) {
@@ -60,7 +60,7 @@ int SDL_WaitEvent(SDL_Event *event) {
   event->key.keysym.sym = keycode;
   keystate[keycode] == buf[1] == 'u' ? 0 : 1;
   assert(keycode >= 1 && keycode < key_num);
-  return 0;
+  return 1;
 }
 
 int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {
