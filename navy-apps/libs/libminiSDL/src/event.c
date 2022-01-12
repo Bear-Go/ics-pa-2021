@@ -25,8 +25,8 @@ int SDL_PollEvent(SDL_Event *ev) {
   buf[0] = '\0';
   int keycode = 0;
   if (!NDL_PollEvent(buf, sizeof(buf))) {
-    ev->key.keysym.sym = SDLK_NONE;
-    ev->type = SDL_USEREVENT;
+    // ev->key.keysym.sym = SDLK_NONE;
+    // ev->type = SDL_USEREVENT;
     return 0;
   }
 
