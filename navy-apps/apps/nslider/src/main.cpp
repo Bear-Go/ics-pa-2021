@@ -79,6 +79,7 @@ int main() {
             rep = 0; g = 0;
           }
           break;
+        case SDLK_ESCAPE: return 0;
       }
     }
   }
