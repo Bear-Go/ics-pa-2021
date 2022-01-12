@@ -29,7 +29,6 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
     void* source = spixels+depth*((i+sy)*src->w+sx);
     memcpy(target, source, depth*sw);
   }
-  assert(0);
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
