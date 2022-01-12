@@ -4,7 +4,7 @@
 
 int main() {
   fixedpt a = fixedpt_rconst(-1.2);
-  fixedpt b = fixedpt_rconst(8388607);
+  fixedpt b = fixedpt_rconst(8388606);
   fixedpt c = fixedpt_rconst(5.6/1.2);
   printf("a = %d   b = %d  \n",a,b);
   printf("%x  %d  %d\n",fixedpt_rconst(-1.2),fixedpt_rconst(1.2),fixedpt_abs(fixedpt_rconst(-1.2)));
