@@ -33,6 +33,7 @@ char *cmd_table[] = {
 };
 
 static void sh_handle_cmd(const char *cmd) {
+  // wait to be done
   if(!strncmp(cmd,cmd_table[0],2)) {
     sh_printf("/bin/bird\n/bin/nterm\n/bin/pal\n/bin/nslider\n/bin/menu\n");
   }
