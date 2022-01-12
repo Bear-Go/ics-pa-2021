@@ -6,7 +6,7 @@ uint8_t* keystate;
 
 int SDL_Init(uint32_t flags) {
   keystate = (uint8_t*)malloc(256 * sizeof(uint8_t));
-  memset(keystate,0,sizeof(keystate));
+  memset(keystate, 0, sizeof(keystate));
   return NDL_Init(flags);
 }
 
