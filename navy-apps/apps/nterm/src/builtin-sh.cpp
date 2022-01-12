@@ -40,7 +40,7 @@ static void sh_handle_cmd(const char *cmd) {
     assert( setenv("PATH","/usr/bin:/bin",0) == 0);
     char*str = (char*)malloc(strlen(cmd)+10);
     memset(str,0,strlen(str));
-    strcpy(str,cmd+2);
+    strcpy(str,cmd+1);
     int len = strlen(str);
     str[len-1] = '\0';
     char*argv[10]={NULL};
