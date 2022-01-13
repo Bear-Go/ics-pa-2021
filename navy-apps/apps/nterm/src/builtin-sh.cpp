@@ -22,21 +22,16 @@ static void sh_prompt() {
   sh_printf("sh> ");
 }
 
-char *table[] = {
-  {"ls"},
-  {"./"},
-};
-
 static void sh_handle_cmd(const char *cmd) {
-  if (!strncmp(cmd, table[0], 2)) {
-    sh_printf("/bin/bird");
-    sh_printf("/bin/nterm");
-    sh_printf("/bin/pal");
-    sh_printf("/bin/nslider");
-    sh_printf("/bin/menu");
+  if (!strncmp(cmd, "ls", 2)) {
+    sh_printf("/bin/bird\n");
+    sh_printf("/bin/nterm\n");
+    sh_printf("/bin/pal\n");
+    sh_printf("/bin/nslider\n");
+    sh_printf("/bin/menu\n");
     sh_printf("\n");
   }
-  else if (!strncmp(cmd, table[1], 2)) {
+  else if (!strncmp(cmd, "./", 2)) {
     assert(setenv("PATH", "/bin", 0) == 0);
     char* str = (char*)malloc(strlen(cmd) + 16);
     memset(str, 0, strlen(str));
