@@ -43,5 +43,4 @@ Context* schedule(Context *prev) {
 void context_kload(PCB* new_pcb, void (*entry)(void *), void* arg) {
   Area stack = {new_pcb->stack, new_pcb->stack + STACK_SIZE};
   new_pcb->cp = kcontext(stack, entry, arg);
-  assert(new_pcb->cp != NULL);
 }

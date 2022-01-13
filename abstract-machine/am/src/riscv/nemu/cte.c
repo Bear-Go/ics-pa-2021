@@ -20,7 +20,7 @@ Context* __am_irq_handle(Context *c) {
 	// 	printf("%3s: 0x%08x ", tregs[i], c->gpr[i]);
   //   if (i % 4 == 3) printf("\n");
 	// }
-  
+
   if (user_handler) {
     Event ev = {0};
     switch (c->mcause) {
@@ -60,7 +60,7 @@ bool cte_init(Context*(*handler)(Event, Context*)) {
 Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
   Context* c = (Context*)((uint8_t*)kstack.end - sizeof(Context) - sizeof(uintptr_t));
   c->mepc = (uintptr_t)entry;
-  return NULL;
+  return c;
 }
 
 void yield() {
