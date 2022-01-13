@@ -10,6 +10,7 @@ static Context* do_event(Event e, Context* c) {
     case EVENT_YIELD: {
       Log("event: yield"); 
       Context* ret = schedule(c);
+      assert(c != NULL);
       return ret;
       panic("should not reach here");
     }
