@@ -5,7 +5,7 @@ extern void do_syscall(Context*);
 Context* schedule(Context *prev);
 
 static Context* do_event(Event e, Context* c) {
-  printf("here\n");
+  
   switch (e.event) {
     case EVENT_YIELD: Log("event: yield"); return schedule(c); panic("should not reach here");
     case EVENT_SYSCALL: do_syscall(c); break;
