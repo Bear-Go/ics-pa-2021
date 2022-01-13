@@ -20,7 +20,7 @@ Context* __am_irq_handle(Context *c) {
 	// 	printf("%3s: 0x%08x ", tregs[i], c->gpr[i]);
   //   if (i % 4 == 3) printf("\n");
 	// }
-  printf("%d\n", c->GPR1);
+  
   if (user_handler) {
     Event ev = {0};
     switch (c->mcause) {

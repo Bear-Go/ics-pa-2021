@@ -26,6 +26,7 @@ void hello_fun(void *arg) {
 
 void init_proc() {
   context_kload(&pcb[0], hello_fun, NULL);
+  assert(pcb[0].cp != NULL);
   switch_boot_pcb();
 
   Log("Initializing processes...");
@@ -37,7 +38,6 @@ void init_proc() {
 Context* schedule(Context *prev) {
   current->cp = prev;
   current = &pcb[0];
-  assert(current->cp != NULL);
   return current->cp;
 }
 
