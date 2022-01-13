@@ -39,6 +39,7 @@ Context* __am_irq_handle(Context *c) {
     }
 
     c = user_handler(ev, c);
+    printf("fffff\n");
     assert(c != NULL);
   }
 
