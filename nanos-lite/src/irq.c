@@ -9,9 +9,7 @@ static Context* do_event(Event e, Context* c) {
   switch (e.event) {
     case EVENT_YIELD: {
       Log("event: yield"); 
-      Context* ret = schedule(c);
-      assert(ret != NULL);
-      return ret;
+      return schedule(c);
       panic("should not reach here");
     }
     case EVENT_SYSCALL: do_syscall(c); break;
