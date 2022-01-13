@@ -22,9 +22,42 @@ static void sh_prompt() {
   sh_printf("sh> ");
 }
 
+char *cmd_table[] = {
+  {"ls"},
+  {"./"},
+};
+
 static void sh_handle_cmd(const char *cmd) {
-  sh_printf("Loading...\n");
-  execvp(cmd, NULL);
+  if(!strncmp(cmd,cmd_table[0],2)) {
+    sh_printf("/bin/bird\n/bin/nterm\n/bin/pal\n/bin/nslider\n/bin/menu\n");
+  }
+  else if(!strncmp(cmd,cmd_table[1],2)){
+    assert( setenv("PATH","/usr/bin:/bin",0) == 0);
+    char*str = (char*)malloc(strlen(cmd)+10);
+    memset(str,0,strlen(str));
+    strcpy(str,cmd+1);
+    int len = strlen(str);
+    str[len-1] = '\0';
+    char*argv[10]={NULL};
+    int argc = 0;
+    char *p = strtok(str," ");
+    for(int i = 0;i < len;)
+    {
+      if(p == NULL) break;
+      else{
+        if(*p != 0) {
+          argv[argc++] = p;
+        }
+        p = p + strlen(p)+1;
+        i = p - str;
+      }
+    }
+    sh_printf("Loading\n");
+    execvp(str,argv);
+  }
+  else{
+    sh_printf("wrong command\n");
+  }
 }
 
 void builtin_sh_run() {
