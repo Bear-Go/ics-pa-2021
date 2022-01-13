@@ -22,41 +22,32 @@ static void sh_prompt() {
   sh_printf("sh> ");
 }
 
-char *cmd_table[] = {
+char *table[] = {
   {"ls"},
   {"./"},
 };
 
 static void sh_handle_cmd(const char *cmd) {
-  if(!strncmp(cmd,cmd_table[0],2)) {
-    sh_printf("/bin/bird\n/bin/nterm\n/bin/pal\n/bin/nslider\n/bin/menu\n");
+  if (!strncmp(cmd, table[0], 2)) {
+    sh_printf("/bin/bird");
+    sh_printf("/bin/nterm");
+    sh_printf("/bin/pal");
+    sh_printf("/bin/nslider");
+    sh_printf("/bin/menu");
+    sh_printf("\n");
   }
-  else if(!strncmp(cmd,cmd_table[1],2)){
-    assert( setenv("PATH","/usr/bin:/bin",0) == 0);
-    char*str = (char*)malloc(strlen(cmd)+10);
-    memset(str,0,strlen(str));
-    strcpy(str,cmd+1);
+  else if (!strncmp(cmd, table[1], 2)) {
+    assert(setenv("PATH", "/bin", 0) == 0);
+    char* str = (char*)malloc(strlen(cmd) + 16);
+    memset(str, 0, strlen(str));
+    strcpy(str, cmd + 1);
     int len = strlen(str);
-    str[len-1] = '\0';
-    char*argv[10]={NULL};
-    int argc = 0;
-    char *p = strtok(str," ");
-    for(int i = 0;i < len;)
-    {
-      if(p == NULL) break;
-      else{
-        if(*p != 0) {
-          argv[argc++] = p;
-        }
-        p = p + strlen(p)+1;
-        i = p - str;
-      }
-    }
-    sh_printf("Loading\n");
-    execvp(str,argv);
+    str[len - 1] = '\0';
+    sh_printf("Loading...\n");
+    execvp(str, NULL);
   }
   else{
-    sh_printf("wrong command\n");
+    sh_printf("Command not find\n");
   }
 }
 
