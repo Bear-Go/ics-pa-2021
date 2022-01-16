@@ -41,7 +41,14 @@ Context* __am_irq_handle(Context *c) {
     c = user_handler(ev, c);
     assert(c != NULL);
   }
-  // printf("context* %p\n", c);
+  printf("context* %p\n", c);
+  printf("%8s: 0x%08x\n", "mcause", c->mcause);
+  printf("%8s: 0x%08x\n", "mepc", c->mepc);
+  printf("%8s: 0x%08x\n", "mstatus", c->mstatus);
+  for (int i = 0; i < 32; ++ i) {
+		printf("%3s: 0x%08x ", tregs[i], c->gpr[i]);
+    if (i % 4 == 3) printf("\n");
+	}
   return c;
 }
 
