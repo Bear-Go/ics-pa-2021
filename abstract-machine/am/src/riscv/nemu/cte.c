@@ -21,7 +21,6 @@ Context* __am_irq_handle(Context *c) {
     if (i % 4 == 3) printf("\n");
 	}
   assert(c != NULL);
-  uintptr_t sp = c->GPRx;
   if (user_handler) {
     Event ev = {0};
     switch (c->mcause) {
@@ -42,7 +41,6 @@ Context* __am_irq_handle(Context *c) {
     c = user_handler(ev, c);
     assert(c != NULL);
   }
-  c->GPRx = sp;
   return c;
 }
 
