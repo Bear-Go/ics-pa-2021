@@ -10,7 +10,7 @@ static Context* do_event(Event e, Context* c) {
     case EVENT_YIELD: {
       Log("event: yield"); 
       Context* ret = schedule(c);
-      printf("context mepc %p\n", ret->mepc);
+      // printf("context mepc %p\n", ret->mepc);
       return ret;
       panic("should not reach here");
     }
