@@ -62,6 +62,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
   c->mepc = (uintptr_t)entry;
   uintptr_t* argp = (uintptr_t*)((uint8_t*)kstack.end - sizeof(uintptr_t));
   *argp = (uintptr_t)arg;
+  printf("arg = %p\n", arg);
   return c;
 }
 

@@ -26,7 +26,7 @@ void hello_fun(void *arg) {\
 
 void init_proc() {
   context_kload(&pcb[0], hello_fun, (void*) 12);
-  context_kload(&pcb[0], hello_fun, (void*) 24);
+  context_kload(&pcb[1], hello_fun, (void*) 24);
   switch_boot_pcb();
 
   Log("Initializing processes...");
@@ -35,9 +35,11 @@ void init_proc() {
   // naive_uload(NULL, "/bin/menu");
 }
 
+static int cnt = 1;
 Context* schedule(Context *prev) {
   current->cp = prev;
-  current = &pcb[0];
+  current = &pcb[cnt % 2];
+  ++ cnt;
   return current->cp;
 }
 
