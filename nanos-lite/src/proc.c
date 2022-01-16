@@ -37,6 +37,7 @@ void init_proc() {
 
 static int cnt = 1;
 Context* schedule(Context *prev) {
+  panic("here");
   current->cp = prev;
   current = &pcb[cnt % 2];
   ++ cnt;
